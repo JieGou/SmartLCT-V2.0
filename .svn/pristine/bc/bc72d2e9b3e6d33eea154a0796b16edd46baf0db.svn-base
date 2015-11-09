@@ -1,0 +1,1666 @@
+﻿<MetroUI:MetroWindow x:Class="SmartLCT.Frm_Guide_two"
+                     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                     xmlns:MetroUI="clr-namespace:Nova.SmartLCT.UI.MetroUI;assembly=Nova.SmartLCT.UI.MetroUI"
+                     xmlns:Microsoft_Windows_Themes="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero"
+                     xmlns:Nova_SmartLCT_Behavior="clr-namespace:Nova.SmartLCT.Behavior;assembly=Behavior"
+                     xmlns:Nova_Wpf_Control="clr-namespace:Nova.Wpf.Control;assembly=Nova.Wpf.Control.NumericUpDown"
+                     xmlns:cmd="clr-namespace:GalaSoft.MvvmLight.Command;assembly=GalaSoft.MvvmLight.Extras.WPF4"
+                     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                     xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+                     xmlns:local="clr-namespace:SmartLCT"
+                     xmlns:localInterface="clr-namespace:Nova.SmartLCT.Interface;assembly=Nova.SmartLCT.Interface.CommonData"
+                     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                     x:Name="myWizard"
+                     Title="{DynamicResource Lang_StartWindow_Wizard}"
+                     Width="626"
+                     Height="460"
+                     Background="#FF373B3C"
+                     Closed="Window_Closed"
+                     Foreground="#FF818181"
+                     ResizeMode="NoResize"
+                     SizeToContent="WidthAndHeight"
+                     mc:Ignorable="d">
+
+    <Window.Resources>
+        <localInterface:IsCheckedConvertVisibility x:Key="IsCheckedConvertVisibility2" />
+        <localInterface:IsCheckedConvertVisibility x:Key="IsCheckedConvertVisibility1" />
+        <localInterface:IsCheckedConvertVisibility x:Key="IsCheckedConvertVisibility" />
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+        <local:Frm_Guide_two_VM x:Key="Frm_Guide_two_VMDataSource" d:IsDataSource="True" />
+        <local:StartWindow_VM x:Key="StartWindow_VMDataSource" d:IsDataSource="True" />
+        <localInterface:IsCheckedConvertVisibility x:Key="isCheckedConvertVisibility" />
+        <localInterface:SelectedArrangeTypeConvertIsChecked x:Key="selectedArrangeTypeConvertIsChecked" />
+
+
+        <DataTemplate x:Key="DataTemplate_Frm_Guide_Two_SenderType">
+            <Grid Width="255">
+                <Image Width="0"
+                       Height="0"
+                       Margin="0"
+                       HorizontalAlignment="Left"
+                       Source="{Binding SenderPicturePath,
+                                        Mode=TwoWay}"
+                       Visibility="Hidden" />
+                <TextBlock Margin="0"
+                           HorizontalAlignment="Stretch"
+                           VerticalAlignment="Center"
+                           Text="{Binding SenderTypeName,
+                                          Mode=TwoWay}"
+                           TextWrapping="Wrap"
+                           d:LayoutOverrides="Height" />
+            </Grid>
+        </DataTemplate>
+        <SolidColorBrush x:Key="CheckBoxStroke" Color="#8E8F8F" />
+        <Style x:Key="CheckRadioFocusVisual">
+            <Setter Property="Control.Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <Rectangle Margin="14,0,0,0"
+                                   SnapsToDevicePixels="true"
+                                   Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"
+                                   StrokeDashArray="1 2"
+                                   StrokeThickness="1" />
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="CommonButtonStyle" TargetType="{x:Type Button}">
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" />
+            <Setter Property="Padding" Value="2" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderBrush" Value="Transparent" />
+            <Setter Property="HorizontalAlignment" Value="Center" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="HorizontalContentAlignment" Value="Center" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border Width="{TemplateBinding Width}"
+                                Height="{TemplateBinding Height}"
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="Black"
+                                BorderThickness="0" />
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="true" />
+                            <Trigger Property="IsKeyboardFocused" Value="true" />
+                            <Trigger Property="IsPressed" Value="true" />
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="RadioButtonStyle_Frm_Guide_Two_LTH" TargetType="{x:Type RadioButton}">
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" />
+            <Setter Property="Background" Value="#F4F4F4" />
+            <Setter Property="BorderBrush" Value="{StaticResource CheckBoxStroke}" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type RadioButton}">
+                        <BulletDecorator Background="Transparent">
+                            <BulletDecorator.Bullet>
+                                <Microsoft_Windows_Themes:BulletChrome x:Name="bulletChrome"
+                                                                       Width="20"
+                                                                       Height="20"
+                                                                       Background="{TemplateBinding Background}"
+                                                                       BorderBrush="{TemplateBinding BorderBrush}"
+                                                                       IsChecked="{TemplateBinding IsChecked}"
+                                                                       IsRound="true"
+                                                                       RenderMouseOver="{TemplateBinding IsMouseOver}"
+                                                                       RenderPressed="{TemplateBinding IsPressed}" />
+                            </BulletDecorator.Bullet>
+                            <Button Width="50"
+                                    Height="50"
+                                    HorizontalAlignment="Stretch"
+                                    Command="{TemplateBinding Command}"
+                                    CommandParameter="{TemplateBinding CommandParameter}"
+                                    Content="Button"
+                                    IsTabStop="{TemplateBinding IsTabStop}"
+                                    Style="{DynamicResource CommonButtonStyle}"
+                                    TabIndex="{TemplateBinding TabIndex}">
+                                <Button.ToolTip>
+                                    <ToolTip Content="{DynamicResource Lang_PortPropPanel_HorLeftTop}" />
+                                </Button.ToolTip>
+                                <Button.Background>
+                                    <ImageBrush ImageSource="/Nova.SmartLCT.Skin;component/Image/BlueMode/Normal/L_T_H.png" />
+                                </Button.Background>
+                                <i:Interaction.Behaviors>
+                                    <Nova_SmartLCT_Behavior:ButtonStatePictureBehavior>
+                                        <Nova_SmartLCT_Behavior:ButtonStatePictureBehavior.DisableImage>
+                                            <ImageBrush ImageSource="/Nova.SmartLCT.Skin;component/Image/BlueMode/Disable/L_T_H.png" />
+                                        </Nova_SmartLCT_Behavior:ButtonStatePictureBehavior.DisableImage>
+                                        <Nova_SmartLCT_Behavior:ButtonStatePictureBehavior.NormalImage>
+                                            <ImageBrush ImageSource="/Nova.SmartLCT.Skin;component/Image/BlueMode/Normal/L_T_H.png" />
+                                        </Nova_SmartLCT_Behavior:ButtonStatePictureBehavior.NormalImage>
+                                        <Nova_SmartLCT_Behavior:ButtonStatePictureBehavior.MouseOverImage>
+                                            <ImageBrush ImageSource="/Nova.SmartLCT.Skin;component/Image/BlueMode/Selecte/L_T_H.png" />
+                                        </Nova_SmartLCT_Behavior:ButtonStatePictureBehavior.MouseOverImage>
+                                    </Nova_SmartLCT_Behavior:ButtonStatePictureBehavior>
+                                </i:Interaction.Behaviors>
+                            </Button>
+                        </BulletDecorator>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="HasContent" Value="true">
+                                <Setter Property="FocusVisualStyle" Value="{StaticResource CheckRadioFocusVisual}" />
+                                <Setter Property="Padding" Value="4,0,0,0" />
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="RadioButtonStyle_Frm_Guide_Two_RTH" TargetType="{x:Type RadioButton}">
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" />
+            <Setter Property="Background" Value="#F4F4F4" />
+            <Setter Property="BorderBrush" Value="{StaticResource CheckBoxStroke}" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type RadioButton}">
+                        <BulletDecorator Background="Transparent">
+                            <BulletDecorator.Bullet>
+                                <Microsoft_Windows_Themes:BulletChrome Width="20"
+                                                                       Height="20"
+                                                                       Background="{TemplateBinding Background}"
+                                                                       BorderBrush="{TemplateBinding BorderBrush}"
+                                                                       IsChecked="{TemplateBinding IsChecked}"
+                                                                       IsRound="true"
+                                                                       RenderMouseOver="{TemplateBinding IsMouseOver}"
+                                                                       RenderPressed="{TemplateBinding IsPressed}" />
+                            </BulletDecorator.Bullet>
+                            <Button Width="50"
+                                    Height="50"
+                                    Command="{TemplateBinding Command}"
+                                    CommandParameter="{TemplateBinding CommandParameter}"
+                                    Content="Button"
+                                    Style="{DynamicResource CommonButtonStyle}">
+                                <Button.ToolTip>
+                                    <ToolTip Content="{DynamicResource Lang_PortPropPanel_HorRightTop}" />
+                                </Button.ToolTip>
+                                <Button.Background>
+                                    <ImageBrush ImageSource="/Nova.SmartLCT.Skin;component/Image/BlueMode/Normal/R_T_H.png" />
+                                </Button.Background>
+                                <i:Interaction.Behaviors>
+                                    <Nova_SmartLCT_Behavior:ButtonStatePictureBehavior>
+                                        <Nova_SmartLCT_Behavior:ButtonStatePictureBehavior.DisableImage>
+                                            <ImageBrush ImageSource="/Nova.SmartLCT.Skin;component/Image/BlueMode/Disable/R_T_H.png" />
+                                        </Nova_SmartLCT_Behavior:ButtonStatePictureBehavior.DisableImage>
+                                        <Nova_SmartLCT_Behavior:ButtonStatePictureBehavior.NormalImage>
+                                            <ImageBrush ImageSource="/Nova.SmartLCT.Skin;component/Image/BlueMode/Normal/R_T_H.png" />
+                                        </Nova_SmartLCT_Behavior:ButtonStatePictureBehavior.NormalImage>
+                                        <Nova_SmartLCT_Behavior:ButtonStatePictureBehavior.MouseOverImage>
+                                            <ImageBrush ImageSource="/Nova.SmartLCT.Skin;component/Image/BlueMode/Selecte/R_T_H.png" />
+                                        </Nova_SmartLCT_Behavior:ButtonStatePictureBehavior.MouseOverImage>
+                                    </Nova_SmartLCT_Behavior:ButtonStatePictureBehavior>
+                                </i:Interaction.Behaviors>
+                            </Button>
+                        </BulletDecorator>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="HasContent" Value="true">
+                                <Setter Property="FocusVisualStyle" Value="{StaticResource CheckRadioFocusVisual}" />
+                                <Setter Property="Padding" Value="4,0,0,0" />
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="RadioButtonStyle_Frm_Guide_Two_LBH" TargetType="{x:Type RadioButton}">
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" />
+            <Setter Property="Background" Value="#F4F4F4" />
+            <Setter Property="BorderBrush" Value="{StaticResource CheckBoxStroke}" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type RadioButton}">
+                        <BulletDecorator Background="Transparent">
+                            <BulletDecorator.Bullet>
+                                <Microsoft_Windows_Themes:BulletChrome Width="20"
+                                                                       Height="20"
+                                                                       Background="{TemplateBinding Background}"
+                                                                       BorderBrush="{TemplateBinding BorderBrush}"
+                                                                       IsChecked="{TemplateBinding IsChecked}"
+                                                                       IsRound="true"
+                                                                       RenderMouseOver="{TemplateBinding IsMouseOver}"
+                                                                       RenderPressed="{TemplateBinding IsPressed}" />
+                            </BulletDecorator.Bullet>
+                            <Button Width="50"
+                                    Height="50"
+                                    Command="{TemplateBinding Command}"
+                                    CommandParameter="{TemplateBinding CommandParameter}"
+                                    Content="Button"
+                                    Style="{DynamicResource CommonButtonStyle}">
+                                <Button.ToolTip>
+                                    <ToolTip Content="{DynamicResource Lang_PortPropPanel_HorLeftBottom}" />
+                                </Button.ToolTip>
+                                <Button.Background>
+                                    <ImageBrush ImageSource="/Nova.SmartLCT.Skin;component/Image/BlueMode/Normal/L_B_H.png" />
+                                </Button.Background>
+                                <i:Interaction.Behaviors>
+                                    <Nova_SmartLCT_Behavior:ButtonStatePictureBehavior>
+                                        <Nova_SmartLCT_Behavior:ButtonStatePictureBehavior.DisableImage>
+                                            <ImageBrush ImageSource="/Nova.SmartLCT.Skin;component/Image/BlueMode/Disable/L_B_H.png" />
+                                        </Nova_SmartLCT_Behavior:ButtonStatePictureBehavior.DisableImage>
+                                        <Nova_SmartLCT_Behavior:ButtonStatePictureBehavior.NormalImage>
+                                            <ImageBrush ImageSource="/Nova.SmartLCT.Skin;component/Image/BlueMode/Normal/L_B_H.png" />
+                                        </Nova_SmartLCT_Behavior:ButtonStatePictureBehavior.NormalImage>
+                                        <Nova_SmartLCT_Behavior:ButtonStatePictureBehavior.MouseOverImage>
+                                            <ImageBrush ImageSource="/Nova.SmartLCT.Skin;component/Image/BlueMode/Selecte/L_B_H.png" />
+                                        </Nova_SmartLCT_Behavior:ButtonStatePictureBehavior.MouseOverImage>
+                                    </Nova_SmartLCT_Behavior:ButtonStatePictureBehavior>
+                                </i:Interaction.Behaviors>
+                            </Button>
+                        </BulletDecorator>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="HasContent" Value="true">
+                                <Setter Property="FocusVisualStyle" Value="{StaticResource CheckRadioFocusVisual}" />
+                                <Setter Property="Padding" Value="4,0,0,0" />
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="RadioButtonStyle_Frm_Guide_Two_RBH" TargetType="{x:Type RadioButton}">
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" />
+            <Setter Property="Background" Value="#F4F4F4" />
+            <Setter Property="BorderBrush" Value="{StaticResource CheckBoxStroke}" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type RadioButton}">
+                        <BulletDecorator Background="Transparent">
+                            <BulletDecorator.Bullet>
+                                <Microsoft_Windows_Themes:BulletChrome Width="20"
+                                                                       Height="20"
+                                                                       Background="{TemplateBinding Background}"
+                                                                       BorderBrush="{TemplateBinding BorderBrush}"
+                                                                       IsChecked="{TemplateBinding IsChecked}"
+                                                                       IsRound="true"
+                                                                       RenderMouseOver="{TemplateBinding IsMouseOver}"
+                                                                       RenderPressed="{TemplateBinding IsPressed}" />
+                            </BulletDecorator.Bullet>
+                            <Button Width="50"
+                                    Height="50"
+                                    Command="{TemplateBinding Command}"
+                                    CommandParameter="{TemplateBinding CommandParameter}"
+                                    Content="Button"
+                                    Style="{DynamicResource CommonButtonStyle}">
+                                <Button.ToolTip>
+                                    <ToolTip Content="{DynamicResource Lang_PortPropPanel_HorRightBottom}" />
+                                </Button.ToolTip>
+                                <Button.Background>
+                                    <ImageBrush ImageSource="/Nova.SmartLCT.Skin;component/Image/BlueMode/Normal/R_B_H.png" />
+                                </Button.Background>
+                                <i:Interaction.Behaviors>
+                                    <Nova_SmartLCT_Behavior:ButtonStatePictureBehavior>
+                                        <Nova_SmartLCT_Behavior:ButtonStatePictureBehavior.DisableImage>
+                                            <ImageBrush ImageSource="/Nova.SmartLCT.Skin;component/Image/BlueMode/Disable/R_B_H.png" />
+                                        </Nova_SmartLCT_Behavior:ButtonStatePictureBehavior.DisableImage>
+                                        <Nova_SmartLCT_Behavior:ButtonStatePictureBehavior.NormalImage>
+                                            <ImageBrush ImageSource="/Nova.SmartLCT.Skin;component/Image/BlueMode/Normal/R_B_H.png" />
+                                        </Nova_SmartLCT_Behavior:ButtonStatePictureBehavior.NormalImage>
+                                        <Nova_SmartLCT_Behavior:ButtonStatePictureBehavior.MouseOverImage>
+                                            <ImageBrush ImageSource="/Nova.SmartLCT.Skin;component/Image/BlueMode/Selecte/R_B_H.png" />
+                                        </Nova_SmartLCT_Behavior:ButtonStatePictureBehavior.MouseOverImage>
+                                    </Nova_SmartLCT_Behavior:ButtonStatePictureBehavior>
+                                </i:Interaction.Behaviors>
+                            </Button>
+                        </BulletDecorator>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="HasContent" Value="true">
+                                <Setter Property="FocusVisualStyle" Value="{StaticResource CheckRadioFocusVisual}" />
+                                <Setter Property="Padding" Value="4,0,0,0" />
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="RadioButtonStyle_Frm_Guide_Two_LTV" TargetType="{x:Type RadioButton}">
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" />
+            <Setter Property="Background" Value="#F4F4F4" />
+            <Setter Property="BorderBrush" Value="{StaticResource CheckBoxStroke}" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type RadioButton}">
+                        <BulletDecorator Background="Transparent">
+                            <BulletDecorator.Bullet>
+                                <Microsoft_Windows_Themes:BulletChrome Width="20"
+                                                                       Height="20"
+                                                                       Background="{TemplateBinding Background}"
+                                                                       BorderBrush="{TemplateBinding BorderBrush}"
+                                                                       IsChecked="{TemplateBinding IsChecked}"
+                                                                       IsRound="true"
+                                                                       RenderMouseOver="{TemplateBinding IsMouseOver}"
+                                                                       RenderPressed="{TemplateBinding IsPressed}" />
+                            </BulletDecorator.Bullet>
+                            <Button Width="50"
+                                    Height="50"
+                                    Command="{TemplateBinding Command}"
+                                    CommandParameter="{TemplateBinding CommandParameter}"
+                                    Content="Button"
+                                    Style="{DynamicResource CommonButtonStyle}">
+                                <Button.ToolTip>
+                                    <ToolTip Content="{DynamicResource Lang_PortPropPanel_VerLeftTop}" />
+                                </Button.ToolTip>
+
+                                <Button.Background>
+                                    <ImageBrush ImageSource="/Nova.SmartLCT.Skin;component/Image/BlueMode/Normal/L_T_V.png" />
+                                </Button.Background>
+                                <i:Interaction.Behaviors>
+                                    <Nova_SmartLCT_Behavior:ButtonStatePictureBehavior>
+                                        <Nova_SmartLCT_Behavior:ButtonStatePictureBehavior.DisableImage>
+                                            <ImageBrush ImageSource="/Nova.SmartLCT.Skin;component/Image/BlueMode/Disable/L_T_V.png" />
+                                        </Nova_SmartLCT_Behavior:ButtonStatePictureBehavior.DisableImage>
+                                        <Nova_SmartLCT_Behavior:ButtonStatePictureBehavior.NormalImage>
+                                            <ImageBrush ImageSource="/Nova.SmartLCT.Skin;component/Image/BlueMode/Normal/L_T_V.png" />
+                                        </Nova_SmartLCT_Behavior:ButtonStatePictureBehavior.NormalImage>
+                                        <Nova_SmartLCT_Behavior:ButtonStatePictureBehavior.MouseOverImage>
+                                            <ImageBrush ImageSource="/Nova.SmartLCT.Skin;component/Image/BlueMode/Selecte/L_T_V.png" />
+                                        </Nova_SmartLCT_Behavior:ButtonStatePictureBehavior.MouseOverImage>
+                                    </Nova_SmartLCT_Behavior:ButtonStatePictureBehavior>
+                                </i:Interaction.Behaviors>
+                            </Button>
+                        </BulletDecorator>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="HasContent" Value="true">
+                                <Setter Property="FocusVisualStyle" Value="{StaticResource CheckRadioFocusVisual}" />
+                                <Setter Property="Padding" Value="4,0,0,0" />
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="RadioButtonStyle_Frm_Guide_Two_RTV" TargetType="{x:Type RadioButton}">
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" />
+            <Setter Property="Background" Value="#F4F4F4" />
+            <Setter Property="BorderBrush" Value="{StaticResource CheckBoxStroke}" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type RadioButton}">
+                        <BulletDecorator Background="Transparent">
+                            <BulletDecorator.Bullet>
+                                <Microsoft_Windows_Themes:BulletChrome Width="20"
+                                                                       Height="20"
+                                                                       Background="{TemplateBinding Background}"
+                                                                       BorderBrush="{TemplateBinding BorderBrush}"
+                                                                       IsChecked="{TemplateBinding IsChecked}"
+                                                                       IsRound="true"
+                                                                       RenderMouseOver="{TemplateBinding IsMouseOver}"
+                                                                       RenderPressed="{TemplateBinding IsPressed}" />
+                            </BulletDecorator.Bullet>
+                            <Button Width="50"
+                                    Height="50"
+                                    Command="{TemplateBinding Command}"
+                                    CommandParameter="{TemplateBinding CommandParameter}"
+                                    Content="Button"
+                                    Style="{DynamicResource CommonButtonStyle}">
+                                <Button.ToolTip>
+                                    <ToolTip Content="{DynamicResource Lang_PortPropPanel_VerRightTop}" />
+                                </Button.ToolTip>
+                                <Button.Background>
+                                    <ImageBrush ImageSource="/Nova.SmartLCT.Skin;component/Image/BlueMode/Normal/R_T_V.png" />
+                                </Button.Background>
+                                <i:Interaction.Behaviors>
+                                    <Nova_SmartLCT_Behavior:ButtonStatePictureBehavior>
+                                        <Nova_SmartLCT_Behavior:ButtonStatePictureBehavior.DisableImage>
+                                            <ImageBrush ImageSource="/Nova.SmartLCT.Skin;component/Image/BlueMode/Disable/R_T_V.png" />
+                                        </Nova_SmartLCT_Behavior:ButtonStatePictureBehavior.DisableImage>
+                                        <Nova_SmartLCT_Behavior:ButtonStatePictureBehavior.NormalImage>
+                                            <ImageBrush ImageSource="/Nova.SmartLCT.Skin;component/Image/BlueMode/Normal/R_T_V.png" />
+                                        </Nova_SmartLCT_Behavior:ButtonStatePictureBehavior.NormalImage>
+                                        <Nova_SmartLCT_Behavior:ButtonStatePictureBehavior.MouseOverImage>
+                                            <ImageBrush ImageSource="/Nova.SmartLCT.Skin;component/Image/BlueMode/Selecte/R_T_V.png" />
+                                        </Nova_SmartLCT_Behavior:ButtonStatePictureBehavior.MouseOverImage>
+                                    </Nova_SmartLCT_Behavior:ButtonStatePictureBehavior>
+                                </i:Interaction.Behaviors>
+                            </Button>
+                        </BulletDecorator>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="HasContent" Value="true">
+                                <Setter Property="FocusVisualStyle" Value="{StaticResource CheckRadioFocusVisual}" />
+                                <Setter Property="Padding" Value="4,0,0,0" />
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="RadioButtonStyle_Frm_Guide_Two_LBV" TargetType="{x:Type RadioButton}">
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" />
+            <Setter Property="Background" Value="#F4F4F4" />
+            <Setter Property="BorderBrush" Value="{StaticResource CheckBoxStroke}" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type RadioButton}">
+                        <BulletDecorator Background="Transparent">
+                            <BulletDecorator.Bullet>
+                                <Microsoft_Windows_Themes:BulletChrome Width="20"
+                                                                       Height="20"
+                                                                       Background="{TemplateBinding Background}"
+                                                                       BorderBrush="{TemplateBinding BorderBrush}"
+                                                                       IsChecked="{TemplateBinding IsChecked}"
+                                                                       IsRound="true"
+                                                                       RenderMouseOver="{TemplateBinding IsMouseOver}"
+                                                                       RenderPressed="{TemplateBinding IsPressed}" />
+                            </BulletDecorator.Bullet>
+                            <Button Width="50"
+                                    Height="50"
+                                    Command="{TemplateBinding Command}"
+                                    CommandParameter="{TemplateBinding CommandParameter}"
+                                    Content="Button"
+                                    Style="{DynamicResource CommonButtonStyle}">
+                                <Button.ToolTip>
+                                    <ToolTip Content="{DynamicResource Lang_PortPropPanel_VerLeftBottom}" />
+                                </Button.ToolTip>
+                                <Button.Background>
+                                    <ImageBrush ImageSource="/Nova.SmartLCT.Skin;component/Image/BlueMode/Normal/L_B_V.png" />
+                                </Button.Background>
+                                <i:Interaction.Behaviors>
+                                    <Nova_SmartLCT_Behavior:ButtonStatePictureBehavior>
+                                        <Nova_SmartLCT_Behavior:ButtonStatePictureBehavior.DisableImage>
+                                            <ImageBrush ImageSource="/Nova.SmartLCT.Skin;component/Image/BlueMode/Disable/L_B_V.png" />
+                                        </Nova_SmartLCT_Behavior:ButtonStatePictureBehavior.DisableImage>
+                                        <Nova_SmartLCT_Behavior:ButtonStatePictureBehavior.NormalImage>
+                                            <ImageBrush ImageSource="/Nova.SmartLCT.Skin;component/Image/BlueMode/Normal/L_B_V.png" />
+                                        </Nova_SmartLCT_Behavior:ButtonStatePictureBehavior.NormalImage>
+                                        <Nova_SmartLCT_Behavior:ButtonStatePictureBehavior.MouseOverImage>
+                                            <ImageBrush ImageSource="/Nova.SmartLCT.Skin;component/Image/BlueMode/Selecte/L_B_V.png" />
+                                        </Nova_SmartLCT_Behavior:ButtonStatePictureBehavior.MouseOverImage>
+                                    </Nova_SmartLCT_Behavior:ButtonStatePictureBehavior>
+                                </i:Interaction.Behaviors>
+                            </Button>
+                        </BulletDecorator>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="HasContent" Value="true">
+                                <Setter Property="FocusVisualStyle" Value="{StaticResource CheckRadioFocusVisual}" />
+                                <Setter Property="Padding" Value="4,0,0,0" />
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="RadioButtonStyle_Frm_Guide_Two_RBV" TargetType="{x:Type RadioButton}">
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" />
+            <Setter Property="Background" Value="#F4F4F4" />
+            <Setter Property="BorderBrush" Value="{StaticResource CheckBoxStroke}" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type RadioButton}">
+                        <BulletDecorator Background="Transparent">
+                            <BulletDecorator.Bullet>
+                                <Microsoft_Windows_Themes:BulletChrome Width="20"
+                                                                       Height="20"
+                                                                       Background="{TemplateBinding Background}"
+                                                                       BorderBrush="{TemplateBinding BorderBrush}"
+                                                                       IsChecked="{TemplateBinding IsChecked}"
+                                                                       IsRound="true"
+                                                                       RenderMouseOver="{TemplateBinding IsMouseOver}"
+                                                                       RenderPressed="{TemplateBinding IsPressed}" />
+                            </BulletDecorator.Bullet>
+                            <Button Width="50"
+                                    Height="50"
+                                    Command="{TemplateBinding Command}"
+                                    CommandParameter="{TemplateBinding CommandParameter}"
+                                    Content="Button"
+                                    Style="{DynamicResource CommonButtonStyle}">
+                                <Button.ToolTip>
+                                    <ToolTip Content="{DynamicResource Lang_PortPropPanel_VerRightBottom}" />
+                                </Button.ToolTip>
+                                <Button.Background>
+                                    <ImageBrush ImageSource="/Nova.SmartLCT.Skin;component/Image/BlueMode/Normal/R_B_V.png" />
+                                </Button.Background>
+                                <i:Interaction.Behaviors>
+                                    <Nova_SmartLCT_Behavior:ButtonStatePictureBehavior>
+                                        <Nova_SmartLCT_Behavior:ButtonStatePictureBehavior.DisableImage>
+                                            <ImageBrush ImageSource="/Nova.SmartLCT.Skin;component/Image/BlueMode/Disable/R_B_V.png" />
+                                        </Nova_SmartLCT_Behavior:ButtonStatePictureBehavior.DisableImage>
+                                        <Nova_SmartLCT_Behavior:ButtonStatePictureBehavior.NormalImage>
+                                            <ImageBrush ImageSource="/Nova.SmartLCT.Skin;component/Image/BlueMode/Normal/R_B_V.png" />
+                                        </Nova_SmartLCT_Behavior:ButtonStatePictureBehavior.NormalImage>
+                                        <Nova_SmartLCT_Behavior:ButtonStatePictureBehavior.MouseOverImage>
+                                            <ImageBrush ImageSource="/Nova.SmartLCT.Skin;component/Image/BlueMode/Selecte/R_B_V.png" />
+                                        </Nova_SmartLCT_Behavior:ButtonStatePictureBehavior.MouseOverImage>
+                                    </Nova_SmartLCT_Behavior:ButtonStatePictureBehavior>
+                                </i:Interaction.Behaviors>
+                            </Button>
+                        </BulletDecorator>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="HasContent" Value="true">
+                                <Setter Property="FocusVisualStyle" Value="{StaticResource CheckRadioFocusVisual}" />
+                                <Setter Property="Padding" Value="4,0,0,0" />
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="Custom_Tabtitle" TargetType="{x:Type Button}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Grid>
+                            <Border Width="80"
+                                    Margin="0,10,0,0"
+                                    HorizontalAlignment="Left"
+                                    BorderThickness="1"
+                                    d:LayoutOverrides="HorizontalAlignment">
+                                <Border.Background>
+                                    <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+                                        <GradientStop Offset="0" Color="#FF64676C" />
+                                        <GradientStop Offset="1" Color="#FF595959" />
+                                    </LinearGradientBrush>
+                                </Border.Background>
+                            </Border>
+                            <Border Width="70"
+                                    Height="30"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Top"
+                                    BorderThickness="1"
+                                    CornerRadius="5"
+                                    RenderTransformOrigin="0.5,0.5"
+                                    d:LayoutOverrides="HorizontalAlignment">
+                                <Border.Background>
+                                    <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+                                        <GradientStop Offset="0" Color="#FF64676C" />
+                                        <GradientStop Offset="1" Color="#FF595959" />
+                                    </LinearGradientBrush>
+                                </Border.Background>
+                            </Border>
+                            <Border Width="83"
+                                    Height="30"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Top"
+                                    BorderThickness="1"
+                                    CornerRadius="5"
+                                    d:LayoutOverrides="HorizontalAlignment">
+                                <Border.Background>
+                                    <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+                                        <GradientStop Offset="0" Color="#FF64676C" />
+                                        <GradientStop Offset="1" Color="#FF595959" />
+                                    </LinearGradientBrush>
+                                </Border.Background>
+                                <Border.LayoutTransform>
+                                    <TransformGroup>
+                                        <ScaleTransform />
+                                        <SkewTransform AngleX="45" />
+                                        <RotateTransform />
+                                        <TranslateTransform />
+                                    </TransformGroup>
+                                </Border.LayoutTransform>
+                            </Border>
+                            <Canvas Height="3"
+                                    Margin="2,0,0,0"
+                                    VerticalAlignment="Bottom"
+                                    Background="#FF595959" />
+                            <ContentPresenter Width="64"
+                                              Margin="12,3.883,0,5"
+                                              HorizontalAlignment="Left"
+                                              RecognizesAccessKey="True"
+                                              SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                                              d:LayoutOverrides="Height" />
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsFocused" Value="True" />
+                            <Trigger Property="IsDefaulted" Value="True" />
+                            <Trigger Property="IsMouseOver" Value="True" />
+                            <Trigger Property="IsPressed" Value="True" />
+                            <Trigger Property="IsEnabled" Value="False" />
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="FontSize" Value="14" />
+            <Setter Property="Foreground" Value="#FFC8C8C8" />
+        </Style>
+        <Style x:Key="ButtonStyle_GuideTwo_RowAndCol" TargetType="{x:Type Button}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Grid>
+                            <Border Width="80"
+                                    Margin="0,10,0,0"
+                                    HorizontalAlignment="Left"
+                                    BorderThickness="1"
+                                    d:LayoutOverrides="HorizontalAlignment">
+                                <Border.Background>
+                                    <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+                                        <GradientStop Offset="0" Color="#FF64676C" />
+                                        <GradientStop Offset="1" Color="#FF595959" />
+                                    </LinearGradientBrush>
+                                </Border.Background>
+                            </Border>
+                            <Border Width="70"
+                                    Height="30"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Top"
+                                    BorderThickness="1"
+                                    CornerRadius="5"
+                                    RenderTransformOrigin="0.5,0.5"
+                                    d:LayoutOverrides="HorizontalAlignment">
+                                <Border.Background>
+                                    <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+                                        <GradientStop Offset="0" Color="#FF64676C" />
+                                        <GradientStop Offset="1" Color="#FF595959" />
+                                    </LinearGradientBrush>
+                                </Border.Background>
+                            </Border>
+                            <Border Width="92"
+                                    Height="30"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Top"
+                                    BorderThickness="1"
+                                    CornerRadius="5"
+                                    d:LayoutOverrides="HorizontalAlignment">
+                                <Border.Background>
+                                    <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+                                        <GradientStop Offset="0" Color="#FF64676C" />
+                                        <GradientStop Offset="1" Color="#FF595959" />
+                                    </LinearGradientBrush>
+                                </Border.Background>
+                                <Border.LayoutTransform>
+                                    <TransformGroup>
+                                        <ScaleTransform />
+                                        <SkewTransform AngleX="45" />
+                                        <RotateTransform />
+                                        <TranslateTransform />
+                                    </TransformGroup>
+                                </Border.LayoutTransform>
+                            </Border>
+                            <Canvas Height="3"
+                                    Margin="2,0,0,0"
+                                    VerticalAlignment="Bottom"
+                                    Background="#FF595959" />
+                            <ContentPresenter Width="80.936"
+                                              Margin="11.991,4.239,0,4.643"
+                                              HorizontalAlignment="Left"
+                                              RecognizesAccessKey="True"
+                                              RenderTransformOrigin="0.5,0.5"
+                                              SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                                              d:LayoutOverrides="Height" />
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsFocused" Value="True" />
+                            <Trigger Property="IsDefaulted" Value="True" />
+                            <Trigger Property="IsMouseOver" Value="True" />
+                            <Trigger Property="IsPressed" Value="True" />
+                            <Trigger Property="IsEnabled" Value="False" />
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="FontSize" Value="14" />
+            <Setter Property="Foreground" Value="#FFC8C8C8" />
+        </Style>
+        <Style x:Key="ComboBoxFocusVisual">
+            <Setter Property="Control.Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <Rectangle Margin="4,4,21,4"
+                                   SnapsToDevicePixels="true"
+                                   Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"
+                                   StrokeDashArray="1 2"
+                                   StrokeThickness="1" />
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <LinearGradientBrush x:Key="ButtonNormalBackground" StartPoint="0,0" EndPoint="0,1">
+            <GradientStop Offset="0" Color="#F3F3F3" />
+            <GradientStop Offset="0.5" Color="#EBEBEB" />
+            <GradientStop Offset="0.5" Color="#DDDDDD" />
+            <GradientStop Offset="1" Color="#CDCDCD" />
+        </LinearGradientBrush>
+        <SolidColorBrush x:Key="ButtonNormalBorder" Color="#FF707070" />
+        <Geometry x:Key="DownArrowGeometry">M 0 0 L 3.5 4 L 7 0 Z</Geometry>
+        <Style x:Key="ComboBoxReadonlyToggleButton" TargetType="{x:Type ToggleButton}">
+            <Setter Property="OverridesDefaultStyle" Value="true" />
+            <Setter Property="IsTabStop" Value="false" />
+            <Setter Property="Focusable" Value="false" />
+            <Setter Property="ClickMode" Value="Press" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ToggleButton}">
+                        <Grid Width="Auto" Background="{TemplateBinding Background}">
+                            <Grid Width="{DynamicResource {x:Static SystemParameters.VerticalScrollBarWidthKey}}"
+                                  HorizontalAlignment="Right"
+                                  Background="{TemplateBinding Background}">
+                                <Path x:Name="Arrow"
+                                      Margin="3,1,0,0"
+                                      HorizontalAlignment="Center"
+                                      VerticalAlignment="Center"
+                                      Data="{StaticResource DownArrowGeometry}"
+                                      Fill="Black" />
+                            </Grid>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <LinearGradientBrush x:Key="TextBoxBorder" MappingMode="Absolute" StartPoint="0,0" EndPoint="0,20">
+            <GradientStop Offset="0.05" Color="#ABADB3" />
+            <GradientStop Offset="0.07" Color="#E2E3EA" />
+            <GradientStop Offset="1" Color="#E3E9EF" />
+        </LinearGradientBrush>
+        <Style x:Key="ComboBoxEditableTextBox" TargetType="{x:Type TextBox}">
+            <Setter Property="OverridesDefaultStyle" Value="true" />
+            <Setter Property="AllowDrop" Value="true" />
+            <Setter Property="MinWidth" Value="0" />
+            <Setter Property="MinHeight" Value="0" />
+            <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+            <Setter Property="ScrollViewer.PanningMode" Value="VerticalFirst" />
+            <Setter Property="Stylus.IsFlicksEnabled" Value="False" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type TextBox}">
+                        <ScrollViewer x:Name="PART_ContentHost"
+                                      Background="Transparent"
+                                      Focusable="false"
+                                      HorizontalScrollBarVisibility="Hidden"
+                                      VerticalScrollBarVisibility="Hidden" />
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="ComboBoxToggleButton2" TargetType="{x:Type ToggleButton}">
+            <Setter Property="OverridesDefaultStyle" Value="true" />
+            <Setter Property="IsTabStop" Value="false" />
+            <Setter Property="Focusable" Value="false" />
+            <Setter Property="ClickMode" Value="Press" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ToggleButton}">
+                        <Microsoft_Windows_Themes:ButtonChrome x:Name="Chrome"
+                                                               Width="{DynamicResource {x:Static SystemParameters.VerticalScrollBarWidthKey}}"
+                                                               Background="{TemplateBinding Background}"
+                                                               BorderBrush="{TemplateBinding BorderBrush}"
+                                                               RenderMouseOver="{TemplateBinding IsMouseOver}"
+                                                               RenderPressed="{TemplateBinding IsPressed}"
+                                                               RoundCorners="false"
+                                                               SnapsToDevicePixels="true">
+                            <Path x:Name="Arrow"
+                                  Margin="0,1,0,0"
+                                  HorizontalAlignment="Center"
+                                  VerticalAlignment="Center"
+                                  Data="{StaticResource DownArrowGeometry}"
+                                  Fill="Black" />
+                        </Microsoft_Windows_Themes:ButtonChrome>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsChecked" Value="true">
+                                <Setter TargetName="Chrome" Property="RenderPressed" Value="true" />
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter TargetName="Arrow" Property="Fill" Value="#AFAFAF" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <ControlTemplate x:Key="ComboBoxEditableTemplate" TargetType="{x:Type ComboBox}">
+            <Grid x:Name="Placement" SnapsToDevicePixels="true">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Popup x:Name="PART_Popup"
+                       Grid.ColumnSpan="2"
+                       AllowsTransparency="true"
+                       IsOpen="{Binding IsDropDownOpen,
+                                        RelativeSource={RelativeSource TemplatedParent}}"
+                       Placement="Bottom"
+                       PopupAnimation="{DynamicResource {x:Static SystemParameters.ComboBoxPopupAnimationKey}}">
+                    <Microsoft_Windows_Themes:SystemDropShadowChrome x:Name="Shdw"
+                                                                     MinWidth="{Binding ActualWidth,
+                                                                                        ElementName=Placement}"
+                                                                     MaxHeight="{TemplateBinding MaxDropDownHeight}"
+                                                                     Color="Transparent">
+                        <Border x:Name="DropDownBorder"
+                                Background="{DynamicResource {x:Static SystemColors.WindowBrushKey}}"
+                                BorderBrush="{DynamicResource {x:Static SystemColors.WindowFrameBrushKey}}"
+                                BorderThickness="1">
+                            <ScrollViewer x:Name="DropDownScrollViewer">
+                                <Grid RenderOptions.ClearTypeHint="Enabled">
+                                    <Canvas Width="0"
+                                            Height="0"
+                                            HorizontalAlignment="Left"
+                                            VerticalAlignment="Top">
+                                        <Rectangle x:Name="OpaqueRect"
+                                                   Width="{Binding ActualWidth,
+                                                                   ElementName=DropDownBorder}"
+                                                   Height="{Binding ActualHeight,
+                                                                    ElementName=DropDownBorder}"
+                                                   Fill="{Binding Background,
+                                                                  ElementName=DropDownBorder}" />
+                                    </Canvas>
+                                    <ItemsPresenter x:Name="ItemsPresenter"
+                                                    KeyboardNavigation.DirectionalNavigation="Contained"
+                                                    SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                                </Grid>
+                            </ScrollViewer>
+                        </Border>
+                    </Microsoft_Windows_Themes:SystemDropShadowChrome>
+                </Popup>
+                <Microsoft_Windows_Themes:ListBoxChrome x:Name="Border"
+                                                        Grid.ColumnSpan="2"
+                                                        Background="{TemplateBinding Background}"
+                                                        BorderBrush="{TemplateBinding BorderBrush}"
+                                                        BorderThickness="{TemplateBinding BorderThickness}"
+                                                        RenderFocused="{TemplateBinding IsKeyboardFocusWithin}"
+                                                        RenderMouseOver="{TemplateBinding IsMouseOver}" />
+                <TextBox x:Name="PART_EditableTextBox"
+                         Margin="{TemplateBinding Padding}"
+                         HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                         VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                         IsReadOnly="{Binding IsReadOnly,
+                                              RelativeSource={RelativeSource TemplatedParent}}"
+                         Style="{StaticResource ComboBoxEditableTextBox}" />
+                <ToggleButton Grid.Column="1"
+                              IsChecked="{Binding IsDropDownOpen,
+                                                  Mode=TwoWay,
+                                                  RelativeSource={RelativeSource TemplatedParent}}"
+                              Style="{StaticResource ComboBoxToggleButton2}" />
+            </Grid>
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsKeyboardFocusWithin" Value="true">
+                    <Setter Property="Foreground" Value="Black" />
+                </Trigger>
+                <Trigger Property="IsDropDownOpen" Value="true">
+                    <Setter TargetName="Border" Property="RenderFocused" Value="true" />
+                </Trigger>
+                <Trigger Property="HasItems" Value="false">
+                    <Setter TargetName="DropDownBorder" Property="Height" Value="95" />
+                </Trigger>
+                <Trigger Property="IsEnabled" Value="false">
+                    <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" />
+                    <Setter Property="Background" Value="#FFF4F4F4" />
+                </Trigger>
+                <Trigger Property="IsGrouping" Value="true">
+                    <Setter Property="ScrollViewer.CanContentScroll" Value="false" />
+                </Trigger>
+                <Trigger SourceName="PART_Popup" Property="HasDropShadow" Value="true">
+                    <Setter TargetName="Shdw" Property="Margin" Value="0,0,5,5" />
+                    <Setter TargetName="Shdw" Property="Color" Value="#71000000" />
+                </Trigger>
+                <Trigger SourceName="DropDownScrollViewer" Property="ScrollViewer.CanContentScroll" Value="false">
+                    <Setter TargetName="OpaqueRect" Property="Canvas.Top" Value="{Binding VerticalOffset, ElementName=DropDownScrollViewer}" />
+                    <Setter TargetName="OpaqueRect" Property="Canvas.Left" Value="{Binding HorizontalOffset, ElementName=DropDownScrollViewer}" />
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+        <Style x:Key="ComboBoxStyle_GuideTwo" TargetType="{x:Type ComboBox}">
+            <Setter Property="FocusVisualStyle" Value="{StaticResource ComboBoxFocusVisual}" />
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}" />
+            <Setter Property="Background" Value="{StaticResource ButtonNormalBackground}" />
+            <Setter Property="BorderBrush" Value="{StaticResource ButtonNormalBorder}" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto" />
+            <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto" />
+            <Setter Property="Padding" Value="4,3" />
+            <Setter Property="ScrollViewer.CanContentScroll" Value="true" />
+            <Setter Property="ScrollViewer.PanningMode" Value="Both" />
+            <Setter Property="Stylus.IsFlicksEnabled" Value="False" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ComboBox}">
+                        <Grid x:Name="MainGrid" SnapsToDevicePixels="true">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="0" MinWidth="{DynamicResource {x:Static SystemParameters.VerticalScrollBarWidthKey}}" />
+                            </Grid.ColumnDefinitions>
+                            <Popup x:Name="PART_Popup"
+                                   Grid.ColumnSpan="2"
+                                   Margin="1"
+                                   AllowsTransparency="true"
+                                   IsOpen="{Binding IsDropDownOpen,
+                                                    RelativeSource={RelativeSource TemplatedParent}}"
+                                   Placement="Bottom"
+                                   PopupAnimation="{DynamicResource {x:Static SystemParameters.ComboBoxPopupAnimationKey}}">
+                                <Microsoft_Windows_Themes:SystemDropShadowChrome x:Name="Shdw"
+                                                                                 MinWidth="{Binding ActualWidth,
+                                                                                                    ElementName=MainGrid}"
+                                                                                 MaxHeight="{TemplateBinding MaxDropDownHeight}"
+                                                                                 Color="Transparent">
+                                    <Border x:Name="DropDownBorder"
+                                            Background="{DynamicResource {x:Static SystemColors.WindowBrushKey}}"
+                                            BorderBrush="{DynamicResource {x:Static SystemColors.WindowFrameBrushKey}}"
+                                            BorderThickness="1">
+                                        <ScrollViewer x:Name="DropDownScrollViewer">
+                                            <Grid RenderOptions.ClearTypeHint="Enabled">
+                                                <Canvas Width="0"
+                                                        Height="0"
+                                                        HorizontalAlignment="Left"
+                                                        VerticalAlignment="Top">
+                                                    <Rectangle x:Name="OpaqueRect"
+                                                               Width="{Binding ActualWidth,
+                                                                               ElementName=DropDownBorder}"
+                                                               Height="{Binding ActualHeight,
+                                                                                ElementName=DropDownBorder}"
+                                                               Fill="{Binding Background,
+                                                                              ElementName=DropDownBorder}" />
+                                                </Canvas>
+                                                <ItemsPresenter x:Name="ItemsPresenter"
+                                                                KeyboardNavigation.DirectionalNavigation="Contained"
+                                                                SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                                            </Grid>
+                                        </ScrollViewer>
+                                    </Border>
+                                </Microsoft_Windows_Themes:SystemDropShadowChrome>
+                            </Popup>
+                            <ToggleButton Grid.ColumnSpan="2"
+                                          Background="{TemplateBinding Background}"
+                                          BorderBrush="{TemplateBinding BorderBrush}"
+                                          Foreground="Gainsboro"
+                                          IsChecked="{Binding IsDropDownOpen,
+                                                              Mode=TwoWay,
+                                                              RelativeSource={RelativeSource TemplatedParent}}"
+                                          Style="{StaticResource ComboBoxReadonlyToggleButton}" />
+                            <ContentPresenter Margin="{TemplateBinding Padding}"
+                                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                              Content="{TemplateBinding SelectionBoxItem}"
+                                              ContentStringFormat="{TemplateBinding SelectionBoxItemStringFormat}"
+                                              ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}"
+                                              ContentTemplateSelector="{TemplateBinding ItemTemplateSelector}"
+                                              IsHitTestVisible="false"
+                                              SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger SourceName="PART_Popup" Property="HasDropShadow" Value="true">
+                                <Setter TargetName="Shdw" Property="Margin" Value="0,0,5,5" />
+                                <Setter TargetName="Shdw" Property="Color" Value="#71000000" />
+                            </Trigger>
+                            <Trigger Property="HasItems" Value="false">
+                                <Setter TargetName="DropDownBorder" Property="Height" Value="95" />
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" />
+                                <Setter Property="Background" Value="#FFF4F4F4" />
+                            </Trigger>
+                            <Trigger Property="IsGrouping" Value="true">
+                                <Setter Property="ScrollViewer.CanContentScroll" Value="false" />
+                            </Trigger>
+                            <Trigger SourceName="DropDownScrollViewer" Property="ScrollViewer.CanContentScroll" Value="false">
+                                <Setter TargetName="OpaqueRect" Property="Canvas.Top" Value="{Binding VerticalOffset, ElementName=DropDownScrollViewer}" />
+                                <Setter TargetName="OpaqueRect" Property="Canvas.Left" Value="{Binding HorizontalOffset, ElementName=DropDownScrollViewer}" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsEditable" Value="true">
+                    <Setter Property="BorderBrush" Value="{StaticResource TextBoxBorder}" />
+                    <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.WindowBrushKey}}" />
+                    <Setter Property="IsTabStop" Value="false" />
+                    <Setter Property="Padding" Value="3" />
+                    <Setter Property="Template" Value="{StaticResource ComboBoxEditableTemplate}" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <ItemsPanelTemplate x:Key="ItemsPanelTemplate_Combox_GuideTwo_sender">
+            <StackPanel Background="#FF4B4B4B" IsItemsHost="True" />
+        </ItemsPanelTemplate>
+        <Style x:Key="ComboBoxItemStyle_GuideTwo_Sender" TargetType="{x:Type ComboBoxItem}">
+            <Setter Property="HorizontalContentAlignment" Value="{Binding HorizontalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}" />
+            <Setter Property="VerticalContentAlignment" Value="{Binding VerticalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}" />
+            <Setter Property="Padding" Value="3,0,3,0" />
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ComboBoxItem}">
+                        <Border x:Name="Bd"
+                                Width="255"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                Padding="{TemplateBinding Padding}"
+                                SnapsToDevicePixels="true">
+                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                              SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsHighlighted" Value="true">
+                                <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.HighlightTextBrushKey}}" />
+                                <Setter TargetName="Bd" Property="Background" Value="#FF373B3C" />
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <DataTemplate x:Key="DataTemplate_GudieTwoReceiveSize">
+            <Grid Width="255">
+                <Image Width="26"
+                       Margin="0"
+                       HorizontalAlignment="Left"
+                       Source="{Binding SenderPicturePath,
+                                        Mode=TwoWay}" />
+                <TextBlock Margin="37.853,0,0,0"
+                           HorizontalAlignment="Stretch"
+                           VerticalAlignment="Center"
+                           Foreground="#FFE42727"
+                           Text="{Binding SenderTypeName,
+                                          Mode=TwoWay}"
+                           TextWrapping="Wrap"
+                           d:LayoutOverrides="Height" />
+            </Grid>
+        </DataTemplate>
+        <Style x:Key="ComboBoxItemStyle1" TargetType="{x:Type ComboBoxItem}">
+            <Setter Property="HorizontalContentAlignment" Value="{Binding HorizontalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}" />
+            <Setter Property="VerticalContentAlignment" Value="{Binding VerticalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}" />
+            <Setter Property="Padding" Value="3,0,3,0" />
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ComboBoxItem}">
+                        <Border x:Name="Bd"
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                Padding="{TemplateBinding Padding}"
+                                SnapsToDevicePixels="true">
+                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                              SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsHighlighted" Value="true">
+                                <Setter TargetName="Bd" Property="Background" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}" />
+                                <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.HighlightTextBrushKey}}" />
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <ItemsPanelTemplate x:Key="ItemsPanelTemplate_GuideTwoReceiveSize">
+            <StackPanel Background="#FF4B4B4B" IsItemsHost="True" />
+        </ItemsPanelTemplate>
+        <DataTemplate x:Key="DataTemplate_GuideTwoReceiveSize">
+            <Grid Width="Auto" />
+        </DataTemplate>
+        <ItemsPanelTemplate x:Key="ItemsPanelTemplate_GuideTwo_ReceiveSize">
+            <StackPanel Background="#FF4B4B4B" IsItemsHost="True" />
+        </ItemsPanelTemplate>
+        <Style x:Key="ComboBoxItemStyle_GuideTwo_ReceiveSize" TargetType="{x:Type ComboBoxItem}">
+            <Setter Property="HorizontalContentAlignment" Value="{Binding HorizontalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}" />
+            <Setter Property="VerticalContentAlignment" Value="{Binding VerticalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}" />
+            <Setter Property="Padding" Value="3,0,3,0" />
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ComboBoxItem}">
+                        <Border x:Name="Bd"
+                                Width="Auto"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                Padding="{TemplateBinding Padding}"
+                                SnapsToDevicePixels="true">
+                            <ContentPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsHighlighted" Value="true">
+                                <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.HighlightTextBrushKey}}" />
+                                <!--<Setter Property="Width" TargetName="Bd" Value="255"/>-->
+                                <Setter TargetName="Bd" Property="Background" Value="#FF373B3C" />
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <DataTemplate x:Key="DataTemplate_GuideTwo_ReceiveSize">
+            <Grid Width="Auto">
+                <TextBlock Margin="0.5"
+                           Foreground="Gainsboro"
+                           Padding="0"
+                           Text="{Binding DisplayName}"
+                           TextWrapping="Wrap"
+                           d:LayoutOverrides="Width, Height" />
+            </Grid>
+        </DataTemplate>
+        <DataTemplate x:Key="DataTemplate_GuideTwo_SenderCard">
+            <Grid Width="Auto">
+                <TextBlock Margin="0.5"
+                           Foreground="Gainsboro"
+                           Padding="0"
+                           Text="{Binding SenderTypeName,
+                                          Mode=TwoWay}"
+                           TextWrapping="Wrap"
+                           d:LayoutOverrides="Width, Height" />
+            </Grid>
+        </DataTemplate>
+        <Style x:Key="ButtonFocusVisual">
+            <Setter Property="Control.Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <Rectangle Margin="2"
+                                   SnapsToDevicePixels="true"
+                                   Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"
+                                   StrokeDashArray="1 2"
+                                   StrokeThickness="1" />
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style TargetType="{x:Type Button}">
+            <Setter Property="FocusVisualStyle" Value="{StaticResource ButtonFocusVisual}" />
+            <Setter Property="Background" Value="{StaticResource ButtonNormalBackground}" />
+            <Setter Property="BorderBrush" Value="{StaticResource ButtonNormalBorder}" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" />
+            <Setter Property="HorizontalContentAlignment" Value="Center" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+            <Setter Property="Padding" Value="1" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border x:Name="border"
+                                BorderBrush="Black"
+                                BorderThickness="1"
+                                CornerRadius="3">
+                            <Border.Background>
+                                <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+
+
+
+                                    <GradientStop Offset="0" Color="#FF3995DE" />
+                                    <GradientStop Offset="1" Color="#FF057AD7" />
+                                    <GradientStop Offset="0.525" Color="#FF057AD7" />
+                                    <GradientStop Offset="0.495" Color="#FF3995DE" />
+                                </LinearGradientBrush>
+                            </Border.Background>
+                            <TextBlock HorizontalAlignment="Center"
+                                       VerticalAlignment="Center"
+                                       Text="{TemplateBinding Content}"
+                                       TextWrapping="Wrap" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="Background">
+                                    <Setter.Value>
+                                        <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+                                            <GradientStop Offset="0" Color="#FF75ECF2" />
+                                            <GradientStop Offset="1" Color="#FF19E0E7" />
+                                            <GradientStop Offset="0.5" Color="#FF19E0E7" />
+                                            <GradientStop Offset="0.495" Color="#FF75ECF2" />
+                                        </LinearGradientBrush>
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                            <Trigger Property="IsKeyboardFocused" Value="true" />
+                            <Trigger Property="ToggleButton.IsChecked" Value="true" />
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Foreground" Value="#ADADAD" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="ButtonStyle_ConnectLineStyle" TargetType="{x:Type Button}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Grid>
+                            <Border Width="80"
+                                    Margin="0,10,0,0"
+                                    HorizontalAlignment="Left"
+                                    BorderThickness="1"
+                                    d:LayoutOverrides="HorizontalAlignment">
+                                <Border.Background>
+                                    <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+                                        <GradientStop Offset="0" Color="#FF64676C" />
+                                        <GradientStop Offset="1" Color="#FF595959" />
+                                    </LinearGradientBrush>
+                                </Border.Background>
+                            </Border>
+                            <Border Width="70"
+                                    Height="30"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Top"
+                                    BorderThickness="1"
+                                    CornerRadius="5"
+                                    RenderTransformOrigin="0.5,0.5"
+                                    d:LayoutOverrides="HorizontalAlignment">
+                                <Border.Background>
+                                    <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+                                        <GradientStop Offset="0" Color="#FF64676C" />
+                                        <GradientStop Offset="1" Color="#FF595959" />
+                                    </LinearGradientBrush>
+                                </Border.Background>
+                            </Border>
+                            <Border Width="110"
+                                    Height="30"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Top"
+                                    BorderThickness="1"
+                                    CornerRadius="5"
+                                    d:LayoutOverrides="HorizontalAlignment">
+                                <Border.Background>
+                                    <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+                                        <GradientStop Offset="0" Color="#FF64676C" />
+                                        <GradientStop Offset="1" Color="#FF595959" />
+                                    </LinearGradientBrush>
+                                </Border.Background>
+                                <Border.LayoutTransform>
+                                    <TransformGroup>
+                                        <ScaleTransform />
+                                        <SkewTransform AngleX="45" />
+                                        <RotateTransform />
+                                        <TranslateTransform />
+                                    </TransformGroup>
+                                </Border.LayoutTransform>
+                            </Border>
+                            <Canvas Height="3"
+                                    Margin="2,0,0,0"
+                                    VerticalAlignment="Bottom"
+                                    Background="#FF595959" />
+                            <ContentPresenter Width="Auto"
+                                              Margin="12,3.883,0,5"
+                                              HorizontalAlignment="Left"
+                                              RecognizesAccessKey="True"
+                                              SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                                              d:LayoutOverrides="Height" />
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsFocused" Value="True" />
+                            <Trigger Property="IsDefaulted" Value="True" />
+                            <Trigger Property="IsMouseOver" Value="True" />
+                            <Trigger Property="IsPressed" Value="True" />
+                            <Trigger Property="IsEnabled" Value="False" />
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="FontSize" Value="14" />
+            <Setter Property="Foreground" Value="#FFC8C8C8" />
+        </Style>
+
+    </Window.Resources>
+
+    <Grid x:Name="LayoutRoot" DataContext="{Binding Source={StaticResource Frm_Guide_two_VMDataSource}}">
+        <Grid Width="620"
+              Margin="0"
+              Background="#FF373B3C">
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition Height="19.5*" />
+                <RowDefinition Height="2.5*" />
+            </Grid.RowDefinitions>
+            <Grid Margin="0">
+                <CheckBox x:Name="CheckBox_CreateEmptyProject"
+                          Margin="29,5,0,0"
+                          HorizontalAlignment="Left"
+                          VerticalAlignment="Top"
+                          Content="{DynamicResource Lang_Frm_Guide_two_NewProject}"
+                          Foreground="Gainsboro"
+                          IsChecked="{Binding IsCreateEmptyProject,
+                                              Mode=TwoWay}"
+                          TabIndex="1" />
+            </Grid>
+            <Grid x:Name="grid"
+                  Grid.Row="1"
+                  Visibility="{Binding IsChecked,
+                                       Converter={StaticResource IsCheckedConvertVisibility2},
+                                       ElementName=CheckBox_CreateEmptyProject,
+                                       Mode=OneWay}"
+                  d:LayoutOverrides="VerticalMargin">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="3*" />
+                    <RowDefinition Height="2*" />
+                    <RowDefinition Height="3.5*" />
+                </Grid.RowDefinitions>
+                <Grid Margin="0">
+                    <Button x:Name="button_ImportReceiveSize"
+                            Width="72"
+                            Height="25"
+                            Margin="0,72.049,50,0"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Top"
+                            Command="{Binding CmdShowScanBoardConfigManager}"
+                            Content="{DynamicResource Lang_Frm_Guide_two_Import}"
+                            RenderTransformOrigin="-0.081,0.536"
+                            TabIndex="4" />
+                    <Label Margin="0,31,411,90.662"
+                           HorizontalAlignment="Right"
+                           Content="{DynamicResource Lang_Global_SendingBoard}"
+                           Foreground="Gainsboro"
+                           RenderTransformOrigin="0.362,1.103" />
+                    <Label Margin="0,73,411,0"
+                           HorizontalAlignment="Right"
+                           VerticalAlignment="Top"
+                           Content="{DynamicResource Lang_Frm_Guide_two_CabinetSize}"
+                           Foreground="Gainsboro" />
+                    <ComboBox x:Name="ComboBox_SenderType"
+                              Width="270"
+                              Margin="222,28.418,0,0"
+                              HorizontalAlignment="Left"
+                              VerticalAlignment="Top"
+                              BorderThickness="0.5"
+                              Foreground="Gainsboro"
+                              ItemContainerStyle="{DynamicResource ComboBoxItemStyle_GuideTwo_ReceiveSize}"
+                              ItemTemplate="{DynamicResource DataTemplate_GuideTwo_SenderCard}"
+                              ItemsPanel="{DynamicResource ItemsPanelTemplate_GuideTwo_ReceiveSize}"
+                              ItemsSource="{Binding SenderConfigCollection,
+                                                    Mode=TwoWay}"
+                              SelectedItem="{Binding SelectedSenderConfigInfo,
+                                                     Mode=TwoWay}"
+                              Style="{DynamicResource ComboBoxStyle_GuideTwo}"
+                              TabIndex="2"
+                              d:LayoutOverrides="VerticalAlignment">
+                        <ComboBox.Background>
+                            <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+                                <GradientStop Color="#FF616161" />
+                                <GradientStop Offset="1" Color="#FF585858" />
+                                <GradientStop Offset="0.495" Color="#FF616161" />
+                                <GradientStop Offset="0.5" Color="#FF585858" />
+                            </LinearGradientBrush>
+                        </ComboBox.Background>
+                    </ComboBox>
+                    <ComboBox x:Name="ComboBox_ReceiveSize"
+                              Width="270"
+                              Margin="222,73.661,0,0"
+                              HorizontalAlignment="Left"
+                              VerticalAlignment="Top"
+                              Foreground="Gainsboro"
+                              ItemContainerStyle="{DynamicResource ComboBoxItemStyle_GuideTwo_ReceiveSize}"
+                              ItemTemplate="{DynamicResource DataTemplate_GuideTwo_ReceiveSize}"
+                              ItemsPanel="{DynamicResource ItemsPanelTemplate_GuideTwo_ReceiveSize}"
+                              ItemsSource="{Binding ScannerCofigCollection,
+                                                    Mode=TwoWay}"
+                              SelectedItem="{Binding SelectedScannerConfigInfo,
+                                                     Mode=TwoWay,
+                                                     UpdateSourceTrigger=PropertyChanged}"
+                              Style="{DynamicResource ComboBoxStyle_GuideTwo}"
+                              TabIndex="3">
+                        <ComboBox.Background>
+                            <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+                                <GradientStop Offset="0" Color="#FF616161" />
+                                <GradientStop Offset="1" Color="#FF585858" />
+                                <GradientStop Offset="0.495" Color="#FF616161" />
+                                <GradientStop Offset="0.5" Color="#FF585858" />
+                            </LinearGradientBrush>
+                        </ComboBox.Background>
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="DropDownClosed">
+                                <Nova_SmartLCT_Behavior:NotifyControlEvent Command="{Binding CmdCustomSizeDropDownClosed, Mode=OneWay}" />
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </ComboBox>
+                    <Label Height="69"
+                           Margin="33,19.391,0,0"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Top"
+                           Background="#0001DBDB"
+                           Content="1"
+                           FontSize="48"
+                           Foreground="#FFB4B4B4" />
+                    <Rectangle Height="3"
+                               Margin="20,128,20,0"
+                               VerticalAlignment="Top"
+                               Fill="#FF595959" />
+                </Grid>
+                <Grid Grid.Row="1" Margin="0">
+                    <Label Margin="0,28,411,0"
+                           HorizontalAlignment="Right"
+                           VerticalAlignment="Top"
+                           Content="{DynamicResource Lang_Frm_Guide_two_Rows}"
+                           Foreground="Gainsboro"
+                           d:LayoutOverrides="VerticalAlignment" />
+                    <Label Margin="0,28,219,0"
+                           HorizontalAlignment="Right"
+                           VerticalAlignment="Top"
+                           Content="{DynamicResource Lang_Frm_Guide_two_Cols}"
+                           Foreground="Gainsboro"
+                           d:LayoutOverrides="VerticalAlignment" />
+                    <Nova_Wpf_Control:NumericUpDown x:Name="numericUpDown_Row"
+                                                    Width="80"
+                                                    Height="25"
+                                                    Margin="222,28,0,0"
+                                                    HorizontalAlignment="Left"
+                                                    VerticalAlignment="Top"
+                                                    Foreground="Gainsboro"
+                                                    IsSelectedAll="True"
+                                                    IsTabStop="True"
+                                                    MinValue="1"
+                                                    TabIndex="5"
+                                                    Value="{Binding Rows,
+                                                                    Mode=TwoWay}">
+                        <Nova_Wpf_Control:NumericUpDown.Background>
+                            <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+                                <GradientStop Offset="0" Color="#FF616161" />
+                                <GradientStop Offset="1" Color="#FF585858" />
+                                <GradientStop Offset="0.495" Color="#FF616161" />
+                                <GradientStop Offset="0.5" Color="#FE585858" />
+                            </LinearGradientBrush>
+                        </Nova_Wpf_Control:NumericUpDown.Background>
+                    </Nova_Wpf_Control:NumericUpDown>
+                    <Nova_Wpf_Control:NumericUpDown x:Name="numericUpDown_Cols"
+                                                    Width="80"
+                                                    Height="25"
+                                                    Margin="0,28,128.963,0"
+                                                    HorizontalAlignment="Right"
+                                                    VerticalAlignment="Top"
+                                                    Foreground="Gainsboro"
+                                                    IsSelectedAll="True"
+                                                    IsTabStop="True"
+                                                    MinValue="1"
+                                                    TabIndex="6"
+                                                    Value="{Binding Cols,
+                                                                    Mode=TwoWay}"
+                                                    d:LayoutOverrides="HorizontalAlignment">
+                        <Nova_Wpf_Control:NumericUpDown.Background>
+                            <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+                                <GradientStop Offset="0" Color="#FF616161" />
+                                <GradientStop Offset="1" Color="#FF585858" />
+                                <GradientStop Offset="0.495" Color="#FF61616C" />
+                                <GradientStop Offset="0.5" Color="#FF585858" />
+                            </LinearGradientBrush>
+                        </Nova_Wpf_Control:NumericUpDown.Background>
+                    </Nova_Wpf_Control:NumericUpDown>
+                    <Label Margin="33,-0.927,0,20.274"
+                           HorizontalAlignment="Left"
+                           Background="#0001DBDB"
+                           Content="2"
+                           FontSize="48"
+                           Foreground="#FFB4B4B4" />
+                    <Rectangle Height="3"
+                               Margin="17,90,23,-396.297"
+                               VerticalAlignment="Top"
+                               Fill="#FF595959" />
+                </Grid>
+                <Grid Grid.Row="2" Margin="0">
+                    <RadioButton x:Name="RadioButton_LTH"
+                                 Margin="349,32,0,0"
+                                 HorizontalAlignment="Left"
+                                 VerticalAlignment="Top"
+                                 Command="{Binding CmdArrangeScanner,
+                                                   Mode=OneWay}"
+                                 CommandParameter="LeftTop_Hor"
+                                 Content="RadioButton"
+                                 IsChecked="{Binding SelectedArrangeType,
+                                                     Converter={StaticResource selectedArrangeTypeConvertIsChecked},
+                                                     ConverterParameter=LeftTop_Hor,
+                                                     Mode=OneWay}"
+                                 Style="{DynamicResource RadioButtonStyle_Frm_Guide_Two_LTH}"
+                                 TabIndex="7"
+                                 d:LayoutOverrides="VerticalAlignment" />
+                    <RadioButton x:Name="RadioButton_RBH"
+                                 Margin="234,32,0,0"
+                                 HorizontalAlignment="Left"
+                                 VerticalAlignment="Top"
+                                 Command="{Binding CmdArrangeScanner,
+                                                   Mode=OneWay}"
+                                 CommandParameter="RightBottom_Hor"
+                                 Content="RadioButton"
+                                 IsChecked="{Binding SelectedArrangeType,
+                                                     Converter={StaticResource selectedArrangeTypeConvertIsChecked},
+                                                     ConverterParameter=RightBottom_Hor,
+                                                     Mode=OneWay}"
+                                 Style="{DynamicResource RadioButtonStyle_Frm_Guide_Two_RBH}"
+                                 TabIndex="10"
+                                 d:LayoutOverrides="VerticalAlignment" />
+                    <RadioButton x:Name="RadioButton_LBV"
+                                 Margin="349,97,0,0"
+                                 HorizontalAlignment="Left"
+                                 VerticalAlignment="Top"
+                                 Command="{Binding CmdArrangeScanner,
+                                                   Mode=OneWay}"
+                                 CommandParameter="LeftBottom_Ver"
+                                 Content="RadioButton"
+                                 IsChecked="{Binding SelectedArrangeType,
+                                                     Converter={StaticResource selectedArrangeTypeConvertIsChecked},
+                                                     ConverterParameter=LeftBottom_Ver,
+                                                     Mode=OneWay}"
+                                 Style="{DynamicResource RadioButtonStyle_Frm_Guide_Two_LBV}"
+                                 TabIndex="13" />
+                    <RadioButton x:Name="RadioButton_LBH"
+                                 Margin="119,32,0,0"
+                                 HorizontalAlignment="Left"
+                                 VerticalAlignment="Top"
+                                 Command="{Binding CmdArrangeScanner,
+                                                   Mode=OneWay}"
+                                 CommandParameter="LeftBottom_Hor"
+                                 Content="RadioButton"
+                                 IsChecked="{Binding SelectedArrangeType,
+                                                     Converter={StaticResource selectedArrangeTypeConvertIsChecked},
+                                                     ConverterParameter=LeftBottom_Hor,
+                                                     Mode=OneWay}"
+                                 Style="{DynamicResource RadioButtonStyle_Frm_Guide_Two_LBH}"
+                                 TabIndex="9"
+                                 d:LayoutOverrides="VerticalAlignment" />
+                    <RadioButton x:Name="RadioButton_RTV"
+                                 Margin="234,97,0,0"
+                                 HorizontalAlignment="Left"
+                                 VerticalAlignment="Top"
+                                 Command="{Binding CmdArrangeScanner,
+                                                   Mode=OneWay}"
+                                 CommandParameter="RightTop_Ver"
+                                 Content="RadioButton"
+                                 IsChecked="{Binding SelectedArrangeType,
+                                                     Converter={StaticResource selectedArrangeTypeConvertIsChecked},
+                                                     ConverterParameter=RightTop_Ver,
+                                                     Mode=OneWay}"
+                                 Style="{DynamicResource RadioButtonStyle_Frm_Guide_Two_RTV}"
+                                 TabIndex="12" />
+                    <RadioButton x:Name="RadioButton_RTH"
+                                 Margin="464,32,0,0"
+                                 HorizontalAlignment="Left"
+                                 VerticalAlignment="Top"
+                                 Command="{Binding CmdArrangeScanner,
+                                                   Mode=OneWay}"
+                                 CommandParameter="RightTop_Hor"
+                                 Content="RadioButton"
+                                 IsChecked="{Binding SelectedArrangeType,
+                                                     Converter={StaticResource selectedArrangeTypeConvertIsChecked},
+                                                     ConverterParameter=RightTop_Hor,
+                                                     Mode=OneWay}"
+                                 Style="{DynamicResource RadioButtonStyle_Frm_Guide_Two_RTH}"
+                                 TabIndex="8"
+                                 d:LayoutOverrides="VerticalAlignment" />
+                    <RadioButton x:Name="RadioButton_LTV"
+                                 Margin="119,97,0,0"
+                                 HorizontalAlignment="Left"
+                                 VerticalAlignment="Top"
+                                 Command="{Binding CmdArrangeScanner,
+                                                   Mode=OneWay}"
+                                 CommandParameter="LeftTop_Ver"
+                                 Content="RadioButton"
+                                 IsChecked="{Binding SelectedArrangeType,
+                                                     Converter={StaticResource selectedArrangeTypeConvertIsChecked},
+                                                     ConverterParameter=LeftTop_Ver,
+                                                     Mode=OneWay}"
+                                 Style="{DynamicResource RadioButtonStyle_Frm_Guide_Two_LTV}"
+                                 TabIndex="11" />
+                    <RadioButton x:Name="RadioButton_RBV"
+                                 Margin="464,97,0,0"
+                                 HorizontalAlignment="Left"
+                                 VerticalAlignment="Top"
+                                 Command="{Binding CmdArrangeScanner,
+                                                   Mode=OneWay}"
+                                 CommandParameter="RightBottom_Ver"
+                                 Content="RadioButton"
+                                 IsChecked="{Binding SelectedArrangeType,
+                                                     Converter={StaticResource selectedArrangeTypeConvertIsChecked},
+                                                     ConverterParameter=RightBottom_Ver,
+                                                     Mode=OneWay}"
+                                 Style="{DynamicResource RadioButtonStyle_Frm_Guide_Two_RBV}"
+                                 TabIndex="14" />
+                    <Label Width="42.15"
+                           Margin="33,35.726,0,60.131"
+                           HorizontalAlignment="Left"
+                           Background="#0001DBDB"
+                           Content="3"
+                           FontSize="48"
+                           Foreground="#FFB4B4B4" />
+                </Grid>
+            </Grid>
+            <Grid Grid.Row="2" Margin="0">
+                <Button x:Name="button_create"
+                        Width="80"
+                        Height="25"
+                        Margin="0,17,150,9.852"
+                        HorizontalAlignment="Right"
+                        Command="{Binding CmdCreate}"
+                        Content="{DynamicResource Lang_Frm_Guide_two_Create}"
+                        TabIndex="15" />
+                <Button x:Name="button_cancel"
+                        Width="80"
+                        Height="25"
+                        Margin="0,17,50,9.852"
+                        HorizontalAlignment="Right"
+                        Command="{Binding CmdCancel}"
+                        Content="{DynamicResource Lang_Frm_Guide_two_Cancel}"
+                        TabIndex="16" />
+            </Grid>
+        </Grid>
+    </Grid>
+</MetroUI:MetroWindow>

@@ -1,0 +1,9 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:Nova.SmartLCT.Skin">
+
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="/Nova.SmartLCT.Skin;component/BlueMode/CustomWindowStyle.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+
+</ResourceDictionary>

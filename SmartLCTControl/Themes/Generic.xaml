@@ -1,0 +1,650 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:Nova_SmartLCT_Behavior="clr-namespace:Nova.SmartLCT.Behavior;assembly=Behavior"
+                    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                    xmlns:ed="http://schemas.microsoft.com/expression/2010/drawing"
+                    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+                    xmlns:local="clr-namespace:Nova.SmartLCT.SmartLCTControl"
+                    xmlns:localInterface="clr-namespace:Nova.SmartLCT.Interface;assembly=Nova.SmartLCT.Interface.CommonData"
+                    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                    xmlns:w="clr-namespace:GalaSoft.MvvmLight.Command;assembly=GalaSoft.MvvmLight.Extras.WPF4"
+                    mc:Ignorable="d">
+    <local:MyTemplateSelector x:Key="MyTemplateSelectorDataSource" d:IsDataSource="True" />
+    <localInterface:IsLockedConverterSizeButtonIsEnabled x:Key="isLockedConverterSizeButtonIsEnabled" />
+    <localInterface:SelectedStateConvertCursor x:Key="selectedStateConvertCursor" />
+    <localInterface:EleTypeConverterColor x:Key="eleTypeConverterColor" />
+    <localInterface:SelectedConvertHeight x:Key="selectedConvertHeight" />
+    <localInterface:ElementConvertPortBeginIconMargin x:Key="elementConvertPortBeginIconMargin" />
+    <localInterface:ConnectIndexConvertScreenName x:Key="connectIndexConvertScreenName" />
+    <localInterface:MarginConvertMarginName x:Key="marginConvertMarginName" />
+    <localInterface:RectSizeConvertSizeName x:Key="rectSizeConvertSizeName" />
+    <localInterface:OperateEnvironConvertVisible x:Key="operateEnvironConvertVisible" />
+    <localInterface:EleTypeConverterColorWithAdjustSender x:Key="eleTypeConverterColorWithAdjustSender" />
+    <localInterface:ConnectIndexConvertIsVisible x:Key="connectIndexConvertIsVisible" />
+    <Style TargetType="{x:Type local:SmartLCTControl}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type local:SmartLCTControl}">
+                    <ControlTemplate.Resources>
+                        <DataTemplate x:Key="DataTemplate_MyLine">
+                            <Grid Margin="{Binding Margin, Mode=TwoWay}">
+                                <Path Width="{Binding Width,
+                                                      Mode=TwoWay}"
+                                      Height="{Binding Height,
+                                                       Mode=TwoWay}"
+                                      HorizontalAlignment="Left"
+                                      VerticalAlignment="Top"
+                                      Data="M0,0 L0.5,25.5 291.5,26.5 291.5,-0.5"
+                                      Fill="{Binding BackgroundBrush}"
+                                      RenderTransformOrigin="0,0.5"
+                                      Stretch="Fill"
+                                      Stroke="{Binding BackgroundBrush}">
+                                    <Path.ToolTip>
+                                        <TextBox Text="{Binding Name, Mode=TwoWay}" />
+                                    </Path.ToolTip>
+                                    <Path.RenderTransform>
+                                        <TransformGroup>
+                                            <ScaleTransform />
+                                            <SkewTransform />
+                                            <RotateTransform Angle="{Binding Angle, Mode=TwoWay}" />
+                                            <TranslateTransform X="0" Y="0" />
+                                        </TransformGroup>
+                                    </Path.RenderTransform>
+                                    <i:Interaction.Triggers>
+                                        <i:EventTrigger EventName="PreviewMouseLeftButtonDown">
+                                            <Nova_SmartLCT_Behavior:NotifyControlEvent Command="{x:Static local:SmartLCTControl.MouseLeftButtonDownWithReceiveCmd}" CommandParameters="{Binding}" />
+                                        </i:EventTrigger>
+                                        <i:EventTrigger EventName="PreviewMouseRightButtonDown">
+                                            <Nova_SmartLCT_Behavior:NotifyControlEvent Command="{x:Static local:SmartLCTControl.MouseRightButtonDownWithReceiveCmd}" CommandParameters="{Binding}" />
+                                        </i:EventTrigger>
+                                        <i:EventTrigger EventName="PreviewMouseUp">
+                                            <Nova_SmartLCT_Behavior:NotifyControlEvent Command="{x:Static local:SmartLCTControl.MouseUpWithReceiveCmd}" CommandParameters="{Binding}" />
+                                        </i:EventTrigger>
+                                        <i:EventTrigger EventName="PreviewMouseMove">
+                                            <Nova_SmartLCT_Behavior:NotifyControlEvent Command="{x:Static local:SmartLCTControl.MouseMoveWithReceiveCmd}" CommandParameters="{Binding}" />
+                                        </i:EventTrigger>
+                                        <i:EventTrigger EventName="MouseDoubleClick">
+                                            <Nova_SmartLCT_Behavior:NotifyControlEvent Command="{x:Static local:SmartLCTControl.MouseDoubleClickWithReceiveCmd}" CommandParameters="{Binding}" />
+                                        </i:EventTrigger>
+
+                                    </i:Interaction.Triggers>
+                                </Path>
+                                <ed:RegularPolygon Width="16"
+                                                   Height="20"
+                                                   Margin="{Binding ArrowMargin,
+                                                                    Mode=TwoWay}"
+                                                   HorizontalAlignment="Left"
+                                                   VerticalAlignment="Top"
+                                                   Fill="{Binding BackgroundBrush}"
+                                                   InnerRadius="1"
+                                                   PointCount="3"
+                                                   RenderTransformOrigin="0.5,0.5"
+                                                   Stretch="Fill"
+                                                   Stroke="{Binding BackgroundBrush}">
+                                    <ed:RegularPolygon.ToolTip>
+                                        <TextBox Text="{Binding Name, Mode=TwoWay}" />
+                                    </ed:RegularPolygon.ToolTip>
+                                    <ed:RegularPolygon.RenderTransform>
+                                        <TransformGroup>
+                                            <ScaleTransform />
+                                            <SkewTransform />
+                                            <RotateTransform Angle="{Binding ArrowAngle, Mode=TwoWay}" />
+                                        </TransformGroup>
+                                    </ed:RegularPolygon.RenderTransform>
+                                    <i:Interaction.Triggers>
+                                        <i:EventTrigger EventName="PreviewMouseLeftButtonDown">
+                                            <Nova_SmartLCT_Behavior:NotifyControlEvent Command="{x:Static local:SmartLCTControl.MouseLeftButtonDownWithReceiveCmd}" CommandParameters="{Binding}" />
+                                        </i:EventTrigger>
+                                        <i:EventTrigger EventName="PreviewMouseRightButtonDown">
+                                            <Nova_SmartLCT_Behavior:NotifyControlEvent Command="{x:Static local:SmartLCTControl.MouseRightButtonDownWithReceiveCmd}" CommandParameters="{Binding}" />
+                                        </i:EventTrigger>
+                                        <i:EventTrigger EventName="PreviewMouseUp">
+                                            <Nova_SmartLCT_Behavior:NotifyControlEvent Command="{x:Static local:SmartLCTControl.MouseUpWithReceiveCmd}" CommandParameters="{Binding}" />
+                                        </i:EventTrigger>
+                                        <i:EventTrigger EventName="PreviewMouseMove">
+                                            <Nova_SmartLCT_Behavior:NotifyControlEvent Command="{x:Static local:SmartLCTControl.MouseMoveWithReceiveCmd}" CommandParameters="{Binding}" />
+                                        </i:EventTrigger>
+                                        <i:EventTrigger EventName="MouseDoubleClick">
+                                            <Nova_SmartLCT_Behavior:NotifyControlEvent Command="{x:Static local:SmartLCTControl.MouseDoubleClickWithReceiveCmd}" CommandParameters="{Binding}" />
+                                        </i:EventTrigger>
+
+                                    </i:Interaction.Triggers>
+                                </ed:RegularPolygon>
+                            </Grid>
+                        </DataTemplate>
+
+                        <DataTemplate x:Key="DataTemplate_MyRectangle">
+                            <Canvas Width="{Binding Width,
+                                                    Mode=TwoWay}"
+                                    Height="{Binding Height,
+                                                     Mode=TwoWay}"
+                                    Margin="{Binding Margin,
+                                                     Mode=TwoWay}"
+                                    Background="{x:Null}"
+                                    Visibility="{Binding Visible,
+                                                         Mode=TwoWay}">
+                                <localInterface:MyRectangleControl>
+                                    <i:Interaction.Triggers>
+                                        <i:EventTrigger EventName="MouseLeftButtonDown">
+                                            <Nova_SmartLCT_Behavior:NotifyControlEvent Command="{x:Static local:SmartLCTControl.MouseLeftButtonDownWithReceiveCmd}" CommandParameters="{Binding}" />
+                                        </i:EventTrigger>
+                                        <i:EventTrigger EventName="MouseRightButtonDown">
+                                            <Nova_SmartLCT_Behavior:NotifyControlEvent Command="{x:Static local:SmartLCTControl.MouseRightButtonDownWithReceiveCmd}" CommandParameters="{Binding}" />
+                                        </i:EventTrigger>
+                                        <i:EventTrigger EventName="MouseUp">
+                                            <Nova_SmartLCT_Behavior:NotifyControlEvent Command="{x:Static local:SmartLCTControl.MouseUpWithReceiveCmd}" CommandParameters="{Binding}" />
+                                        </i:EventTrigger>
+                                        <i:EventTrigger EventName="MouseMove">
+                                            <Nova_SmartLCT_Behavior:NotifyControlEvent Command="{x:Static local:SmartLCTControl.MouseMoveWithReceiveCmd}" CommandParameters="{Binding}" />
+                                        </i:EventTrigger>
+                                        <i:EventTrigger EventName="MouseDoubleClick">
+                                            <Nova_SmartLCT_Behavior:NotifyControlEvent Command="{x:Static local:SmartLCTControl.MouseDoubleClickWithReceiveCmd}" CommandParameters="{Binding}" />
+                                        </i:EventTrigger>
+
+                                    </i:Interaction.Triggers>
+                                </localInterface:MyRectangleControl>
+                                <Button Width="10"
+                                        Height="10"
+                                        Margin="0"
+                                        Style="{DynamicResource CommonButtonStyle}"
+                                        Visibility="{Binding ConnectedVisible,
+                                                             Mode=TwoWay}">
+                                    <Button.Background>
+                                        <ImageBrush ImageSource="/Nova.SmartLCT.Skin;component/Image/BlueMode/Normal/noConnect.png" />
+                                    </Button.Background>
+                                    <i:Interaction.Triggers>
+                                        <i:EventTrigger EventName="PreviewMouseLeftButtonDown">
+                                            <Nova_SmartLCT_Behavior:NotifyControlEvent Command="{x:Static local:SmartLCTControl.MouseLeftButtonDownWithReceiveCmd}" CommandParameters="{Binding}" />
+                                        </i:EventTrigger>
+                                        <i:EventTrigger EventName="MouseRightButtonDown">
+                                            <Nova_SmartLCT_Behavior:NotifyControlEvent Command="{x:Static local:SmartLCTControl.MouseRightButtonDownWithReceiveCmd}" CommandParameters="{Binding}" />
+                                        </i:EventTrigger>
+                                        <i:EventTrigger EventName="PreviewMouseUp">
+                                            <Nova_SmartLCT_Behavior:NotifyControlEvent Command="{x:Static local:SmartLCTControl.MouseUpWithReceiveCmd}" CommandParameters="{Binding}" />
+                                        </i:EventTrigger>
+                                        <i:EventTrigger EventName="PreviewMouseMove">
+                                            <Nova_SmartLCT_Behavior:NotifyControlEvent Command="{x:Static local:SmartLCTControl.MouseMoveWithReceiveCmd}" CommandParameters="{Binding}" />
+                                        </i:EventTrigger>
+                                        <i:EventTrigger EventName="PreviewMouseDoubleClick">
+                                            <Nova_SmartLCT_Behavior:NotifyControlEvent Command="{x:Static local:SmartLCTControl.MouseDoubleClickWithReceiveCmd}" CommandParameters="{Binding}" />
+                                        </i:EventTrigger>
+                                    </i:Interaction.Triggers>
+                                </Button>
+
+                                <Grid Margin="{Binding StartAndEndIconMargin,
+                                                       Mode=TwoWay}"
+                                      HorizontalAlignment="Left"
+                                      VerticalAlignment="Top">
+                                    <Button Width="20"
+                                            Height="20"
+                                            Margin="0"
+                                            Style="{DynamicResource CommonButtonStyle}"
+                                            Visibility="{Binding MaxConnectIndexVisibile,
+                                                                 Mode=TwoWay}">
+                                        <Button.Background>
+                                            <ImageBrush ImageSource="/Nova.SmartLCT.Skin;component/Image/BlueMode/Normal/End.png" />
+                                        </Button.Background>
+                                        <i:Interaction.Triggers>
+                                            <i:EventTrigger EventName="PreviewMouseLeftButtonDown">
+                                                <Nova_SmartLCT_Behavior:NotifyControlEvent Command="{x:Static local:SmartLCTControl.MouseLeftButtonDownWithReceiveCmd}" CommandParameters="{Binding}" />
+                                            </i:EventTrigger>
+                                            <i:EventTrigger EventName="MouseRightButtonDown">
+                                                <Nova_SmartLCT_Behavior:NotifyControlEvent Command="{x:Static local:SmartLCTControl.MouseRightButtonDownWithReceiveCmd}" CommandParameters="{Binding}" />
+                                            </i:EventTrigger>
+                                            <i:EventTrigger EventName="PreviewMouseUp">
+                                                <Nova_SmartLCT_Behavior:NotifyControlEvent Command="{x:Static local:SmartLCTControl.MouseUpWithReceiveCmd}" CommandParameters="{Binding}" />
+                                            </i:EventTrigger>
+                                            <i:EventTrigger EventName="PreviewMouseMove">
+                                                <Nova_SmartLCT_Behavior:NotifyControlEvent Command="{x:Static local:SmartLCTControl.MouseMoveWithReceiveCmd}" CommandParameters="{Binding}" />
+                                            </i:EventTrigger>
+                                            <i:EventTrigger EventName="PreviewMouseDoubleClick">
+                                                <Nova_SmartLCT_Behavior:NotifyControlEvent Command="{x:Static local:SmartLCTControl.MouseDoubleClickWithReceiveCmd}" CommandParameters="{Binding}" />
+                                            </i:EventTrigger>
+                                        </i:Interaction.Triggers>
+                                    </Button>
+                                    <Button Width="20"
+                                            Height="20"
+                                            Margin="0"
+                                            Style="{DynamicResource CommonButtonStyle}"
+                                            Visibility="{Binding MinConnectIndexVisibile,
+                                                                 Mode=TwoWay}">
+                                        <Button.Background>
+                                            <ImageBrush ImageSource="/Nova.SmartLCT.Skin;component/Image/BlueMode/Normal/Start.png" />
+                                        </Button.Background>
+                                        <i:Interaction.Triggers>
+                                            <i:EventTrigger EventName="PreviewMouseLeftButtonDown">
+                                                <Nova_SmartLCT_Behavior:NotifyControlEvent Command="{x:Static local:SmartLCTControl.MouseLeftButtonDownWithReceiveCmd}" CommandParameters="{Binding}" />
+                                            </i:EventTrigger>
+                                            <i:EventTrigger EventName="MouseRightButtonDown">
+                                                <Nova_SmartLCT_Behavior:NotifyControlEvent Command="{x:Static local:SmartLCTControl.MouseRightButtonDownWithReceiveCmd}" CommandParameters="{Binding}" />
+                                            </i:EventTrigger>
+                                            <i:EventTrigger EventName="PreviewMouseUp">
+                                                <Nova_SmartLCT_Behavior:NotifyControlEvent Command="{x:Static local:SmartLCTControl.MouseUpWithReceiveCmd}" CommandParameters="{Binding}" />
+                                            </i:EventTrigger>
+                                            <i:EventTrigger EventName="PreviewMouseMove">
+                                                <Nova_SmartLCT_Behavior:NotifyControlEvent Command="{x:Static local:SmartLCTControl.MouseMoveWithReceiveCmd}" CommandParameters="{Binding}" />
+                                            </i:EventTrigger>
+                                            <i:EventTrigger EventName="PreviewMouseDoubleClick">
+                                                <Nova_SmartLCT_Behavior:NotifyControlEvent Command="{x:Static local:SmartLCTControl.MouseDoubleClickWithReceiveCmd}" CommandParameters="{Binding}" />
+                                            </i:EventTrigger>
+                                        </i:Interaction.Triggers>
+                                    </Button>
+                                </Grid>
+
+                                <Grid Margin="0,0,0,0" Visibility="{Binding OperateEnviron, Converter={StaticResource operateEnvironConvertVisible}, Mode=TwoWay}">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                    </Grid.RowDefinitions>
+                                    <Label Grid.Row="0"
+                                           Content="{Binding DisplayName,
+                                                             Mode=TwoWay}"
+                                           Foreground="#FFE6E6E6">
+                                        <i:Interaction.Triggers>
+                                            <i:EventTrigger EventName="PreviewMouseLeftButtonDown">
+                                                <Nova_SmartLCT_Behavior:NotifyControlEvent Command="{x:Static local:SmartLCTControl.MouseLeftButtonDownWithReceiveCmd}" CommandParameters="{Binding}" />
+                                            </i:EventTrigger>
+                                            <i:EventTrigger EventName="MouseRightButtonDown">
+                                                <Nova_SmartLCT_Behavior:NotifyControlEvent Command="{x:Static local:SmartLCTControl.MouseRightButtonDownWithReceiveCmd}" CommandParameters="{Binding}" />
+                                            </i:EventTrigger>
+                                            <i:EventTrigger EventName="PreviewMouseUp">
+                                                <Nova_SmartLCT_Behavior:NotifyControlEvent Command="{x:Static local:SmartLCTControl.MouseUpWithReceiveCmd}" CommandParameters="{Binding}" />
+                                            </i:EventTrigger>
+                                            <i:EventTrigger EventName="PreviewMouseMove">
+                                                <Nova_SmartLCT_Behavior:NotifyControlEvent Command="{x:Static local:SmartLCTControl.MouseMoveWithReceiveCmd}" CommandParameters="{Binding}" />
+                                            </i:EventTrigger>
+
+                                            <i:EventTrigger EventName="PreviewMouseDoubleClick">
+                                                <Nova_SmartLCT_Behavior:NotifyControlEvent Command="{x:Static local:SmartLCTControl.MouseDoubleClickWithReceiveCmd}" CommandParameters="{Binding}" />
+                                            </i:EventTrigger>
+                                        </i:Interaction.Triggers>
+                                    </Label>
+                                    <Label Grid.Row="1"
+                                           Content="{Binding Margin,
+                                                             Converter={StaticResource marginConvertMarginName}}"
+                                           Foreground="#FFE6E6E6">
+                                        <i:Interaction.Triggers>
+                                            <i:EventTrigger EventName="PreviewMouseLeftButtonDown">
+                                                <Nova_SmartLCT_Behavior:NotifyControlEvent Command="{x:Static local:SmartLCTControl.MouseLeftButtonDownWithReceiveCmd}" CommandParameters="{Binding}" />
+                                            </i:EventTrigger>
+                                            <i:EventTrigger EventName="MouseRightButtonDown">
+                                                <Nova_SmartLCT_Behavior:NotifyControlEvent Command="{x:Static local:SmartLCTControl.MouseRightButtonDownWithReceiveCmd}" CommandParameters="{Binding}" />
+                                            </i:EventTrigger>
+                                            <i:EventTrigger EventName="PreviewMouseUp">
+                                                <Nova_SmartLCT_Behavior:NotifyControlEvent Command="{x:Static local:SmartLCTControl.MouseUpWithReceiveCmd}" CommandParameters="{Binding}" />
+                                            </i:EventTrigger>
+                                            <i:EventTrigger EventName="PreviewMouseMove">
+                                                <Nova_SmartLCT_Behavior:NotifyControlEvent Command="{x:Static local:SmartLCTControl.MouseMoveWithReceiveCmd}" CommandParameters="{Binding}" />
+                                            </i:EventTrigger>
+
+                                            <i:EventTrigger EventName="PreviewMouseDoubleClick">
+                                                <Nova_SmartLCT_Behavior:NotifyControlEvent Command="{x:Static local:SmartLCTControl.MouseDoubleClickWithReceiveCmd}" CommandParameters="{Binding}" />
+                                            </i:EventTrigger>
+                                        </i:Interaction.Triggers>
+                                    </Label>
+                                    <Label Grid.Row="2"
+                                           Content="{Binding RectSize,
+                                                             Converter={StaticResource rectSizeConvertSizeName}}"
+                                           Foreground="#FFE6E6E6">
+                                        <i:Interaction.Triggers>
+                                            <i:EventTrigger EventName="PreviewMouseLeftButtonDown">
+                                                <Nova_SmartLCT_Behavior:NotifyControlEvent Command="{x:Static local:SmartLCTControl.MouseLeftButtonDownWithReceiveCmd}" CommandParameters="{Binding}" />
+                                            </i:EventTrigger>
+                                            <i:EventTrigger EventName="MouseRightButtonDown">
+                                                <Nova_SmartLCT_Behavior:NotifyControlEvent Command="{x:Static local:SmartLCTControl.MouseRightButtonDownWithReceiveCmd}" CommandParameters="{Binding}" />
+                                            </i:EventTrigger>
+                                            <i:EventTrigger EventName="PreviewMouseUp">
+                                                <Nova_SmartLCT_Behavior:NotifyControlEvent Command="{x:Static local:SmartLCTControl.MouseUpWithReceiveCmd}" CommandParameters="{Binding}" />
+                                            </i:EventTrigger>
+                                            <i:EventTrigger EventName="PreviewMouseMove">
+                                                <Nova_SmartLCT_Behavior:NotifyControlEvent Command="{x:Static local:SmartLCTControl.MouseMoveWithReceiveCmd}" CommandParameters="{Binding}" />
+                                            </i:EventTrigger>
+
+                                            <i:EventTrigger EventName="PreviewMouseDoubleClick">
+                                                <Nova_SmartLCT_Behavior:NotifyControlEvent Command="{x:Static local:SmartLCTControl.MouseDoubleClickWithReceiveCmd}" CommandParameters="{Binding}" />
+                                            </i:EventTrigger>
+                                        </i:Interaction.Triggers>
+                                    </Label>
+                                </Grid>
+                            </Canvas>
+
+                        </DataTemplate>
+
+                        <DataTemplate x:Key="DataTemplate_MyRectLayer">
+                            <Canvas Width="{Binding Width,
+                                                    Mode=TwoWay}"
+                                    Height="{Binding Height,
+                                                     Mode=TwoWay}"
+                                    Margin="{Binding Margin,
+                                                     Mode=TwoWay}"
+                                    Background="Transparent"
+                                    Visibility="{Binding Visible,
+                                                         Mode=TwoWay}">
+                                <localInterface:MyRectLayerControl>
+                                    <i:Interaction.Triggers>
+                                        <i:EventTrigger EventName="MouseLeftButtonDown">
+                                            <Nova_SmartLCT_Behavior:NotifyControlEvent Command="{x:Static local:SmartLCTControl.MouseLeftButtonDownWithReceiveCmd}" CommandParameters="{Binding}" />
+                                        </i:EventTrigger>
+                                        <i:EventTrigger EventName="MouseRightButtonDown">
+                                            <Nova_SmartLCT_Behavior:NotifyControlEvent Command="{x:Static local:SmartLCTControl.MouseRightButtonDownWithReceiveCmd}" CommandParameters="{Binding}" />
+                                        </i:EventTrigger>
+                                        <i:EventTrigger EventName="MouseUp">
+                                            <Nova_SmartLCT_Behavior:NotifyControlEvent Command="{x:Static local:SmartLCTControl.MouseUpWithReceiveCmd}" CommandParameters="{Binding}" />
+                                        </i:EventTrigger>
+                                        <i:EventTrigger EventName="MouseMove">
+                                            <Nova_SmartLCT_Behavior:NotifyControlEvent Command="{x:Static local:SmartLCTControl.MouseMoveWithReceiveCmd}" CommandParameters="{Binding}" />
+                                        </i:EventTrigger>
+
+                                        <i:EventTrigger EventName="MouseWheel">
+                                            <Nova_SmartLCT_Behavior:NotifyControlEvent Command="{x:Static local:SmartLCTControl.MouseWheelWithReceiveCmd}" CommandParameters="{Binding}" />
+                                        </i:EventTrigger>
+                                        <i:EventTrigger EventName="KeyDown">
+                                            <Nova_SmartLCT_Behavior:NotifyControlEvent Command="{x:Static local:SmartLCTControl.KeyDownWithReceiveCmd}" CommandParameters="{Binding}" />
+                                        </i:EventTrigger>
+                                    </i:Interaction.Triggers>
+                                </localInterface:MyRectLayerControl>
+                            </Canvas>
+                        </DataTemplate>
+
+                        <ItemsPanelTemplate x:Key="ItemsPanelTemplate_MyRectLayer">
+                            <localInterface:MyCanvas EleType="{Binding EleType,
+                                                                       Mode=TwoWay}"
+                                                     IsHitTestVisible="true"
+                                                     OperateEnviron="{Binding OperateEnviron,
+                                                                              Mode=TwoWay}"
+                                                     Style="{DynamicResource MyCanvasStyle}" />
+                        </ItemsPanelTemplate>
+                        <Style x:Key="MyCanvasStyle" TargetType="{x:Type localInterface:MyCanvas}">
+                            <Style.Triggers>
+                                <MultiTrigger>
+                                    <MultiTrigger.Conditions>
+                                        <Condition Property="EleType" Value="Screen" />
+                                        <Condition Property="OperateEnviron" Value="AdjustScreenLocation" />
+                                    </MultiTrigger.Conditions>
+                                    <Setter Property="Background">
+                                        <Setter.Value>
+                                            <ImageBrush ImageSource="/Nova.SmartLCT.Skin;component/Image/BlueMode/Normal/Screen.jpg" />
+                                        </Setter.Value>
+                                    </Setter>
+                                </MultiTrigger>
+                                <MultiTrigger>
+                                    <MultiTrigger.Conditions>
+                                        <Condition Property="EleType" Value="Screen" />
+                                        <Condition Property="OperateEnviron" Value="AdjustSenderLocation" />
+                                    </MultiTrigger.Conditions>
+                                    <Setter Property="Background" Value="{Binding EleType, Converter={StaticResource eleTypeConverterColorWithAdjustSender}}" />
+                                </MultiTrigger>
+                                <MultiTrigger>
+                                    <MultiTrigger.Conditions>
+                                        <Condition Property="OperateEnviron" Value="DesignScreen" />
+                                    </MultiTrigger.Conditions>
+                                    <Setter Property="Background" Value="{Binding EleType, Converter={StaticResource eleTypeConverterColor}}" />
+                                </MultiTrigger>
+                                <Trigger Property="EleType" Value="None">
+                                    <Setter Property="Background" Value="#0014141C" />
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+
+                        <Style TargetType="{x:Type localInterface:MyRectangleControl}">
+                            <Setter Property="ElementSelectedState" Value="{Binding ElementSelectedState}" />
+                            <Setter Property="EleType" Value="{Binding EleType}" />
+                            <Setter Property="OperateEnviron" Value="{Binding OperateEnviron}" />
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="{x:Type localInterface:MyRectangleControl}">
+                                        <Rectangle x:Name="PART_Rect"
+                                                   Width="{Binding Width,
+                                                                   Mode=TwoWay}"
+                                                   Height="{Binding Height,
+                                                                    Mode=TwoWay}"
+                                                   Margin="0"
+                                                   Fill="#FF2E3440"
+                                                   Opacity="{Binding Opacity,
+                                                                     Mode=TwoWay}"
+                                                   Stroke="#FF646464"
+                                                   StrokeThickness="0.5"
+                                                   Visibility="{Binding Visible,
+                                                                        Mode=TwoWay}" />
+                                        <ControlTemplate.Triggers>
+                                            <MultiTrigger>
+                                                <MultiTrigger.Conditions>
+                                                    <Condition Property="EleType" Value="Receive" />
+                                                    <Condition Property="ElementSelectedState" Value="Selected" />
+                                                </MultiTrigger.Conditions>
+                                                <Setter TargetName="PART_Rect" Property="Fill" Value="#FF5E626B" />
+                                                <Setter TargetName="PART_Rect" Property="Stroke" Value="#FFB8B8B8" />
+                                                <Setter TargetName="PART_Rect" Property="StrokeThickness" Value="0.6" />
+                                            </MultiTrigger>
+                                            <MultiTrigger>
+                                                <MultiTrigger.Conditions>
+                                                    <Condition Property="EleType" Value="groupframe" />
+                                                </MultiTrigger.Conditions>
+                                                <Setter TargetName="PART_Rect" Property="Fill" Value="{x:Null}" />
+                                                <Setter TargetName="PART_Rect" Property="StrokeThickness" Value="1" />
+                                            </MultiTrigger>
+                                            <MultiTrigger>
+                                                <MultiTrigger.Conditions>
+                                                    <Condition Property="EleType" Value="groupframe" />
+                                                    <Condition Property="ElementSelectedState" Value="Selected" />
+                                                </MultiTrigger.Conditions>
+                                                <Setter TargetName="PART_Rect" Property="Fill" Value="{x:Null}" />
+                                                <Setter TargetName="PART_Rect" Property="Stroke" Value="#FFB8B8B8" />
+                                                <Setter TargetName="PART_Rect" Property="StrokeThickness" Value="2" />
+                                            </MultiTrigger>
+                                            <MultiTrigger>
+                                                <MultiTrigger.Conditions>
+                                                    <Condition Property="ElementSelectedState" Value="FrameSelected" />
+                                                </MultiTrigger.Conditions>
+                                                <Setter TargetName="PART_Rect" Property="Fill" Value="#FF36363E" />
+                                                <Setter TargetName="PART_Rect" Property="Stroke" Value="#FFB8B8B8" />
+                                                <Setter TargetName="PART_Rect" Property="StrokeThickness" Value="1.5" />
+                                            </MultiTrigger>
+                                            <MultiTrigger>
+                                                <MultiTrigger.Conditions>
+                                                    <Condition Property="ElementSelectedState" Value="Selected" />
+                                                    <Condition Property="OperateEnviron" Value="AdjustSenderLocation" />
+                                                    <Condition Property="EleType" Value="Receive" />
+                                                </MultiTrigger.Conditions>
+                                                <Setter TargetName="PART_Rect" Property="Fill" Value="#FF60787C" />
+                                                <Setter TargetName="PART_Rect" Property="Stroke" Value="#FFB3B3B3" />
+                                                <Setter TargetName="PART_Rect" Property="StrokeThickness" Value="2" />
+                                            </MultiTrigger>
+                                            <MultiTrigger>
+                                                <MultiTrigger.Conditions>
+                                                    <Condition Property="ElementSelectedState" Value="None" />
+                                                    <Condition Property="OperateEnviron" Value="AdjustSenderLocation" />
+                                                    <Condition Property="EleType" Value="Receive" />
+                                                </MultiTrigger.Conditions>
+                                                <Setter TargetName="PART_Rect" Property="Fill" Value="#FF3D5257" />
+                                                <Setter TargetName="PART_Rect" Property="Stroke" Value="#FF50696E" />
+                                                <Setter TargetName="PART_Rect" Property="StrokeThickness" Value="1.5" />
+                                            </MultiTrigger>
+                                            <MultiTrigger>
+                                                <MultiTrigger.Conditions>
+                                                    <Condition Property="ElementSelectedState" Value="None" />
+                                                    <Condition Property="OperateEnviron" Value="AdjustScreenLocation" />
+                                                    <Condition Property="EleType" Value="Receive" />
+                                                </MultiTrigger.Conditions>
+                                                <Setter TargetName="PART_Rect" Property="Fill" Value="#FF6C7070" />
+                                                <Setter TargetName="PART_Rect" Property="Stroke" Value="#FFCDD2D9" />
+                                                <Setter TargetName="PART_Rect" Property="StrokeThickness" Value="1.5" />
+                                            </MultiTrigger>
+                                            <MultiTrigger>
+                                                <MultiTrigger.Conditions>
+                                                    <Condition Property="ElementSelectedState" Value="Selected" />
+                                                    <Condition Property="OperateEnviron" Value="AdjustScreenLocation" />
+                                                    <Condition Property="EleType" Value="Receive" />
+                                                </MultiTrigger.Conditions>
+                                                <Setter TargetName="PART_Rect" Property="Fill" Value="#FF60787C" />
+                                                <Setter TargetName="PART_Rect" Property="Stroke" Value="#FFB3B3B3" />
+                                                <Setter TargetName="PART_Rect" Property="StrokeThickness" Value="2" />
+                                            </MultiTrigger>
+                                        </ControlTemplate.Triggers>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                            <Setter Property="IsHitTestVisible" Value="true" />
+                        </Style>
+
+                        <Style x:Key="RectLayer_ContentPresenterStyle" TargetType="{x:Type ContentPresenter}">
+                            <Setter Property="Panel.ZIndex" Value="{Binding ZIndex, Mode=TwoWay}" />
+                        </Style>
+
+                        <Style TargetType="{x:Type localInterface:MyRectLayerControl}">
+                            <Setter Property="ElementSelectedState" Value="{Binding ElementSelectedState}" />
+                            <Setter Property="EleType" Value="{Binding EleType}" />
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="{x:Type localInterface:MyRectLayerControl}">
+                                        <Grid Width="{Binding Width, Mode=TwoWay}" Height="{Binding Height, Mode=TwoWay}">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="5" />
+                                                <ColumnDefinition />
+                                                <ColumnDefinition Width="5" />
+                                            </Grid.ColumnDefinitions>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="5" />
+                                                <RowDefinition />
+                                                <RowDefinition Height="5" />
+                                            </Grid.RowDefinitions>
+                                            <Rectangle x:Name="top_left"
+                                                       Margin="0"
+                                                       HorizontalAlignment="Left"
+                                                       VerticalAlignment="Top"
+                                                       Cursor="{Binding ElementSelectedState,
+                                                                        Converter={StaticResource selectedStateConvertCursor},
+                                                                        ConverterParameter=SizeNWSE}"
+                                                       Fill="#FFE9E9E9"
+                                                       RenderTransformOrigin="0.5,0.5" />
+                                            <Rectangle x:Name="top_center"
+                                                       Grid.Column="1"
+                                                       Margin="0"
+                                                       VerticalAlignment="Top"
+                                                       Cursor="{Binding ElementSelectedState,
+                                                                        Converter={StaticResource selectedStateConvertCursor},
+                                                                        ConverterParameter=SizeNS}"
+                                                       Fill="#FFE9E9E9"
+                                                       RenderTransformOrigin="0.5,0.5" />
+                                            <Rectangle x:Name="top_right"
+                                                       Grid.Column="2"
+                                                       Margin="0"
+                                                       HorizontalAlignment="Right"
+                                                       VerticalAlignment="Top"
+                                                       Cursor="{Binding ElementSelectedState,
+                                                                        Converter={StaticResource selectedStateConvertCursor},
+                                                                        ConverterParameter=SizeNESW}"
+                                                       Fill="#FFE9E9E9"
+                                                       RenderTransformOrigin="0.5,0.5" />
+                                            <ItemsControl x:Name="PART_RectLayer"
+                                                          Grid.Row="0"
+                                                          Grid.RowSpan="3"
+                                                          Grid.Column="0"
+                                                          Grid.ColumnSpan="3"
+                                                          Width="{Binding Width,
+                                                                          Mode=TwoWay}"
+                                                          Height="{Binding Height,
+                                                                           Mode=TwoWay}"
+                                                          Background="Transparent"
+                                                          BorderBrush="Black"
+                                                          ItemContainerStyle="{DynamicResource RectLayer_ContentPresenterStyle}"
+                                                          ItemTemplateSelector="{Binding Mode=OneWay,
+                                                                                         Source={StaticResource MyTemplateSelectorDataSource}}"
+                                                          ItemsPanel="{DynamicResource ItemsPanelTemplate_MyRectLayer}"
+                                                          ItemsSource="{Binding ElementCollection,
+                                                                                Mode=TwoWay}"
+                                                          Visibility="{Binding Visible,
+                                                                               Mode=TwoWay}" />
+
+                                            <Rectangle x:Name="center_left"
+                                                       Grid.Row="1"
+                                                       Grid.Column="0"
+                                                       Margin="0"
+                                                       HorizontalAlignment="Left"
+                                                       Cursor="{Binding ElementSelectedState,
+                                                                        Converter={StaticResource selectedStateConvertCursor},
+                                                                        ConverterParameter=SizeWE}"
+                                                       Fill="#FFE9E9E9"
+                                                       RenderTransformOrigin="0.5,0.5" />
+                                            <Rectangle x:Name="center_right"
+                                                       Grid.Row="1"
+                                                       Grid.Column="2"
+                                                       Margin="0"
+                                                       HorizontalAlignment="Right"
+                                                       Cursor="{Binding ElementSelectedState,
+                                                                        Converter={StaticResource selectedStateConvertCursor},
+                                                                        ConverterParameter=SizeWE}"
+                                                       Fill="#FFE9E9E9"
+                                                       RenderTransformOrigin="0.5,0.5" />
+                                            <Rectangle x:Name="bottom_left"
+                                                       Grid.Row="2"
+                                                       Margin="0"
+                                                       HorizontalAlignment="Left"
+                                                       VerticalAlignment="Bottom"
+                                                       Cursor="{Binding ElementSelectedState,
+                                                                        Converter={StaticResource selectedStateConvertCursor},
+                                                                        ConverterParameter=SizeNESW}"
+                                                       Fill="#FFE9E9E9"
+                                                       RenderTransformOrigin="0.5,0.5" />
+                                            <Rectangle x:Name="bottom_center"
+                                                       Grid.Row="2"
+                                                       Grid.Column="1"
+                                                       Margin="0"
+                                                       VerticalAlignment="Bottom"
+                                                       Cursor="{Binding ElementSelectedState,
+                                                                        Converter={StaticResource selectedStateConvertCursor},
+                                                                        ConverterParameter=SizeNS}"
+                                                       Fill="#FFE9E9E9"
+                                                       RenderTransformOrigin="0.5,0.5" />
+                                            <Rectangle x:Name="bottom_right"
+                                                       Grid.Row="2"
+                                                       Grid.Column="2"
+                                                       Margin="0"
+                                                       HorizontalAlignment="Right"
+                                                       VerticalAlignment="Bottom"
+                                                       Cursor="{Binding ElementSelectedState,
+                                                                        Converter={StaticResource selectedStateConvertCursor},
+                                                                        ConverterParameter=SizeNWSE}"
+                                                       Fill="#FFE9E9E9"
+                                                       RenderTransformOrigin="0.5,0.5" />
+
+                                        </Grid>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </ControlTemplate.Resources>
+
+                    <Border Background="{TemplateBinding Background}"
+                            BorderBrush="Black"
+                            BorderThickness="1">
+                        <ScrollViewer x:Name="MyScrollViewer"
+                                      Background="White"
+                                      HorizontalScrollBarVisibility="Auto"
+                                      Template="{DynamicResource ScrollViewerControlTemplate_Center}"
+                                      VerticalScrollBarVisibility="Auto">
+                            <Viewbox x:Name="MyViewbox"
+                                     HorizontalAlignment="Left"
+                                     VerticalAlignment="Top"
+                                     Stretch="Fill">
+                                <ItemsControl x:Name="MyItemsControl"
+                                              HorizontalAlignment="Left"
+                                              VerticalAlignment="Top"
+                                              Background="#FF14141C"
+                                              IsHitTestVisible="true"
+                                              ItemContainerStyle="{DynamicResource RectLayer_ContentPresenterStyle}"
+                                              ItemTemplateSelector="{Binding Mode=OneWay,
+                                                                             Source={StaticResource MyTemplateSelectorDataSource}}"
+                                              ItemsPanel="{DynamicResource ItemsPanelTemplate_MyRectLayer}"
+                                              Visibility="{Binding Visible,
+                                                                   Mode=TwoWay}" />
+                            </Viewbox>
+                        </ScrollViewer>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+</ResourceDictionary>

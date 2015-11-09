@@ -1,0 +1,288 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Nova.SmartLCT.Interface.BrightInfo" Collapsed="true">
+    <Position X="11" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>KCAAEAAAAAAAAAAAAAAAAAQAAAAAAAAAAgAAAAAAAAA=</HashCode>
+      <FileName>CommonData.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Nova.SmartLCT.Interface.EnvironAndDisplayBrightCollection" Collapsed="true">
+    <Position X="11" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>CommonData.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Nova.SmartLCT.Interface.WeekInfo" Collapsed="true">
+    <Position X="7.5" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAEAAAAAAAEAAAAAAAAACAAAAAAAAAAAAAEAAAAAA=</HashCode>
+      <FileName>CommonData.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Nova.SmartLCT.Interface.SenderAndPortPicInfo" Collapsed="true">
+    <Position X="9.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAIAAAQAAAAQAgAAAAAAAAAAAAAANAAAEAAAA=</HashCode>
+      <FileName>CommonData.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Nova.SmartLCT.Interface.PortInfo" Collapsed="true">
+    <Position X="0.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAIAAAAAAAAAAgAAAAAAAAAAACAAAAAAAE=</HashCode>
+      <FileName>CommonData.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Nova.SmartLCT.Interface.ScreenMapRealParameters" Collapsed="true">
+    <Position X="7.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAIAAAAAAAAAgAAIAAACAAAAAAAAAAAAAggAAAAAA=</HashCode>
+      <FileName>CommonData.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Nova.SmartLCT.Interface.SenderAndPortIndexInfo" Collapsed="true">
+    <Position X="5.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAIAAAAAAAAAAAAgAAAAAAAAAAAAAAEAABAAAAA=</HashCode>
+      <FileName>CommonData.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Nova.SmartLCT.Interface.SelectedStateInfo" Collapsed="true">
+    <Position X="2.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAEAABAAAAAAAAAgAAAAAAAACAAAAAAEAAAAAAAA=</HashCode>
+      <FileName>CommonData.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Nova.SmartLCT.Interface.GroupInfo" Collapsed="true">
+    <Position X="2.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAhAAAAAAAAAoAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>CommonData.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Nova.SmartLCT.Interface.AddLineInfo" Collapsed="true">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAAAQAAEBAAAEAQAAAgAAAAAAAAAACAAAAAAAAAAAAA=</HashCode>
+      <FileName>CommonData.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Nova.SmartLCT.Interface.ConnectIconVisibilityInfo" Collapsed="true">
+    <Position X="2.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAABAAIAAAAAAgAAAkAABAAAAAACACAAAAIAAE=</HashCode>
+      <FileName>CommonData.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Nova.SmartLCT.Interface.OldAndNewType" Collapsed="true">
+    <Position X="7.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAAAACAEAAAAAAAAAAAAAAAAAIAAAA=</HashCode>
+      <FileName>CommonData.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Nova.SmartLCT.Interface.OldAndNewVisibility" Collapsed="true">
+    <Position X="9.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAAAACAEAAAAAAAAAAAAAAAAAIAAAA=</HashCode>
+      <FileName>CommonData.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Nova.SmartLCT.Interface.ElementSizeInfo" Collapsed="true">
+    <Position X="9.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAABAAAAAAAAAgBEAAAAAAAAAAAAABAAAAAAAE=</HashCode>
+      <FileName>CommonData.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Nova.SmartLCT.Interface.ElementMoveInfo" Collapsed="true">
+    <Position X="7.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAABAAgAAAAAAgEAAAAAAAAAAAAAAAAABAgAAA=</HashCode>
+      <FileName>CommonData.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Nova.SmartLCT.Interface.AddReceiveInfo" Collapsed="true">
+    <Position X="4" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgAAAAAAAAAAAECAAAAAAIAABAAAAAAAAQAAAAAAAAA=</HashCode>
+      <FileName>CommonData.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Nova.SmartLCT.Interface.PortConnectInfo" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="11" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAABAAAIEICAAAIAAAiAgABVABAAAUDAyAAAAAE=</HashCode>
+      <FileName>CommonData.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Nova.SmartLCT.Interface.SenderConnectInfo" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="2.25" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAEAIIABAIEKCQAACAAhiAgABUAAAAQUBACJQAAAE=</HashCode>
+      <FileName>CommonData.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Nova.SmartLCT.Interface.SelectedInfo" Collapsed="true">
+    <Position X="11" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAABIAAgAAABAAAAAAAAAAAAgAAAQAAAAAAAEQAAAA=</HashCode>
+      <FileName>CommonData.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Nova.SmartLCT.Interface.SenderAndPort" Collapsed="true">
+    <Position X="4" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAMAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAE=</HashCode>
+      <FileName>CommonData.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Nova.SmartLCT.Interface.ControlTriggerData" Collapsed="true">
+    <Position X="4" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgAEAAAAAAAAAAAAAAAAAAACQAAAAAAAAAAAIAgA=</HashCode>
+      <FileName>CommonData.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Nova.SmartLCT.Interface.ArrageTypeParam" Collapsed="true">
+    <Position X="9.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAIACABAIAAACQAAICAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>CommonData.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Nova.SmartLCT.Interface.ConfigurationData" Collapsed="true">
+    <Position X="0.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgAEBAAAAAAAEFCADAAABIAAAAEAAAgAQAAAAADIAEA=</HashCode>
+      <FileName>CommonData.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Nova.SmartLCT.Interface.ProductInfo" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="2.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAABACgQIAEAAAAAEAAgBBAAAAAAEAAAAAAAAA=</HashCode>
+      <FileName>CommonData.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Nova.SmartLCT.Interface.ProjectInfo" Collapsed="true">
+    <Position X="4" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAACAAAIAAA=</HashCode>
+      <FileName>CommonData.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Nova.SmartLCT.Interface.StaicResizeType" Collapsed="true">
+    <Position X="5.75" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAQwAAAAAAIYAAAAIAAAAhDAAAAAAAAAAAABAAA=</HashCode>
+      <FileName>CommonData.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Nova.SmartLCT.Interface.SenderInfo" Collapsed="true">
+    <Position X="4" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAEAAAAAAAAAAAAAAAAAQAAAACAAAAAAABAEAAABA=</HashCode>
+      <FileName>CommonData.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Nova.SmartLCT.Interface.SenderAndPortInfo" Collapsed="true">
+    <Position X="7.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAACQAAAAAIAEAIAAAAEAAAAAAAAAAA=</HashCode>
+      <FileName>CommonData.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Nova.SmartLCT.Interface.SenderCollectionInfo" Collapsed="true">
+    <Position X="11" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAgAAAAAAAAAAAAAIAAAgAAAAEAAAAAAAAAAA=</HashCode>
+      <FileName>CommonData.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Nova.SmartLCT.Interface.AddPortInfo" Collapsed="true">
+    <Position X="2.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACAAAAAIAAAAAAAAAAAAAoAAAAAAAAEAACAAAAAAAA=</HashCode>
+      <FileName>CommonData.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Nova.SmartLCT.Interface.AddSenderInfo" Collapsed="true">
+    <Position X="5.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAIAAAAAAAAAAIAAAAAAAAEAAAAAAAAAAE=</HashCode>
+      <FileName>CommonData.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Nova.SmartLCT.Interface.SelectedElementInfo" Collapsed="true">
+    <Position X="9.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAIAAAAAAAAAACAAgAAAAAAEAAAAA=</HashCode>
+      <FileName>CommonData.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Nova.SmartLCT.Interface.SelectedLayerAndElement" Collapsed="true">
+    <Position X="0.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACEQAAAARAAAIAAIETAAQCAAAhEAAACAAAAAEAAAAA=</HashCode>
+      <FileName>CommonData.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Nova.SmartLCT.Interface.ScannerCofigInfo" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="5.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAEAACACAICAAAAAAAIAQAAAAAAACEAECAAAAAYBE=</HashCode>
+      <FileName>CommonData.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Nova.SmartLCT.Interface.GlobalParameters" Collapsed="true">
+    <Position X="0.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>KQCAYCQUCACIYQgAIAEgAgEECAAlAAAegAAABAgBEAA=</HashCode>
+      <FileName>CommonData.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Nova.SmartLCT.Interface.LCTConstData" Collapsed="true">
+    <Position X="5.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAgA=</HashCode>
+      <FileName>CommonData.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Nova.SmartLCT.Interface.LangItemData" Collapsed="true">
+    <Position X="4" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAIGAAAAAAAAACAAAAAgAAAAAAAAAABAAA=</HashCode>
+      <FileName>CommonData.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Nova.SmartLCT.Interface.SenderConfigInfo" Collapsed="true">
+    <Position X="0.5" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CgAAAAAAEAAAAAgAAAIAAAAAAAAgAAAAAAIAAAgAAAA=</HashCode>
+      <FileName>CommonData.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Nova.SmartLCT.Interface.CustomReceiveResult" Collapsed="true">
+    <Position X="5.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAABAAAAAAAAAgAAEAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>CommonData.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Nova.SmartLCT.Interface.AppConfiguration" Collapsed="true">
+    <Position X="7.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAA=</HashCode>
+      <FileName>CommonData.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="微软雅黑" Size="9" />
+</ClassDiagram>

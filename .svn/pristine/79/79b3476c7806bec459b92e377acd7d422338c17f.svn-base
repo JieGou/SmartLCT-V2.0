@@ -1,0 +1,59 @@
+﻿<Window x:Class="Nova.SmartLCT.UI.StartUpWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:GalaSoft_MvvmLight_Command="clr-namespace:GalaSoft.MvvmLight.Command;assembly=GalaSoft.MvvmLight.Platform"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:local="clr-namespace:Nova.SmartLCT.UI"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        Title="{Binding WindowDisplayTitle,
+                        Mode=OneWay}"
+        Width="414"
+        Height="310"
+        AllowsTransparency="True"
+        Background="Transparent"
+        ResizeMode="NoResize"
+        ShowInTaskbar="False"
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None"
+        mc:Ignorable="d">
+    <Window.Resources>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+        <local:StartUpWindow_VM x:Key="StartUpWindow_VMDataSource" d:IsDataSource="True" />
+    </Window.Resources>
+    <!--<Window.Background>
+        <ImageBrush ImageSource="Resource/main.png" />
+    </Window.Background>-->
+    <Window.DataContext>
+        <Binding Source="{StaticResource StartUpWindow_VMDataSource}" />
+    </Window.DataContext>
+    <i:Interaction.Triggers>
+        <i:EventTrigger>
+            <GalaSoft_MvvmLight_Command:EventToCommand Command="{Binding CmdInitialize, Mode=OneWay}" />
+        </i:EventTrigger>
+        <i:EventTrigger EventName="Closed">
+            <GalaSoft_MvvmLight_Command:EventToCommand Command="{Binding CmdUninitialize, Mode=OneWay}" />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+    <Border Margin="5" BorderThickness="0">
+        <Border.Effect>
+            <DropShadowEffect BlurRadius="10"
+                              RenderingBias="Quality"
+                              ShadowDepth="2"
+                              Color="#FF464646" />
+        </Border.Effect>
+        <Grid>
+            <Grid.Background>
+                <ImageBrush ImageSource="Resource/main.png" />
+            </Grid.Background>
+
+            <Label Margin="13,0,0,4"
+                   HorizontalAlignment="Left"
+                   VerticalAlignment="Bottom"
+                   Content="{Binding LoadingMsg}"
+                   Foreground="White" />
+        </Grid>
+    </Border>
+
+</Window>

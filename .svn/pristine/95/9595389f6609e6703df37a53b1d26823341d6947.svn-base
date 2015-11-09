@@ -1,0 +1,47 @@
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Data;
+//using System.Windows.Shapes;
+
+namespace SmartLCT.Converter
+{
+    class StateToPathConverter: IValueConverter
+    {
+        private readonly string strDisablePath = "/Nova.SmartLCT.Skin;component/Image/BlueMode/Disable";
+        private readonly string strNormalPath = "/Nova.SmartLCT.Skin;component/Image/BlueMode/Normal";
+        private readonly string strSelectPath = "/Nova.SmartLCT.Skin;component/Image/BlueMode/Selecte";
+        private readonly string strImageType = ".png";
+        public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        {
+            string strImagePath = string.Empty;
+            string strState = value.ToString();
+            string strImageName = parameter.ToString();
+            switch(strState)
+            {
+                case "Disable":
+                    strImagePath = Path.Combine(strDisablePath, strState, strImageName,strImageType);
+                    break;
+                case "Normal":
+                    strImagePath = Path.Combine(strNormalPath, strState,strImageName, strImageType);
+                    break;
+                case "Select":
+                    strImagePath = Path.Combine(strSelectPath, strState,strImageName, strImageType);
+                    break;
+                default:
+                    strImagePath = Path.Combine(strNormalPath, strState,strImageName, strImageType);
+                    break;
+            }
+            return strImagePath;
+           
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
+}

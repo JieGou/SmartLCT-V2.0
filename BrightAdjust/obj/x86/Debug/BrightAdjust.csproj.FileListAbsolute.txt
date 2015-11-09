@@ -1,0 +1,173 @@
+C:\Users\NovaStar_Lixc\Desktop\Smart-LCT\SmartLCT\开发库\Code\应用程序\scr\BrightAdjust\bin\Debug\Lang\en\AppLanguage.en.xaml
+C:\Users\NovaStar_Lixc\Desktop\Smart-LCT\SmartLCT\开发库\Code\应用程序\scr\BrightAdjust\bin\Debug\Lang\zh-CN\AppLanguage.zh-CN.xaml
+C:\Users\NovaStar_Lixc\Desktop\Smart-LCT\SmartLCT\开发库\Code\应用程序\scr\BrightAdjust\bin\Debug\CommonData\ColorTRGBMapping.bin
+C:\Users\NovaStar_Lixc\Desktop\Smart-LCT\SmartLCT\开发库\Code\应用程序\scr\BrightAdjust\bin\Debug\Nova.SmartLCT.UI.BrightAdjust.dll
+C:\Users\NovaStar_Lixc\Desktop\Smart-LCT\SmartLCT\开发库\Code\应用程序\scr\BrightAdjust\bin\Debug\Nova.SmartLCT.UI.BrightAdjust.pdb
+C:\Users\NovaStar_Lixc\Desktop\Smart-LCT\SmartLCT\开发库\Code\应用程序\scr\BrightAdjust\bin\Debug\Behavior.dll
+C:\Users\NovaStar_Lixc\Desktop\Smart-LCT\SmartLCT\开发库\Code\应用程序\scr\BrightAdjust\bin\Debug\GalaSoft.MvvmLight.Extras.WPF4.dll
+C:\Users\NovaStar_Lixc\Desktop\Smart-LCT\SmartLCT\开发库\Code\应用程序\scr\BrightAdjust\bin\Debug\GalaSoft.MvvmLight.WPF4.dll
+C:\Users\NovaStar_Lixc\Desktop\Smart-LCT\SmartLCT\开发库\Code\应用程序\scr\BrightAdjust\bin\Debug\Microsoft.Expression.Drawing.dll
+C:\Users\NovaStar_Lixc\Desktop\Smart-LCT\SmartLCT\开发库\Code\应用程序\scr\BrightAdjust\bin\Debug\Microsoft.Expression.Interactions.dll
+C:\Users\NovaStar_Lixc\Desktop\Smart-LCT\SmartLCT\开发库\Code\应用程序\scr\BrightAdjust\bin\Debug\Nova.Equipment.Protocol.TGProtocol.dll
+C:\Users\NovaStar_Lixc\Desktop\Smart-LCT\SmartLCT\开发库\Code\应用程序\scr\BrightAdjust\bin\Debug\Nova.IO.Port.ICommProcessorBase.dll
+C:\Users\NovaStar_Lixc\Desktop\Smart-LCT\SmartLCT\开发库\Code\应用程序\scr\BrightAdjust\bin\Debug\Nova.LCT.GigabitSystem.DataClass.dll
+C:\Users\NovaStar_Lixc\Desktop\Smart-LCT\SmartLCT\开发库\Code\应用程序\scr\BrightAdjust\bin\Debug\Nova.LCT.GigabitSystem.HardwareCaculator.dll
+C:\Users\NovaStar_Lixc\Desktop\Smart-LCT\SmartLCT\开发库\Code\应用程序\scr\BrightAdjust\bin\Debug\Nova.LCT.GigabitSystem.HardwareFiles.dll
+C:\Users\NovaStar_Lixc\Desktop\Smart-LCT\SmartLCT\开发库\Code\应用程序\scr\BrightAdjust\bin\Debug\Nova.LCT.GigabitSystem.LEDConfigAccessor.dll
+C:\Users\NovaStar_Lixc\Desktop\Smart-LCT\SmartLCT\开发库\Code\应用程序\scr\BrightAdjust\bin\Debug\Nova.LCT.GigabitSystem.ProtocolEnum.dll
+C:\Users\NovaStar_Lixc\Desktop\Smart-LCT\SmartLCT\开发库\Code\应用程序\scr\BrightAdjust\bin\Debug\Nova.LCT.LCTServerBaseProxy.dll
+C:\Users\NovaStar_Lixc\Desktop\Smart-LCT\SmartLCT\开发库\Code\应用程序\scr\BrightAdjust\bin\Debug\Nova.Message.Common.dll
+C:\Users\NovaStar_Lixc\Desktop\Smart-LCT\SmartLCT\开发库\Code\应用程序\scr\BrightAdjust\bin\Debug\Nova.SmartLCT.Database.SmartDB.dll
+C:\Users\NovaStar_Lixc\Desktop\Smart-LCT\SmartLCT\开发库\Code\应用程序\scr\BrightAdjust\bin\Debug\Nova.SmartLCT.Interface.CommonData.dll
+C:\Users\NovaStar_Lixc\Desktop\Smart-LCT\SmartLCT\开发库\Code\应用程序\scr\BrightAdjust\bin\Debug\Nova.Wpf.Control.NumericUpDown.dll
+C:\Users\NovaStar_Lixc\Desktop\Smart-LCT\SmartLCT\开发库\Code\应用程序\scr\BrightAdjust\bin\Debug\System.Windows.Interactivity.dll
+C:\Users\NovaStar_Lixc\Desktop\Smart-LCT\SmartLCT\开发库\Code\应用程序\scr\BrightAdjust\bin\Debug\Xceed.Wpf.Toolkit.dll
+C:\Users\NovaStar_Lixc\Desktop\Smart-LCT\SmartLCT\开发库\Code\应用程序\scr\BrightAdjust\bin\Debug\GuiLabs.Undo.dll
+C:\Users\NovaStar_Lixc\Desktop\Smart-LCT\SmartLCT\开发库\Code\应用程序\scr\BrightAdjust\bin\Debug\WindowResizer.dll
+C:\Users\NovaStar_Lixc\Desktop\Smart-LCT\SmartLCT\开发库\Code\应用程序\scr\BrightAdjust\bin\Debug\Nova.Database.DataBaseManager.dll
+C:\Users\NovaStar_Lixc\Desktop\Smart-LCT\SmartLCT\开发库\Code\应用程序\scr\BrightAdjust\bin\Debug\Matrix.dll
+C:\Users\NovaStar_Lixc\Desktop\Smart-LCT\SmartLCT\开发库\Code\应用程序\scr\BrightAdjust\bin\Debug\Nova.Xml.XmlFile.dll
+C:\Users\NovaStar_Lixc\Desktop\Smart-LCT\SmartLCT\开发库\Code\应用程序\scr\BrightAdjust\bin\Debug\Nova.LCT.GigabitSystem.LowBrightnessPerformer.dll
+C:\Users\NovaStar_Lixc\Desktop\Smart-LCT\SmartLCT\开发库\Code\应用程序\scr\BrightAdjust\bin\Debug\System.Data.SQLite.dll
+C:\Users\NovaStar_Lixc\Desktop\Smart-LCT\SmartLCT\开发库\Code\应用程序\scr\BrightAdjust\bin\Debug\Behavior.pdb
+C:\Users\NovaStar_Lixc\Desktop\Smart-LCT\SmartLCT\开发库\Code\应用程序\scr\BrightAdjust\bin\Debug\Nova.SmartLCT.Interface.CommonData.pdb
+C:\Users\NovaStar_Lixc\Desktop\Smart-LCT\SmartLCT\开发库\Code\应用程序\scr\BrightAdjust\bin\Debug\Nova.SmartLCT.Database.SmartDB.pdb
+C:\Users\NovaStar_Lixc\Desktop\Smart-LCT\SmartLCT\开发库\Code\应用程序\scr\BrightAdjust\bin\Debug\Microsoft.Expression.Drawing.xml
+C:\Users\NovaStar_Lixc\Desktop\Smart-LCT\SmartLCT\开发库\Code\应用程序\scr\BrightAdjust\bin\Debug\Microsoft.Expression.Interactions.xml
+C:\Users\NovaStar_Lixc\Desktop\Smart-LCT\SmartLCT\开发库\Code\应用程序\scr\BrightAdjust\bin\Debug\Nova.LCT.GigabitSystem.DataClass.xml
+C:\Users\NovaStar_Lixc\Desktop\Smart-LCT\SmartLCT\开发库\Code\应用程序\scr\BrightAdjust\bin\Debug\Nova.LCT.GigabitSystem.HardwareFiles.xml
+C:\Users\NovaStar_Lixc\Desktop\Smart-LCT\SmartLCT\开发库\Code\应用程序\scr\BrightAdjust\bin\Debug\System.Windows.Interactivity.xml
+C:\Users\NovaStar_Lixc\Desktop\Smart-LCT\SmartLCT\开发库\Code\应用程序\scr\BrightAdjust\bin\Debug\GuiLabs.Undo.pdb
+C:\Users\NovaStar_Lixc\Desktop\Smart-LCT\SmartLCT\开发库\Code\应用程序\scr\BrightAdjust\bin\Debug\WindowResizer.pdb
+C:\Users\NovaStar_Lixc\Desktop\Smart-LCT\SmartLCT\开发库\Code\应用程序\scr\BrightAdjust\bin\Debug\Nova.Database.DataBaseManager.xml
+C:\Users\NovaStar_Lixc\Desktop\Smart-LCT\SmartLCT\开发库\Code\应用程序\scr\BrightAdjust\bin\Debug\de\Microsoft.Expression.Interactions.resources.dll
+C:\Users\NovaStar_Lixc\Desktop\Smart-LCT\SmartLCT\开发库\Code\应用程序\scr\BrightAdjust\bin\Debug\en\Microsoft.Expression.Interactions.resources.dll
+C:\Users\NovaStar_Lixc\Desktop\Smart-LCT\SmartLCT\开发库\Code\应用程序\scr\BrightAdjust\bin\Debug\es\Microsoft.Expression.Interactions.resources.dll
+C:\Users\NovaStar_Lixc\Desktop\Smart-LCT\SmartLCT\开发库\Code\应用程序\scr\BrightAdjust\bin\Debug\fr\Microsoft.Expression.Interactions.resources.dll
+C:\Users\NovaStar_Lixc\Desktop\Smart-LCT\SmartLCT\开发库\Code\应用程序\scr\BrightAdjust\bin\Debug\it\Microsoft.Expression.Interactions.resources.dll
+C:\Users\NovaStar_Lixc\Desktop\Smart-LCT\SmartLCT\开发库\Code\应用程序\scr\BrightAdjust\bin\Debug\ja\Microsoft.Expression.Interactions.resources.dll
+C:\Users\NovaStar_Lixc\Desktop\Smart-LCT\SmartLCT\开发库\Code\应用程序\scr\BrightAdjust\bin\Debug\ko\Microsoft.Expression.Interactions.resources.dll
+C:\Users\NovaStar_Lixc\Desktop\Smart-LCT\SmartLCT\开发库\Code\应用程序\scr\BrightAdjust\bin\Debug\zh-Hans\Microsoft.Expression.Interactions.resources.dll
+C:\Users\NovaStar_Lixc\Desktop\Smart-LCT\SmartLCT\开发库\Code\应用程序\scr\BrightAdjust\bin\Debug\zh-Hant\Microsoft.Expression.Interactions.resources.dll
+C:\Users\NovaStar_Lixc\Desktop\Smart-LCT\SmartLCT\开发库\Code\应用程序\scr\BrightAdjust\bin\Debug\de\System.Windows.Interactivity.resources.dll
+C:\Users\NovaStar_Lixc\Desktop\Smart-LCT\SmartLCT\开发库\Code\应用程序\scr\BrightAdjust\bin\Debug\en\System.Windows.Interactivity.resources.dll
+C:\Users\NovaStar_Lixc\Desktop\Smart-LCT\SmartLCT\开发库\Code\应用程序\scr\BrightAdjust\bin\Debug\es\System.Windows.Interactivity.resources.dll
+C:\Users\NovaStar_Lixc\Desktop\Smart-LCT\SmartLCT\开发库\Code\应用程序\scr\BrightAdjust\bin\Debug\fr\System.Windows.Interactivity.resources.dll
+C:\Users\NovaStar_Lixc\Desktop\Smart-LCT\SmartLCT\开发库\Code\应用程序\scr\BrightAdjust\bin\Debug\it\System.Windows.Interactivity.resources.dll
+C:\Users\NovaStar_Lixc\Desktop\Smart-LCT\SmartLCT\开发库\Code\应用程序\scr\BrightAdjust\bin\Debug\ja\System.Windows.Interactivity.resources.dll
+C:\Users\NovaStar_Lixc\Desktop\Smart-LCT\SmartLCT\开发库\Code\应用程序\scr\BrightAdjust\bin\Debug\ko\System.Windows.Interactivity.resources.dll
+C:\Users\NovaStar_Lixc\Desktop\Smart-LCT\SmartLCT\开发库\Code\应用程序\scr\BrightAdjust\bin\Debug\zh-Hans\System.Windows.Interactivity.resources.dll
+C:\Users\NovaStar_Lixc\Desktop\Smart-LCT\SmartLCT\开发库\Code\应用程序\scr\BrightAdjust\bin\Debug\zh-Hant\System.Windows.Interactivity.resources.dll
+C:\Users\NovaStar_Lixc\Desktop\Smart-LCT\SmartLCT\开发库\Code\应用程序\scr\BrightAdjust\obj\x86\Debug\BrightAdjust.csprojResolveAssemblyReference.cache
+C:\Users\NovaStar_Lixc\Desktop\Smart-LCT\SmartLCT\开发库\Code\应用程序\scr\BrightAdjust\obj\x86\Debug\Simple Styles.baml
+C:\Users\NovaStar_Lixc\Desktop\Smart-LCT\SmartLCT\开发库\Code\应用程序\scr\BrightAdjust\obj\x86\Debug\UIResources.baml
+C:\Users\NovaStar_Lixc\Desktop\Smart-LCT\SmartLCT\开发库\Code\应用程序\scr\BrightAdjust\obj\x86\Debug\WinBrightAdjust.g.cs
+C:\Users\NovaStar_Lixc\Desktop\Smart-LCT\SmartLCT\开发库\Code\应用程序\scr\BrightAdjust\obj\x86\Debug\Window_AddTimingAdjustData.g.cs
+C:\Users\NovaStar_Lixc\Desktop\Smart-LCT\SmartLCT\开发库\Code\应用程序\scr\BrightAdjust\obj\x86\Debug\Window_FastSegmentation.g.cs
+C:\Users\NovaStar_Lixc\Desktop\Smart-LCT\SmartLCT\开发库\Code\应用程序\scr\BrightAdjust\obj\x86\Debug\Window_PeripheralsConfig.g.cs
+C:\Users\NovaStar_Lixc\Desktop\Smart-LCT\SmartLCT\开发库\Code\应用程序\scr\BrightAdjust\obj\x86\Debug\GeneratedInternalTypeHelper.g.cs
+C:\Users\NovaStar_Lixc\Desktop\Smart-LCT\SmartLCT\开发库\Code\应用程序\scr\BrightAdjust\obj\x86\Debug\Nova.SmartLCT.UI.BrightAdjust_MarkupCompile.cache
+C:\Users\NovaStar_Lixc\Desktop\Smart-LCT\SmartLCT\开发库\Code\应用程序\scr\BrightAdjust\obj\x86\Debug\Nova.SmartLCT.UI.BrightAdjust_MarkupCompile.lref
+C:\Users\NovaStar_Lixc\Desktop\Smart-LCT\SmartLCT\开发库\Code\应用程序\scr\BrightAdjust\obj\x86\Debug\ProjectDataSources.baml
+C:\Users\NovaStar_Lixc\Desktop\Smart-LCT\SmartLCT\开发库\Code\应用程序\scr\BrightAdjust\obj\x86\Debug\SampleData\SampleDataSource\SampleDataSource.baml
+C:\Users\NovaStar_Lixc\Desktop\Smart-LCT\SmartLCT\开发库\Code\应用程序\scr\BrightAdjust\obj\x86\Debug\WinBrightAdjust.baml
+C:\Users\NovaStar_Lixc\Desktop\Smart-LCT\SmartLCT\开发库\Code\应用程序\scr\BrightAdjust\obj\x86\Debug\Window_AddTimingAdjustData.baml
+C:\Users\NovaStar_Lixc\Desktop\Smart-LCT\SmartLCT\开发库\Code\应用程序\scr\BrightAdjust\obj\x86\Debug\Window_FastSegmentation.baml
+C:\Users\NovaStar_Lixc\Desktop\Smart-LCT\SmartLCT\开发库\Code\应用程序\scr\BrightAdjust\obj\x86\Debug\Window_PeripheralsConfig.baml
+C:\Users\NovaStar_Lixc\Desktop\Smart-LCT\SmartLCT\开发库\Code\应用程序\scr\BrightAdjust\obj\x86\Debug\Nova.SmartLCT.UI.BrightAdjust.g.resources
+C:\Users\NovaStar_Lixc\Desktop\Smart-LCT\SmartLCT\开发库\Code\应用程序\scr\BrightAdjust\obj\x86\Debug\Nova.SmartLCT.UI.Properties.Resources.resources
+C:\Users\NovaStar_Lixc\Desktop\Smart-LCT\SmartLCT\开发库\Code\应用程序\scr\BrightAdjust\obj\x86\Debug\BrightAdjust.csproj.GenerateResource.Cache
+C:\Users\NovaStar_Lixc\Desktop\Smart-LCT\SmartLCT\开发库\Code\应用程序\scr\BrightAdjust\obj\x86\Debug\Nova.SmartLCT.UI.BrightAdjust.dll
+C:\Users\NovaStar_Lixc\Desktop\Smart-LCT\SmartLCT\开发库\Code\应用程序\scr\BrightAdjust\obj\x86\Debug\Nova.SmartLCT.UI.BrightAdjust.pdb
+C:\Users\NovaStar_Lixc\Desktop\Smart-LCT Code\BrightAdjust\obj\x86\Debug\BrightAdjust.csprojResolveAssemblyReference.cache
+C:\Users\NovaStar_Lixc\Desktop\Smart-LCT Code\BrightAdjust\obj\x86\Debug\Simple Styles.baml
+C:\Users\NovaStar_Lixc\Desktop\Smart-LCT Code\BrightAdjust\obj\x86\Debug\UIResources.baml
+C:\Users\NovaStar_Lixc\Desktop\Smart-LCT Code\BrightAdjust\obj\x86\Debug\Window_AddTimingAdjustData.g.cs
+C:\Users\NovaStar_Lixc\Desktop\Smart-LCT Code\BrightAdjust\obj\x86\Debug\Window_FastSegmentation.g.cs
+C:\Users\NovaStar_Lixc\Desktop\Smart-LCT Code\BrightAdjust\obj\x86\Debug\Window_PeripheralsConfig.g.cs
+C:\Users\NovaStar_Lixc\Desktop\Smart-LCT Code\BrightAdjust\obj\x86\Debug\GeneratedInternalTypeHelper.g.cs
+C:\Users\NovaStar_Lixc\Desktop\Smart-LCT Code\BrightAdjust\obj\x86\Debug\Nova.SmartLCT.UI.BrightAdjust_MarkupCompile.cache
+C:\Users\NovaStar_Lixc\Desktop\Smart-LCT Code\BrightAdjust\obj\x86\Debug\Nova.SmartLCT.UI.BrightAdjust_MarkupCompile.lref
+C:\Users\NovaStar_Lixc\Desktop\Smart-LCT Code\BrightAdjust\obj\x86\Debug\Nova.SmartLCT.UI.BrightAdjust.dll
+C:\Users\NovaStar_Lixc\Desktop\Smart-LCT Code\BrightAdjust\obj\x86\Debug\Nova.SmartLCT.UI.BrightAdjust.pdb
+C:\Users\NovaStar_Lixc\Desktop\Smart-LCT Code\BrightAdjust\bin\Debug\Lang\en\AppLanguage.en.xaml
+C:\Users\NovaStar_Lixc\Desktop\Smart-LCT Code\BrightAdjust\bin\Debug\Lang\zh-CN\AppLanguage.zh-CN.xaml
+C:\Users\NovaStar_Lixc\Desktop\Smart-LCT Code\BrightAdjust\bin\Debug\CommonData\ColorTRGBMapping.bin
+C:\Users\NovaStar_Lixc\Desktop\Smart-LCT Code\BrightAdjust\bin\Debug\Nova.SmartLCT.UI.BrightAdjust.dll.config
+C:\Users\NovaStar_Lixc\Desktop\Smart-LCT Code\BrightAdjust\bin\Debug\Nova.SmartLCT.UI.BrightAdjust.dll
+C:\Users\NovaStar_Lixc\Desktop\Smart-LCT Code\BrightAdjust\bin\Debug\Nova.SmartLCT.UI.BrightAdjust.pdb
+C:\Users\NovaStar_Lixc\Desktop\Smart-LCT Code\BrightAdjust\bin\Debug\Behavior.dll
+C:\Users\NovaStar_Lixc\Desktop\Smart-LCT Code\BrightAdjust\bin\Debug\GalaSoft.MvvmLight.dll
+C:\Users\NovaStar_Lixc\Desktop\Smart-LCT Code\BrightAdjust\bin\Debug\GalaSoft.MvvmLight.Extras.dll
+C:\Users\NovaStar_Lixc\Desktop\Smart-LCT Code\BrightAdjust\bin\Debug\GalaSoft.MvvmLight.Platform.dll
+C:\Users\NovaStar_Lixc\Desktop\Smart-LCT Code\BrightAdjust\bin\Debug\Microsoft.Expression.Drawing.dll
+C:\Users\NovaStar_Lixc\Desktop\Smart-LCT Code\BrightAdjust\bin\Debug\Microsoft.Expression.Interactions.dll
+C:\Users\NovaStar_Lixc\Desktop\Smart-LCT Code\BrightAdjust\bin\Debug\Microsoft.Practices.ServiceLocation.dll
+C:\Users\NovaStar_Lixc\Desktop\Smart-LCT Code\BrightAdjust\bin\Debug\Nova.Equipment.Protocol.TGProtocol.dll
+C:\Users\NovaStar_Lixc\Desktop\Smart-LCT Code\BrightAdjust\bin\Debug\Nova.IO.Port.ICommProcessorBase.dll
+C:\Users\NovaStar_Lixc\Desktop\Smart-LCT Code\BrightAdjust\bin\Debug\Nova.LCT.GigabitSystem.DataClass.dll
+C:\Users\NovaStar_Lixc\Desktop\Smart-LCT Code\BrightAdjust\bin\Debug\Nova.LCT.GigabitSystem.HardwareCaculator.dll
+C:\Users\NovaStar_Lixc\Desktop\Smart-LCT Code\BrightAdjust\bin\Debug\Nova.LCT.GigabitSystem.HardwareFiles.dll
+C:\Users\NovaStar_Lixc\Desktop\Smart-LCT Code\BrightAdjust\bin\Debug\Nova.LCT.GigabitSystem.LEDConfigAccessor.dll
+C:\Users\NovaStar_Lixc\Desktop\Smart-LCT Code\BrightAdjust\bin\Debug\Nova.LCT.GigabitSystem.ProtocolEnum.dll
+C:\Users\NovaStar_Lixc\Desktop\Smart-LCT Code\BrightAdjust\bin\Debug\Nova.LCT.LCTServerBaseProxy.dll
+C:\Users\NovaStar_Lixc\Desktop\Smart-LCT Code\BrightAdjust\bin\Debug\Nova.Message.Common.dll
+C:\Users\NovaStar_Lixc\Desktop\Smart-LCT Code\BrightAdjust\bin\Debug\Nova.SmartLCT.Database.SmartDB.dll
+C:\Users\NovaStar_Lixc\Desktop\Smart-LCT Code\BrightAdjust\bin\Debug\Nova.SmartLCT.Interface.CommonData.dll
+C:\Users\NovaStar_Lixc\Desktop\Smart-LCT Code\BrightAdjust\bin\Debug\Nova.Wpf.Control.NumericUpDown.dll
+C:\Users\NovaStar_Lixc\Desktop\Smart-LCT Code\BrightAdjust\bin\Debug\System.Windows.Interactivity.dll
+C:\Users\NovaStar_Lixc\Desktop\Smart-LCT Code\BrightAdjust\bin\Debug\Xceed.Wpf.Toolkit.dll
+C:\Users\NovaStar_Lixc\Desktop\Smart-LCT Code\BrightAdjust\bin\Debug\GuiLabs.Undo.dll
+C:\Users\NovaStar_Lixc\Desktop\Smart-LCT Code\BrightAdjust\bin\Debug\Nova.Database.DataBaseManager.dll
+C:\Users\NovaStar_Lixc\Desktop\Smart-LCT Code\BrightAdjust\bin\Debug\Matrix.dll
+C:\Users\NovaStar_Lixc\Desktop\Smart-LCT Code\BrightAdjust\bin\Debug\Nova.Xml.XmlFile.dll
+C:\Users\NovaStar_Lixc\Desktop\Smart-LCT Code\BrightAdjust\bin\Debug\Nova.LCT.GigabitSystem.LowBrightnessPerformer.dll
+C:\Users\NovaStar_Lixc\Desktop\Smart-LCT Code\BrightAdjust\bin\Debug\System.Data.SQLite.dll
+C:\Users\NovaStar_Lixc\Desktop\Smart-LCT Code\BrightAdjust\bin\Debug\Behavior.pdb
+C:\Users\NovaStar_Lixc\Desktop\Smart-LCT Code\BrightAdjust\bin\Debug\Nova.SmartLCT.Interface.CommonData.pdb
+C:\Users\NovaStar_Lixc\Desktop\Smart-LCT Code\BrightAdjust\bin\Debug\Nova.SmartLCT.Database.SmartDB.pdb
+C:\Users\NovaStar_Lixc\Desktop\Smart-LCT Code\BrightAdjust\bin\Debug\GalaSoft.MvvmLight.pdb
+C:\Users\NovaStar_Lixc\Desktop\Smart-LCT Code\BrightAdjust\bin\Debug\GalaSoft.MvvmLight.xml
+C:\Users\NovaStar_Lixc\Desktop\Smart-LCT Code\BrightAdjust\bin\Debug\GalaSoft.MvvmLight.Extras.pdb
+C:\Users\NovaStar_Lixc\Desktop\Smart-LCT Code\BrightAdjust\bin\Debug\GalaSoft.MvvmLight.Extras.xml
+C:\Users\NovaStar_Lixc\Desktop\Smart-LCT Code\BrightAdjust\bin\Debug\GalaSoft.MvvmLight.Platform.pdb
+C:\Users\NovaStar_Lixc\Desktop\Smart-LCT Code\BrightAdjust\bin\Debug\GalaSoft.MvvmLight.Platform.xml
+C:\Users\NovaStar_Lixc\Desktop\Smart-LCT Code\BrightAdjust\bin\Debug\Microsoft.Practices.ServiceLocation.pdb
+C:\Users\NovaStar_Lixc\Desktop\Smart-LCT Code\BrightAdjust\bin\Debug\Microsoft.Practices.ServiceLocation.xml
+C:\Users\NovaStar_Lixc\Desktop\Smart-LCT Code\BrightAdjust\bin\Debug\Nova.LCT.GigabitSystem.DataClass.xml
+C:\Users\NovaStar_Lixc\Desktop\Smart-LCT Code\BrightAdjust\bin\Debug\Nova.LCT.GigabitSystem.HardwareFiles.xml
+C:\Users\NovaStar_Lixc\Desktop\Smart-LCT Code\BrightAdjust\bin\Debug\GuiLabs.Undo.pdb
+C:\Users\NovaStar_Lixc\Desktop\Smart-LCT Code\BrightAdjust\bin\Debug\Nova.Database.DataBaseManager.xml
+C:\Users\NovaStar_Lixc\Desktop\Smart-LCT Code\BrightAdjust\bin\Debug\de\Microsoft.Expression.Drawing.resources.dll
+C:\Users\NovaStar_Lixc\Desktop\Smart-LCT Code\BrightAdjust\bin\Debug\es\Microsoft.Expression.Drawing.resources.dll
+C:\Users\NovaStar_Lixc\Desktop\Smart-LCT Code\BrightAdjust\bin\Debug\fr\Microsoft.Expression.Drawing.resources.dll
+C:\Users\NovaStar_Lixc\Desktop\Smart-LCT Code\BrightAdjust\bin\Debug\it\Microsoft.Expression.Drawing.resources.dll
+C:\Users\NovaStar_Lixc\Desktop\Smart-LCT Code\BrightAdjust\bin\Debug\ja\Microsoft.Expression.Drawing.resources.dll
+C:\Users\NovaStar_Lixc\Desktop\Smart-LCT Code\BrightAdjust\bin\Debug\ko\Microsoft.Expression.Drawing.resources.dll
+C:\Users\NovaStar_Lixc\Desktop\Smart-LCT Code\BrightAdjust\bin\Debug\ru\Microsoft.Expression.Drawing.resources.dll
+C:\Users\NovaStar_Lixc\Desktop\Smart-LCT Code\BrightAdjust\bin\Debug\zh-Hans\Microsoft.Expression.Drawing.resources.dll
+C:\Users\NovaStar_Lixc\Desktop\Smart-LCT Code\BrightAdjust\bin\Debug\zh-Hant\Microsoft.Expression.Drawing.resources.dll
+C:\Users\NovaStar_Lixc\Desktop\Smart-LCT Code\BrightAdjust\bin\Debug\de\Microsoft.Expression.Interactions.resources.dll
+C:\Users\NovaStar_Lixc\Desktop\Smart-LCT Code\BrightAdjust\bin\Debug\en\Microsoft.Expression.Interactions.resources.dll
+C:\Users\NovaStar_Lixc\Desktop\Smart-LCT Code\BrightAdjust\bin\Debug\es\Microsoft.Expression.Interactions.resources.dll
+C:\Users\NovaStar_Lixc\Desktop\Smart-LCT Code\BrightAdjust\bin\Debug\fr\Microsoft.Expression.Interactions.resources.dll
+C:\Users\NovaStar_Lixc\Desktop\Smart-LCT Code\BrightAdjust\bin\Debug\it\Microsoft.Expression.Interactions.resources.dll
+C:\Users\NovaStar_Lixc\Desktop\Smart-LCT Code\BrightAdjust\bin\Debug\ja\Microsoft.Expression.Interactions.resources.dll
+C:\Users\NovaStar_Lixc\Desktop\Smart-LCT Code\BrightAdjust\bin\Debug\ko\Microsoft.Expression.Interactions.resources.dll
+C:\Users\NovaStar_Lixc\Desktop\Smart-LCT Code\BrightAdjust\bin\Debug\ru\Microsoft.Expression.Interactions.resources.dll
+C:\Users\NovaStar_Lixc\Desktop\Smart-LCT Code\BrightAdjust\bin\Debug\zh-Hans\Microsoft.Expression.Interactions.resources.dll
+C:\Users\NovaStar_Lixc\Desktop\Smart-LCT Code\BrightAdjust\bin\Debug\zh-Hant\Microsoft.Expression.Interactions.resources.dll
+C:\Users\NovaStar_Lixc\Desktop\Smart-LCT Code\BrightAdjust\obj\x86\Debug\WinBrightAdjust.g.cs
+C:\Users\NovaStar_Lixc\Desktop\Smart-LCT Code\BrightAdjust\obj\x86\Debug\ProjectDataSources.baml
+C:\Users\NovaStar_Lixc\Desktop\Smart-LCT Code\BrightAdjust\obj\x86\Debug\SampleData\SampleDataSource\SampleDataSource.baml
+C:\Users\NovaStar_Lixc\Desktop\Smart-LCT Code\BrightAdjust\obj\x86\Debug\WinBrightAdjust.baml
+C:\Users\NovaStar_Lixc\Desktop\Smart-LCT Code\BrightAdjust\obj\x86\Debug\Window_AddTimingAdjustData.baml
+C:\Users\NovaStar_Lixc\Desktop\Smart-LCT Code\BrightAdjust\obj\x86\Debug\Window_FastSegmentation.baml
+C:\Users\NovaStar_Lixc\Desktop\Smart-LCT Code\BrightAdjust\obj\x86\Debug\Window_PeripheralsConfig.baml
+C:\Users\NovaStar_Lixc\Desktop\Smart-LCT Code\BrightAdjust\obj\x86\Debug\Nova.SmartLCT.UI.BrightAdjust.g.resources
+C:\Users\NovaStar_Lixc\Desktop\Smart-LCT Code\BrightAdjust\obj\x86\Debug\Nova.SmartLCT.UI.Properties.Resources.resources
+C:\Users\NovaStar_Lixc\Desktop\Smart-LCT Code\BrightAdjust\obj\x86\Debug\BrightAdjust.csproj.GenerateResource.Cache
+C:\Users\NovaStar_Lixc\Desktop\Smart-LCT Code\BrightAdjust\bin\Debug\WindowResizer.dll
+C:\Users\NovaStar_Lixc\Desktop\Smart-LCT Code\BrightAdjust\bin\Debug\WindowResizer.pdb
+C:\Users\NovaStar_Lixc\Desktop\Smart-LCT Code\BrightAdjust\bin\Debug\Nova.SmartLCT.UI.MetroUI.dll
+C:\Users\NovaStar_Lixc\Desktop\Smart-LCT Code\BrightAdjust\bin\Debug\Nova.SmartLCT.UI.MetroUI.pdb

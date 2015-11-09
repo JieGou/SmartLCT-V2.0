@@ -1,0 +1,5 @@
+C:\Users\NovaStar_Lixc\Desktop\Smart-LCT Code\UndoFramework\bin\Debug\GuiLabs.Undo.dll
+C:\Users\NovaStar_Lixc\Desktop\Smart-LCT Code\UndoFramework\bin\Debug\GuiLabs.Undo.pdb
+C:\Users\NovaStar_Lixc\Desktop\Smart-LCT Code\UndoFramework\obj\Debug\GuiLabs.Undo.dll
+C:\Users\NovaStar_Lixc\Desktop\Smart-LCT Code\UndoFramework\obj\Debug\GuiLabs.Undo.pdb
+C:\Users\NovaStar_Lixc\Desktop\Smart-LCT Code\UndoFramework\obj\Debug\UndoFramework.csprojResolveAssemblyReference.cache

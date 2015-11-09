@@ -1,0 +1,5 @@
+C:\Users\NovaStar_Lixc\Desktop\Smart-LCT Code\WindowResizer\bin\Debug\WindowResizer.dll
+C:\Users\NovaStar_Lixc\Desktop\Smart-LCT Code\WindowResizer\bin\Debug\WindowResizer.pdb
+C:\Users\NovaStar_Lixc\Desktop\Smart-LCT Code\WindowResizer\obj\Debug\WindowResizer.dll
+C:\Users\NovaStar_Lixc\Desktop\Smart-LCT Code\WindowResizer\obj\Debug\WindowResizer.pdb
+C:\Users\NovaStar_Lixc\Desktop\Smart-LCT Code\WindowResizer\obj\Debug\WindowResizer.csprojResolveAssemblyReference.cache

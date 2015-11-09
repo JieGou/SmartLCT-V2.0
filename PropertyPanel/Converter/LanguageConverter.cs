@@ -1,0 +1,34 @@
+﻿using Nova.SmartLCT.Interface;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Data;
+
+namespace Nova.SmartLCT.UI.Converter
+{
+    public class LanguageConverter: IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        {
+            string strCascade = value.ToString();
+            if (strCascade == null)
+            {
+                return string.Empty;
+            }
+            
+            if (strCascade.EndsWith("_"))
+            {
+              strCascade= strCascade.TrimEnd(new char[] { '_'});
+            }
+            CommonStaticMethod.GetLanguageString(strCascade, strCascade, out strCascade);
+            return strCascade;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
+}

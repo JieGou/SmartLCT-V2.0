@@ -1,0 +1,2026 @@
+﻿<MetroUI:MetroWindow x:Class="Nova.SmartLCT.UI.Window_AddTimingAdjustData"
+                     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                     xmlns:MetroUI="clr-namespace:Nova.SmartLCT.UI.MetroUI;assembly=Nova.SmartLCT.UI.MetroUI"
+                     xmlns:Microsoft_Windows_Themes="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero"
+                     xmlns:Nova_SmartLCT_Interface="clr-namespace:Nova.SmartLCT.Interface;assembly=Nova.SmartLCT.Interface.CommonData"
+                     xmlns:Xceed_Wpf_Toolkit_Themes="clr-namespace:Xceed.Wpf.Toolkit.Themes;assembly=Xceed.Wpf.Toolkit"
+                     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                     xmlns:ed="http://schemas.microsoft.com/expression/2010/drawing"
+                     xmlns:local="clr-namespace:Nova.SmartLCT.UI"
+                     xmlns:localInterface="clr-namespace:Nova.SmartLCT.Interface;assembly=Nova.SmartLCT.Interface.CommonData"
+                     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                     xmlns:myNumericUD="clr-namespace:Nova.Wpf.Control;assembly=Nova.Wpf.Control.NumericUpDown"
+                     xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+                     x:Name="Window"
+                     Title="{DynamicResource Lang_Bright_AddSmartBrightTitle}"
+                     Width="420"
+                     Height="404"
+                     Background="#FF303435"
+                     Closed="Window_Closed"
+                     Foreground="Black"
+                     ResizeMode="NoResize"
+                     SizeToContent="Height"
+                     mc:Ignorable="d">
+
+    <MetroUI:MetroWindow.Resources>
+        <localInterface:EnumBoolConverter x:Key="EnumBoolConverter" />
+        <localInterface:SmartBrightModeAndBoolConverter x:Key="SmartBrightModeAndBoolConverter" />
+        <localInterface:RepetitionStateVisibilityConverter x:Key="RepetitionStateVisibilityConverter" />
+        <localInterface:IsTrueConvertIsFalse x:Key="IsTrueConvertIsFalse1" />
+        <localInterface:IsTrueConvertIsFalse x:Key="IsTrueConvertIsFalse" />
+        <localInterface:AdjustBrightModeConvertIsSelected x:Key="AdjustBrightModeConvertIsSelected" />
+        <local:Window_AddTimingAdjustData_VM x:Key="Window_AddTimingAdjustData_VMDataSource" d:IsDataSource="True" />
+        <DataTemplate x:Key="DataTemplate_TimePeriod">
+            <Grid Width="Auto">
+                <!--<TextBlock Margin="0,0,0,4.163" TextWrapping="Wrap" Text="{Binding TimePeriodDisplay, Mode=TwoWay}" d:LayoutOverrides="Width, Height"/>-->
+                <TextBlock Margin="0.5"
+                           Foreground="Gainsboro"
+                           Padding="0"
+                           Text="{Binding TimePeriodDisplay,
+                                          Mode=TwoWay}"
+                           TextWrapping="Wrap"
+                           d:LayoutOverrides="Width, Height" />
+            </Grid>
+        </DataTemplate>
+
+        <ControlTemplate x:Key="ScrollViewerControlTemplate_Center" TargetType="{x:Type ScrollViewer}">
+            <Grid x:Name="Grid" Background="{TemplateBinding Background}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <ScrollContentPresenter x:Name="PART_ScrollContentPresenter"
+                                        Grid.Row="0"
+                                        Grid.Column="0"
+                                        Margin="{TemplateBinding Padding}"
+                                        CanContentScroll="{TemplateBinding CanContentScroll}"
+                                        CanHorizontallyScroll="False"
+                                        CanVerticallyScroll="False"
+                                        Content="{TemplateBinding Content}"
+                                        ContentTemplate="{TemplateBinding ContentTemplate}" />
+                <ScrollBar x:Name="PART_VerticalScrollBar"
+                           Grid.Row="0"
+                           Grid.Column="1"
+                           AutomationProperties.AutomationId="VerticalScrollBar"
+                           Cursor="Arrow"
+                           Maximum="{TemplateBinding ScrollableHeight}"
+                           Minimum="0"
+                           ViewportSize="{TemplateBinding ViewportHeight}"
+                           Visibility="{TemplateBinding ComputedVerticalScrollBarVisibility}"
+                           Value="{Binding VerticalOffset,
+                                           Mode=OneWay,
+                                           RelativeSource={RelativeSource TemplatedParent}}" />
+                <ScrollBar x:Name="PART_HorizontalScrollBar"
+                           Grid.Row="1"
+                           Grid.Column="0"
+                           AutomationProperties.AutomationId="HorizontalScrollBar"
+                           Cursor="Arrow"
+                           Maximum="{TemplateBinding ScrollableWidth}"
+                           Minimum="0"
+                           Orientation="Horizontal"
+                           ViewportSize="{TemplateBinding ViewportWidth}"
+                           Visibility="{TemplateBinding ComputedHorizontalScrollBarVisibility}"
+                           Value="{Binding HorizontalOffset,
+                                           Mode=OneWay,
+                                           RelativeSource={RelativeSource TemplatedParent}}" />
+                <Rectangle x:Name="Corner"
+                           Grid.Row="1"
+                           Grid.Column="1"
+                           Fill="#FF303435" />
+            </Grid>
+        </ControlTemplate>
+        <Style x:Key="ScrollBarButton" TargetType="{x:Type RepeatButton}">
+            <Setter Property="OverridesDefaultStyle" Value="true" />
+            <Setter Property="Focusable" Value="false" />
+            <Setter Property="IsTabStop" Value="false" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type RepeatButton}">
+                        <Microsoft_Windows_Themes:ScrollChrome x:Name="Chrome"
+                                                               Microsoft_Windows_Themes:ScrollChrome.ScrollGlyph="{TemplateBinding Microsoft_Windows_Themes:ScrollChrome.ScrollGlyph}"
+                                                               RenderMouseOver="{TemplateBinding IsMouseOver}"
+                                                               RenderPressed="{TemplateBinding IsPressed}"
+                                                               SnapsToDevicePixels="true" />
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="VerticalScrollBarPageButton" TargetType="{x:Type RepeatButton}">
+            <Setter Property="OverridesDefaultStyle" Value="true" />
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="Focusable" Value="false" />
+            <Setter Property="IsTabStop" Value="false" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type RepeatButton}">
+                        <Rectangle Width="{TemplateBinding Width}"
+                                   Height="{TemplateBinding Height}"
+                                   Fill="{TemplateBinding Background}" />
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="ScrollBarThumb" TargetType="{x:Type Thumb}">
+            <Setter Property="OverridesDefaultStyle" Value="true" />
+            <Setter Property="IsTabStop" Value="false" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Thumb}">
+                        <Border BorderBrush="#FF6F7374" BorderThickness="0,1,0,0">
+                            <Border Background="{DynamicResource MyScrollTruckBackground}"
+                                    BorderBrush="#FF202123"
+                                    BorderThickness="0,0,0,1" />
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="ScrollBarThumbv" TargetType="{x:Type Thumb}">
+            <Setter Property="OverridesDefaultStyle" Value="true" />
+            <Setter Property="IsTabStop" Value="false" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Thumb}">
+                        <Border BorderBrush="#FF4A4B4D" BorderThickness="1,0,0,0">
+                            <Border Background="{DynamicResource MyScrollTruckBackgroundv}"
+                                    BorderBrush="#FF202123"
+                                    BorderThickness="0,0,1,0" />
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <LinearGradientBrush x:Key="HorizontalScrollBarBackground" StartPoint="0,0.5" EndPoint="1,0.5">
+            <GradientStop Offset="1" Color="Black" />
+            <GradientStop Color="#FF2C2D31" />
+            <GradientStop Offset="0.083" Color="#FF3E4042" />
+            <GradientStop Offset="0.923" Color="#FF303435" />
+            <GradientStop Offset="0.104" Color="#FF303435" />
+        </LinearGradientBrush>
+
+        <LinearGradientBrush x:Key="MyScrollTruckBackground" StartPoint="0,0.5" EndPoint="1,0.5">
+            <GradientStop Offset="1" Color="Black" />
+            <GradientStop Color="#FF545454" />
+            <GradientStop Offset="0.08" Color="#FF4D4E4E" />
+            <GradientStop Offset="0.98" Color="#FF303435" />
+            <GradientStop Offset="0.075" Color="#FF303435" />
+            <GradientStop Color="#FF4A4C4D" />
+
+        </LinearGradientBrush>
+        <LinearGradientBrush x:Key="MyScrollTruckBackgroundv" StartPoint="0.5,0" EndPoint="0.5,1">
+            <GradientStop Offset="1" Color="Black" />
+            <GradientStop Color="#FF545454" />
+            <GradientStop Offset="0.08" Color="#FF4D4E4E" />
+            <GradientStop Offset="0.98" Color="#FF303435" />
+            <GradientStop Offset="0.075" Color="#FF303435" />
+            <GradientStop Color="#FF4A4C4D" />
+        </LinearGradientBrush>
+        <Style x:Key="HorizontalScrollBarPageButton" TargetType="{x:Type RepeatButton}">
+            <Setter Property="OverridesDefaultStyle" Value="true" />
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="Focusable" Value="false" />
+            <Setter Property="IsTabStop" Value="false" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type RepeatButton}">
+                        <Rectangle Width="{TemplateBinding Width}"
+                                   Height="{TemplateBinding Height}"
+                                   Fill="{TemplateBinding Background}" />
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="SButtonFocusVisual">
+            <Setter Property="Control.Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <Rectangle Margin="2"
+                                   SnapsToDevicePixels="true"
+                                   Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"
+                                   StrokeDashArray="1 2"
+                                   StrokeThickness="1" />
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="ButtonStyle_ScrollBarLineUp" TargetType="{x:Type Button}">
+            <Setter Property="FocusVisualStyle" Value="{StaticResource SButtonFocusVisual}" />
+            <Setter Property="Background" Value="{StaticResource ButtonNormalBackground}" />
+            <Setter Property="BorderBrush" Value="{StaticResource ButtonNormalBorder}" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" />
+            <Setter Property="HorizontalContentAlignment" Value="Center" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+            <Setter Property="Padding" Value="1" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border Background="{TemplateBinding Background}"
+                                BorderBrush="Black"
+                                BorderThickness="0,1">
+                            <ed:RegularPolygon Width="8"
+                                               Height="6"
+                                               Margin="5,0,0,0"
+                                               HorizontalAlignment="Left"
+                                               VerticalAlignment="Center"
+                                               Fill="Black"
+                                               InnerRadius="1"
+                                               PointCount="3"
+                                               RenderTransformOrigin="0.5,0.5"
+                                               Stretch="Fill">
+                                <ed:RegularPolygon.RenderTransform>
+                                    <TransformGroup>
+                                        <ScaleTransform />
+                                        <SkewTransform />
+                                        <RotateTransform Angle="0" />
+                                        <TranslateTransform />
+                                    </TransformGroup>
+                                </ed:RegularPolygon.RenderTransform>
+                            </ed:RegularPolygon>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsKeyboardFocused" Value="true" />
+                            <Trigger Property="ToggleButton.IsChecked" Value="true" />
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Foreground" Value="#ADADAD" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="ButtonStyle_ScrollBarLineLeft" TargetType="{x:Type Button}">
+            <Setter Property="FocusVisualStyle" Value="{StaticResource SButtonFocusVisual}" />
+            <Setter Property="Background" Value="{StaticResource ButtonNormalBackground}" />
+            <Setter Property="BorderBrush" Value="{StaticResource ButtonNormalBorder}" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" />
+            <Setter Property="HorizontalContentAlignment" Value="Center" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+            <Setter Property="Padding" Value="1" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border Background="{TemplateBinding Background}"
+                                BorderBrush="Black"
+                                BorderThickness="0,1">
+                            <ed:RegularPolygon Width="8"
+                                               Height="6"
+                                               Margin="5,0,0,0"
+                                               HorizontalAlignment="Left"
+                                               VerticalAlignment="Center"
+                                               Fill="Black"
+                                               InnerRadius="1"
+                                               PointCount="3"
+                                               RenderTransformOrigin="0.5,0.5"
+                                               Stretch="Fill">
+                                <ed:RegularPolygon.RenderTransform>
+                                    <TransformGroup>
+                                        <ScaleTransform />
+                                        <SkewTransform />
+                                        <RotateTransform Angle="-90" />
+                                        <TranslateTransform />
+                                    </TransformGroup>
+                                </ed:RegularPolygon.RenderTransform>
+                            </ed:RegularPolygon>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsKeyboardFocused" Value="true" />
+                            <Trigger Property="ToggleButton.IsChecked" Value="true" />
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Foreground" Value="#ADADAD" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="ButtonStyle_ScrollBarLineRight" TargetType="{x:Type Button}">
+            <Setter Property="FocusVisualStyle" Value="{StaticResource SButtonFocusVisual}" />
+            <Setter Property="Background" Value="{StaticResource ButtonNormalBackground}" />
+            <Setter Property="BorderBrush" Value="{StaticResource ButtonNormalBorder}" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" />
+            <Setter Property="HorizontalContentAlignment" Value="Center" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+            <Setter Property="Padding" Value="1" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border Background="{TemplateBinding Background}"
+                                BorderBrush="Black"
+                                BorderThickness="0,1">
+                            <ed:RegularPolygon Width="8"
+                                               Height="6"
+                                               Margin="5,0,0,0"
+                                               HorizontalAlignment="Left"
+                                               VerticalAlignment="Center"
+                                               Fill="Black"
+                                               InnerRadius="1"
+                                               PointCount="3"
+                                               RenderTransformOrigin="0.5,0.5"
+                                               Stretch="Fill">
+                                <ed:RegularPolygon.RenderTransform>
+                                    <TransformGroup>
+                                        <ScaleTransform />
+                                        <SkewTransform />
+                                        <RotateTransform Angle="90" />
+                                        <TranslateTransform />
+                                    </TransformGroup>
+                                </ed:RegularPolygon.RenderTransform>
+                            </ed:RegularPolygon>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsKeyboardFocused" Value="true" />
+                            <Trigger Property="ToggleButton.IsChecked" Value="true" />
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Foreground" Value="#ADADAD" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style TargetType="{x:Type ScrollBar}">
+            <Setter Property="Background" Value="#FF303435" />
+            <Setter Property="Stylus.IsPressAndHoldEnabled" Value="false" />
+            <Setter Property="Stylus.IsFlicksEnabled" Value="false" />
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" />
+            <Setter Property="Width" Value="{DynamicResource {x:Static SystemParameters.VerticalScrollBarWidthKey}}" />
+            <Setter Property="MinWidth" Value="{DynamicResource {x:Static SystemParameters.VerticalScrollBarWidthKey}}" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ScrollBar}">
+                        <Grid x:Name="Bg"
+                              Background="{TemplateBinding Background}"
+                              SnapsToDevicePixels="true">
+                            <Grid.RowDefinitions>
+                                <RowDefinition MaxHeight="{DynamicResource {x:Static SystemParameters.VerticalScrollBarButtonHeightKey}}" />
+                                <RowDefinition Height="0.00001*" />
+                                <RowDefinition MaxHeight="{DynamicResource {x:Static SystemParameters.VerticalScrollBarButtonHeightKey}}" />
+                            </Grid.RowDefinitions>
+                            <Button Background="#FF303435"
+                                    BorderBrush="{x:Null}"
+                                    BorderThickness="0.5"
+                                    Command="{x:Static ScrollBar.LineUpCommand}"
+                                    IsEnabled="{TemplateBinding IsMouseOver}"
+                                    Microsoft_Windows_Themes:ScrollChrome.ScrollGlyph="UpArrow"
+                                    Style="{DynamicResource ButtonStyle_ScrollBarLineUp}" />
+                            <Track x:Name="PART_Track"
+                                   Grid.Row="1"
+                                   IsDirectionReversed="true"
+                                   IsEnabled="{TemplateBinding IsMouseOver}">
+                                <Track.DecreaseRepeatButton>
+                                    <RepeatButton Command="{x:Static ScrollBar.PageUpCommand}" Style="{StaticResource VerticalScrollBarPageButton}" />
+                                </Track.DecreaseRepeatButton>
+                                <Track.IncreaseRepeatButton>
+                                    <RepeatButton Command="{x:Static ScrollBar.PageDownCommand}" Style="{StaticResource VerticalScrollBarPageButton}" />
+                                </Track.IncreaseRepeatButton>
+                                <Track.Thumb>
+                                    <Thumb Microsoft_Windows_Themes:ScrollChrome.ScrollGlyph="VerticalGripper" Style="{StaticResource ScrollBarThumb}" />
+                                </Track.Thumb>
+                            </Track>
+                            <Button x:Name="repeatButton"
+                                    Grid.Row="2"
+                                    Margin="0,0,0,-1"
+                                    Background="#FF303435"
+                                    BorderBrush="{x:Null}"
+                                    BorderThickness="0.5"
+                                    Command="{x:Static ScrollBar.LineDownCommand}"
+                                    IsEnabled="{TemplateBinding IsMouseOver}"
+                                    Microsoft_Windows_Themes:ScrollChrome.ScrollGlyph="DownArrow"
+                                    Style="{DynamicResource ButtonStyle_ScrollBarLineDown}" />
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter TargetName="Bg" Property="Background" Value="Gray" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="Orientation" Value="Horizontal">
+                    <Setter Property="Width" Value="Auto" />
+                    <Setter Property="MinWidth" Value="0" />
+                    <Setter Property="Height" Value="{DynamicResource {x:Static SystemParameters.HorizontalScrollBarHeightKey}}" />
+                    <Setter Property="MinHeight" Value="{DynamicResource {x:Static SystemParameters.HorizontalScrollBarHeightKey}}" />
+
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type ScrollBar}">
+                                <Grid x:Name="Bg"
+                                      Background="{TemplateBinding Background}"
+                                      SnapsToDevicePixels="true">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition MaxWidth="{DynamicResource {x:Static SystemParameters.HorizontalScrollBarButtonWidthKey}}" />
+                                        <ColumnDefinition Width="0.00001*" />
+                                        <ColumnDefinition MaxWidth="{DynamicResource {x:Static SystemParameters.HorizontalScrollBarButtonWidthKey}}" />
+                                    </Grid.ColumnDefinitions>
+                                    <Button Background="#FF303435"
+                                            BorderBrush="{x:Null}"
+                                            BorderThickness="0.5"
+                                            Command="{x:Static ScrollBar.LineLeftCommand}"
+                                            IsEnabled="{TemplateBinding IsMouseOver}"
+                                            Microsoft_Windows_Themes:ScrollChrome.ScrollGlyph="LeftArrow"
+                                            Style="{DynamicResource ButtonStyle_ScrollBarLineLeft}" />
+                                    <Track x:Name="PART_Track"
+                                           Grid.Column="1"
+                                           IsEnabled="{TemplateBinding IsMouseOver}">
+                                        <Track.DecreaseRepeatButton>
+                                            <RepeatButton Command="{x:Static ScrollBar.PageLeftCommand}" Style="{StaticResource HorizontalScrollBarPageButton}" />
+                                        </Track.DecreaseRepeatButton>
+                                        <Track.IncreaseRepeatButton>
+                                            <RepeatButton Command="{x:Static ScrollBar.PageRightCommand}" Style="{StaticResource HorizontalScrollBarPageButton}" />
+                                        </Track.IncreaseRepeatButton>
+                                        <Track.Thumb>
+                                            <Thumb Microsoft_Windows_Themes:ScrollChrome.ScrollGlyph="HorizontalGripper" Style="{StaticResource ScrollBarThumbv}" />
+                                        </Track.Thumb>
+                                    </Track>
+                                    <Button Grid.Column="2"
+                                            Background="#FF303435"
+                                            BorderBrush="{x:Null}"
+                                            BorderThickness="0.5"
+                                            Command="{x:Static ScrollBar.LineRightCommand}"
+                                            IsEnabled="{TemplateBinding IsMouseOver}"
+                                            Microsoft_Windows_Themes:ScrollChrome.ScrollGlyph="RightArrow"
+                                            Style="{DynamicResource ButtonStyle_ScrollBarLineRight}" />
+                                </Grid>
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="IsEnabled" Value="false">
+                                        <Setter TargetName="Bg" Property="Background" Value="gray" />
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="ButtonStyle_ScrollBarLineDown" TargetType="{x:Type Button}">
+            <Setter Property="FocusVisualStyle" Value="{StaticResource SButtonFocusVisual}" />
+            <Setter Property="Background" Value="{StaticResource ButtonNormalBackground}" />
+            <Setter Property="BorderBrush" Value="{StaticResource ButtonNormalBorder}" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" />
+            <Setter Property="HorizontalContentAlignment" Value="Center" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+            <Setter Property="Padding" Value="1" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border Background="{TemplateBinding Background}"
+                                BorderBrush="Black"
+                                BorderThickness="0,0.5">
+                            <ed:RegularPolygon Width="8"
+                                               Height="6"
+                                               Margin="5,0,0,0"
+                                               HorizontalAlignment="Left"
+                                               VerticalAlignment="Center"
+                                               Fill="Black"
+                                               InnerRadius="1"
+                                               PointCount="3"
+                                               RenderTransformOrigin="0.5,0.5"
+                                               Stretch="Fill">
+                                <ed:RegularPolygon.RenderTransform>
+                                    <TransformGroup>
+                                        <ScaleTransform />
+                                        <SkewTransform />
+                                        <RotateTransform Angle="180" />
+                                        <TranslateTransform />
+                                    </TransformGroup>
+                                </ed:RegularPolygon.RenderTransform>
+                            </ed:RegularPolygon>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsKeyboardFocused" Value="true" />
+                            <Trigger Property="ToggleButton.IsChecked" Value="true" />
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Foreground" Value="#ADADAD" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+
+
+
+
+        <Style x:Key="ComboBoxToggleButton2" TargetType="{x:Type ToggleButton}">
+            <Setter Property="OverridesDefaultStyle" Value="true" />
+            <Setter Property="IsTabStop" Value="false" />
+            <Setter Property="Focusable" Value="false" />
+            <Setter Property="ClickMode" Value="Press" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ToggleButton}">
+                        <Microsoft_Windows_Themes:ButtonChrome x:Name="Chrome"
+                                                               Width="{DynamicResource {x:Static SystemParameters.VerticalScrollBarWidthKey}}"
+                                                               Background="{TemplateBinding Background}"
+                                                               BorderBrush="{TemplateBinding BorderBrush}"
+                                                               RenderMouseOver="{TemplateBinding IsMouseOver}"
+                                                               RenderPressed="{TemplateBinding IsPressed}"
+                                                               RoundCorners="false"
+                                                               SnapsToDevicePixels="true">
+                            <Path x:Name="Arrow"
+                                  Margin="0,1,0,0"
+                                  HorizontalAlignment="Center"
+                                  VerticalAlignment="Center"
+                                  Data="{StaticResource DownArrowGeometry}"
+                                  Fill="Black" />
+                        </Microsoft_Windows_Themes:ButtonChrome>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsChecked" Value="true">
+                                <Setter TargetName="Chrome" Property="RenderPressed" Value="true" />
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter TargetName="Arrow" Property="Fill" Value="#AFAFAF" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="ComboBoxItemStyle_TimePeriod" TargetType="{x:Type ComboBoxItem}">
+            <Setter Property="HorizontalContentAlignment" Value="{Binding HorizontalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}" />
+            <Setter Property="VerticalContentAlignment" Value="{Binding VerticalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}" />
+            <Setter Property="Padding" Value="3,0,3,0" />
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ComboBoxItem}">
+                        <Border x:Name="Bd"
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                Padding="{TemplateBinding Padding}"
+                                SnapsToDevicePixels="true">
+                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                              SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsHighlighted" Value="true">
+                                <Setter TargetName="Bd" Property="Background" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}" />
+                                <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.HighlightTextBrushKey}}" />
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="bButtonFocusVisual">
+            <Setter Property="Control.Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <Rectangle Margin="2"
+                                   SnapsToDevicePixels="true"
+                                   Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"
+                                   StrokeDashArray="1 2"
+                                   StrokeThickness="1" />
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <LinearGradientBrush x:Key="bButtonNormalBackground" StartPoint="0,0" EndPoint="0,1">
+            <GradientStop Offset="0" Color="#F3F3F3" />
+            <GradientStop Offset="0.5" Color="#EBEBEB" />
+            <GradientStop Offset="0.5" Color="#DDDDDD" />
+            <GradientStop Offset="1" Color="#CDCDCD" />
+        </LinearGradientBrush>
+        <SolidColorBrush x:Key="bButtonNormalBorder" Color="#FF707070" />
+        <Style TargetType="{x:Type Button}">
+            <Setter Property="FocusVisualStyle" Value="{StaticResource bButtonFocusVisual}" />
+            <Setter Property="Background" Value="{StaticResource bButtonNormalBackground}" />
+            <Setter Property="BorderBrush" Value="{StaticResource bButtonNormalBorder}" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" />
+            <Setter Property="HorizontalContentAlignment" Value="Center" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+            <Setter Property="Padding" Value="1" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border x:Name="border"
+                                BorderBrush="Black"
+                                BorderThickness="1"
+                                CornerRadius="3">
+                            <Border.Background>
+                                <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+
+
+
+                                    <GradientStop Offset="0" Color="#FF3995DE" />
+                                    <GradientStop Offset="1" Color="#FF057AD7" />
+                                    <GradientStop Offset="0.525" Color="#FF057AD7" />
+                                    <GradientStop Offset="0.495" Color="#FF3995DE" />
+                                </LinearGradientBrush>
+                            </Border.Background>
+                            <TextBlock HorizontalAlignment="Center"
+                                       VerticalAlignment="Center"
+                                       Text="{TemplateBinding Content}"
+                                       TextWrapping="Wrap" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="Background">
+                                    <Setter.Value>
+                                        <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+                                            <GradientStop Offset="0" Color="#FF75ECF2" />
+                                            <GradientStop Offset="1" Color="#FF19E0E7" />
+                                            <GradientStop Offset="0.5" Color="#FF19E0E7" />
+                                            <GradientStop Offset="0.495" Color="#FF75ECF2" />
+                                        </LinearGradientBrush>
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                            <Trigger Property="IsKeyboardFocused" Value="true" />
+                            <Trigger Property="ToggleButton.IsChecked" Value="true" />
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Foreground" Value="#ADADAD" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <ItemsPanelTemplate x:Key="ItemsPanelTemplate_GuideTwoReceiveSize">
+            <StackPanel Background="#FF4B4B4B" IsItemsHost="True" />
+        </ItemsPanelTemplate>
+        <DataTemplate x:Key="DataTemplate_GuideTwoReceiveSize">
+            <Grid Width="Auto" />
+        </DataTemplate>
+        <ItemsPanelTemplate x:Key="ItemsPanelTemplate_GuideTwo_ReceiveSize">
+            <StackPanel Background="#FF4B4B4B" IsItemsHost="True" />
+        </ItemsPanelTemplate>
+        <Style x:Key="ComboBoxItemStyle_GuideTwo_ReceiveSize" TargetType="{x:Type ComboBoxItem}">
+            <Setter Property="HorizontalContentAlignment" Value="{Binding HorizontalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}" />
+            <Setter Property="VerticalContentAlignment" Value="{Binding VerticalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}" />
+            <Setter Property="Padding" Value="3,0,3,0" />
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ComboBoxItem}">
+                        <Border x:Name="Bd"
+                                Width="Auto"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                Padding="{TemplateBinding Padding}"
+                                SnapsToDevicePixels="true">
+                            <ContentPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsHighlighted" Value="true">
+                                <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.HighlightTextBrushKey}}" />
+                                <!--<Setter Property="Width" TargetName="Bd" Value="255"/>-->
+                                <Setter TargetName="Bd" Property="Background" Value="#FF373B3C" />
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="ComboBoxFocusVisual">
+            <Setter Property="Control.Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <Rectangle Margin="4,4,21,4"
+                                   SnapsToDevicePixels="true"
+                                   Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"
+                                   StrokeDashArray="1 2"
+                                   StrokeThickness="1" />
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <LinearGradientBrush x:Key="ButtonNormalBackground" StartPoint="0,0" EndPoint="0,1">
+            <GradientStop Offset="0" Color="#F3F3F3" />
+            <GradientStop Offset="0.5" Color="#EBEBEB" />
+            <GradientStop Offset="0.5" Color="#DDDDDD" />
+            <GradientStop Offset="1" Color="#CDCDCD" />
+        </LinearGradientBrush>
+        <SolidColorBrush x:Key="ButtonNormalBorder" Color="#FF707070" />
+        <Geometry x:Key="DownArrowGeometry">M 0 0 L 3.5 4 L 7 0 Z</Geometry>
+        <Style x:Key="ComboBoxReadonlyToggleButton" TargetType="{x:Type ToggleButton}">
+            <Setter Property="OverridesDefaultStyle" Value="true" />
+            <Setter Property="IsTabStop" Value="false" />
+            <Setter Property="Focusable" Value="false" />
+            <Setter Property="ClickMode" Value="Press" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ToggleButton}">
+                        <Grid Width="Auto" Background="{TemplateBinding Background}">
+                            <Grid Width="{DynamicResource {x:Static SystemParameters.VerticalScrollBarWidthKey}}"
+                                  HorizontalAlignment="Right"
+                                  Background="{TemplateBinding Background}">
+                                <Path x:Name="Arrow"
+                                      Margin="3,1,0,0"
+                                      HorizontalAlignment="Center"
+                                      VerticalAlignment="Center"
+                                      Data="{StaticResource DownArrowGeometry}"
+                                      Fill="Black" />
+                            </Grid>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <LinearGradientBrush x:Key="TextBoxBorder" MappingMode="Absolute" StartPoint="0,0" EndPoint="0,20">
+            <GradientStop Offset="0.05" Color="#ABADB3" />
+            <GradientStop Offset="0.07" Color="#E2E3EA" />
+            <GradientStop Offset="1" Color="#E3E9EF" />
+        </LinearGradientBrush>
+        <Style x:Key="ComboBoxEditableTextBox" TargetType="{x:Type TextBox}">
+            <Setter Property="OverridesDefaultStyle" Value="true" />
+            <Setter Property="AllowDrop" Value="true" />
+            <Setter Property="MinWidth" Value="0" />
+            <Setter Property="MinHeight" Value="0" />
+            <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+            <Setter Property="ScrollViewer.PanningMode" Value="VerticalFirst" />
+            <Setter Property="Stylus.IsFlicksEnabled" Value="False" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type TextBox}">
+                        <ScrollViewer x:Name="PART_ContentHost"
+                                      Background="Transparent"
+                                      Focusable="false"
+                                      HorizontalScrollBarVisibility="Hidden"
+                                      VerticalScrollBarVisibility="Hidden" />
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <ControlTemplate x:Key="ComboBoxEditableTemplate" TargetType="{x:Type ComboBox}">
+            <Grid x:Name="Placement" SnapsToDevicePixels="true">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Popup x:Name="PART_Popup"
+                       Grid.ColumnSpan="2"
+                       AllowsTransparency="true"
+                       IsOpen="{Binding IsDropDownOpen,
+                                        RelativeSource={RelativeSource TemplatedParent}}"
+                       Placement="Bottom"
+                       PopupAnimation="{DynamicResource {x:Static SystemParameters.ComboBoxPopupAnimationKey}}">
+                    <Microsoft_Windows_Themes:SystemDropShadowChrome x:Name="Shdw"
+                                                                     MinWidth="{Binding ActualWidth,
+                                                                                        ElementName=Placement}"
+                                                                     MaxHeight="{TemplateBinding MaxDropDownHeight}"
+                                                                     Color="Transparent">
+                        <Border x:Name="DropDownBorder"
+                                Background="{DynamicResource {x:Static SystemColors.WindowBrushKey}}"
+                                BorderBrush="{DynamicResource {x:Static SystemColors.WindowFrameBrushKey}}"
+                                BorderThickness="1">
+                            <ScrollViewer x:Name="DropDownScrollViewer">
+                                <Grid RenderOptions.ClearTypeHint="Enabled">
+                                    <Canvas Width="0"
+                                            Height="0"
+                                            HorizontalAlignment="Left"
+                                            VerticalAlignment="Top">
+                                        <Rectangle x:Name="OpaqueRect"
+                                                   Width="{Binding ActualWidth,
+                                                                   ElementName=DropDownBorder}"
+                                                   Height="{Binding ActualHeight,
+                                                                    ElementName=DropDownBorder}"
+                                                   Fill="{Binding Background,
+                                                                  ElementName=DropDownBorder}" />
+                                    </Canvas>
+                                    <ItemsPresenter x:Name="ItemsPresenter"
+                                                    KeyboardNavigation.DirectionalNavigation="Contained"
+                                                    SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                                </Grid>
+                            </ScrollViewer>
+                        </Border>
+                    </Microsoft_Windows_Themes:SystemDropShadowChrome>
+                </Popup>
+                <Microsoft_Windows_Themes:ListBoxChrome x:Name="Border"
+                                                        Grid.ColumnSpan="2"
+                                                        Background="{TemplateBinding Background}"
+                                                        BorderBrush="{TemplateBinding BorderBrush}"
+                                                        BorderThickness="{TemplateBinding BorderThickness}"
+                                                        RenderFocused="{TemplateBinding IsKeyboardFocusWithin}"
+                                                        RenderMouseOver="{TemplateBinding IsMouseOver}" />
+                <TextBox x:Name="PART_EditableTextBox"
+                         Margin="{TemplateBinding Padding}"
+                         HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                         VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                         IsReadOnly="{Binding IsReadOnly,
+                                              RelativeSource={RelativeSource TemplatedParent}}"
+                         Style="{StaticResource ComboBoxEditableTextBox}" />
+                <ToggleButton Grid.Column="1"
+                              IsChecked="{Binding IsDropDownOpen,
+                                                  Mode=TwoWay,
+                                                  RelativeSource={RelativeSource TemplatedParent}}"
+                              Style="{StaticResource ComboBoxToggleButton2}" />
+            </Grid>
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsKeyboardFocusWithin" Value="true">
+                    <Setter Property="Foreground" Value="Black" />
+                </Trigger>
+                <Trigger Property="IsDropDownOpen" Value="true">
+                    <Setter TargetName="Border" Property="RenderFocused" Value="true" />
+                </Trigger>
+                <Trigger Property="HasItems" Value="false">
+                    <Setter TargetName="DropDownBorder" Property="Height" Value="95" />
+                </Trigger>
+                <Trigger Property="IsEnabled" Value="false">
+                    <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" />
+                    <Setter Property="Background" Value="#FFF4F4F4" />
+                </Trigger>
+                <Trigger Property="IsGrouping" Value="true">
+                    <Setter Property="ScrollViewer.CanContentScroll" Value="false" />
+                </Trigger>
+                <Trigger SourceName="PART_Popup" Property="HasDropShadow" Value="true">
+                    <Setter TargetName="Shdw" Property="Margin" Value="0,0,5,5" />
+                    <Setter TargetName="Shdw" Property="Color" Value="#71000000" />
+                </Trigger>
+                <Trigger SourceName="DropDownScrollViewer" Property="ScrollViewer.CanContentScroll" Value="false">
+                    <Setter TargetName="OpaqueRect" Property="Canvas.Top" Value="{Binding VerticalOffset, ElementName=DropDownScrollViewer}" />
+                    <Setter TargetName="OpaqueRect" Property="Canvas.Left" Value="{Binding HorizontalOffset, ElementName=DropDownScrollViewer}" />
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+        <Style x:Key="ComboBoxStyle_GuideTwo" TargetType="{x:Type ComboBox}">
+            <Setter Property="FocusVisualStyle" Value="{StaticResource ComboBoxFocusVisual}" />
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}" />
+            <Setter Property="Background" Value="{StaticResource ButtonNormalBackground}" />
+            <Setter Property="BorderBrush" Value="{StaticResource ButtonNormalBorder}" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto" />
+            <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto" />
+            <Setter Property="Padding" Value="4,3" />
+            <Setter Property="ScrollViewer.CanContentScroll" Value="true" />
+            <Setter Property="ScrollViewer.PanningMode" Value="Both" />
+            <Setter Property="Stylus.IsFlicksEnabled" Value="False" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ComboBox}">
+                        <Grid x:Name="MainGrid" SnapsToDevicePixels="true">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="0" MinWidth="{DynamicResource {x:Static SystemParameters.VerticalScrollBarWidthKey}}" />
+                            </Grid.ColumnDefinitions>
+                            <Popup x:Name="PART_Popup"
+                                   Grid.ColumnSpan="2"
+                                   Margin="1"
+                                   AllowsTransparency="true"
+                                   IsOpen="{Binding IsDropDownOpen,
+                                                    RelativeSource={RelativeSource TemplatedParent}}"
+                                   Placement="Bottom"
+                                   PopupAnimation="{DynamicResource {x:Static SystemParameters.ComboBoxPopupAnimationKey}}">
+                                <Microsoft_Windows_Themes:SystemDropShadowChrome x:Name="Shdw"
+                                                                                 MinWidth="{Binding ActualWidth,
+                                                                                                    ElementName=MainGrid}"
+                                                                                 MaxHeight="{TemplateBinding MaxDropDownHeight}"
+                                                                                 Color="Transparent">
+                                    <Border x:Name="DropDownBorder"
+                                            Background="{DynamicResource {x:Static SystemColors.WindowBrushKey}}"
+                                            BorderBrush="{DynamicResource {x:Static SystemColors.WindowFrameBrushKey}}"
+                                            BorderThickness="1">
+                                        <ScrollViewer x:Name="DropDownScrollViewer">
+                                            <Grid RenderOptions.ClearTypeHint="Enabled">
+                                                <Canvas Width="0"
+                                                        Height="0"
+                                                        HorizontalAlignment="Left"
+                                                        VerticalAlignment="Top">
+                                                    <Rectangle x:Name="OpaqueRect"
+                                                               Width="{Binding ActualWidth,
+                                                                               ElementName=DropDownBorder}"
+                                                               Height="{Binding ActualHeight,
+                                                                                ElementName=DropDownBorder}"
+                                                               Fill="{Binding Background,
+                                                                              ElementName=DropDownBorder}" />
+                                                </Canvas>
+                                                <ItemsPresenter x:Name="ItemsPresenter"
+                                                                KeyboardNavigation.DirectionalNavigation="Contained"
+                                                                SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                                            </Grid>
+                                        </ScrollViewer>
+                                    </Border>
+                                </Microsoft_Windows_Themes:SystemDropShadowChrome>
+                            </Popup>
+                            <ToggleButton Grid.ColumnSpan="2"
+                                          Background="{TemplateBinding Background}"
+                                          BorderBrush="{TemplateBinding BorderBrush}"
+                                          Foreground="Gainsboro"
+                                          IsChecked="{Binding IsDropDownOpen,
+                                                              Mode=TwoWay,
+                                                              RelativeSource={RelativeSource TemplatedParent}}"
+                                          Style="{StaticResource ComboBoxReadonlyToggleButton}" />
+                            <ContentPresenter Margin="{TemplateBinding Padding}"
+                                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                              Content="{TemplateBinding SelectionBoxItem}"
+                                              ContentStringFormat="{TemplateBinding SelectionBoxItemStringFormat}"
+                                              ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}"
+                                              ContentTemplateSelector="{TemplateBinding ItemTemplateSelector}"
+                                              IsHitTestVisible="false"
+                                              SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger SourceName="PART_Popup" Property="HasDropShadow" Value="true">
+                                <Setter TargetName="Shdw" Property="Margin" Value="0,0,5,5" />
+                                <Setter TargetName="Shdw" Property="Color" Value="#71000000" />
+                            </Trigger>
+                            <Trigger Property="HasItems" Value="false">
+                                <Setter TargetName="DropDownBorder" Property="Height" Value="95" />
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" />
+                                <Setter Property="Background" Value="#FFF4F4F4" />
+                            </Trigger>
+                            <Trigger Property="IsGrouping" Value="true">
+                                <Setter Property="ScrollViewer.CanContentScroll" Value="false" />
+                            </Trigger>
+                            <Trigger SourceName="DropDownScrollViewer" Property="ScrollViewer.CanContentScroll" Value="false">
+                                <Setter TargetName="OpaqueRect" Property="Canvas.Top" Value="{Binding VerticalOffset, ElementName=DropDownScrollViewer}" />
+                                <Setter TargetName="OpaqueRect" Property="Canvas.Left" Value="{Binding HorizontalOffset, ElementName=DropDownScrollViewer}" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsEditable" Value="true">
+                    <Setter Property="BorderBrush" Value="{StaticResource TextBoxBorder}" />
+                    <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.WindowBrushKey}}" />
+                    <Setter Property="IsTabStop" Value="false" />
+                    <Setter Property="Padding" Value="3" />
+                    <Setter Property="Template" Value="{StaticResource ComboBoxEditableTemplate}" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="ListBoxItemStyle_TimePeriod" TargetType="{x:Type ListBoxItem}">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="HorizontalContentAlignment" Value="{Binding HorizontalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}" />
+            <Setter Property="VerticalContentAlignment" Value="{Binding VerticalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}" />
+            <Setter Property="Padding" Value="2,0,0,0" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ListBoxItem}">
+                        <ControlTemplate.Resources>
+                            <Storyboard x:Key="Storyboard1" />
+                        </ControlTemplate.Resources>
+                        <Border x:Name="Bd"
+                                Width="Auto"
+                                Background="#FF4A4A4A"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                Padding="0,6"
+                                SnapsToDevicePixels="true">
+                            <ContentPresenter x:Name="contentPresenter"
+                                              Width="Auto"
+                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                              SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsSelected" Value="true">
+                                <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.HighlightTextBrushKey}}" />
+                                <Setter TargetName="Bd" Property="Background" Value="#FF4A4A4A" />
+                                <Setter TargetName="contentPresenter" Property="OpacityMask" Value="Black" />
+                            </Trigger>
+                            <Trigger Property="Selector.IsSelected" Value="False">
+                                <Trigger.EnterActions>
+                                    <BeginStoryboard Storyboard="{StaticResource Storyboard1}" />
+                                </Trigger.EnterActions>
+                                <Setter TargetName="contentPresenter" Property="OpacityMask" Value="#FF504646" />
+                            </Trigger>
+                            <MultiTrigger>
+                                <MultiTrigger.Conditions>
+                                    <Condition Property="IsSelected" Value="true" />
+                                    <Condition Property="Selector.IsSelectionActive" Value="false" />
+                                </MultiTrigger.Conditions>
+                                <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" />
+                                <Setter TargetName="Bd" Property="Background" Value="#FF4A4A4A" />
+                                <Setter TargetName="contentPresenter" Property="OpacityMask" Value="Black" />
+                            </MultiTrigger>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" />
+                            </Trigger>
+                            <MultiTrigger>
+                                <MultiTrigger.Conditions>
+                                    <Condition Property="IsSelected" Value="false" />
+                                    <Condition Property="IsMouseOver" Value="true" />
+                                </MultiTrigger.Conditions>
+                                <Setter TargetName="Bd" Property="Background" Value="#FF373B3C" />
+                            </MultiTrigger>
+                            <MultiTrigger>
+                                <MultiTrigger.Conditions>
+                                    <Condition Property="IsSelected" Value="true" />
+                                    <Condition Property="IsMouseOver" Value="true" />
+                                </MultiTrigger.Conditions>
+                                <Setter TargetName="Bd" Property="Background" Value="#FF373B3C" />
+                            </MultiTrigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="ColumnHeaderGripperStyle" TargetType="{x:Type Thumb}">
+            <Setter Property="Width" Value="8" />
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="Cursor" Value="SizeWE" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Thumb}">
+                        <Border Background="{TemplateBinding Background}" Padding="{TemplateBinding Padding}" />
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="DataGridColumnHeaderStyle_AutoAdjust" TargetType="{x:Type DataGridColumnHeader}">
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type DataGridColumnHeader}">
+                        <Grid>
+                            <Microsoft_Windows_Themes:DataGridHeaderBorder Background="#FF303435"
+                                                                           BorderBrush="{TemplateBinding BorderBrush}"
+                                                                           BorderThickness="{TemplateBinding BorderThickness}"
+                                                                           IsClickable="{TemplateBinding CanUserSort}"
+                                                                           IsHovered="{TemplateBinding IsMouseOver}"
+                                                                           IsPressed="{TemplateBinding IsPressed}"
+                                                                           Padding="{TemplateBinding Padding}"
+                                                                           SeparatorBrush="{TemplateBinding SeparatorBrush}"
+                                                                           SeparatorVisibility="{TemplateBinding SeparatorVisibility}"
+                                                                           SortDirection="{TemplateBinding SortDirection}">
+                                <ContentPresenter HorizontalAlignment="Center"
+                                                  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                                  SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                            </Microsoft_Windows_Themes:DataGridHeaderBorder>
+                            <Thumb x:Name="PART_LeftHeaderGripper"
+                                   HorizontalAlignment="Left"
+                                   Foreground="Gainsboro"
+                                   Style="{StaticResource ColumnHeaderGripperStyle}" />
+                            <Thumb x:Name="PART_RightHeaderGripper"
+                                   HorizontalAlignment="Right"
+                                   Foreground="Gainsboro"
+                                   Style="{StaticResource ColumnHeaderGripperStyle}" />
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <SolidColorBrush x:Key="{x:Static DataGrid.FocusBorderBrushKey}" Color="#FF000000" />
+        <Style x:Key="DataGridCellStyle_AutoAdjust" TargetType="{x:Type DataGridCell}">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderBrush" Value="Transparent" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type DataGridCell}">
+                        <Border Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                SnapsToDevicePixels="True">
+                            <ContentPresenter HorizontalAlignment="Center"
+                                              VerticalAlignment="Center"
+                                              OpacityMask="Black"
+                                              SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsSelected" Value="True">
+                    <Setter Property="Background" Value="#FFA0A0A0" />
+                    <!--<Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.HighlightTextBrushKey}}"/>
+					<Setter Property="BorderBrush" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>-->
+                </Trigger>
+                <Trigger Property="IsKeyboardFocusWithin" Value="True">
+                    <!--<Setter Property="BorderBrush" Value="Red"/>
+                    <Setter Property="Background" Value="Blue"/>
+                    <Setter Property="Foreground" Value="Black"/>-->
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="DataGridRowStyle_autoadjust" TargetType="{x:Type DataGridRow}">
+            <Setter Property="Background" Value="#FF4B4B4B" />
+            <Setter Property="SnapsToDevicePixels" Value="true" />
+            <Setter Property="Validation.ErrorTemplate" Value="{x:Null}" />
+            <Setter Property="ValidationErrorTemplate">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <TextBlock Margin="2,0,0,0"
+                                   VerticalAlignment="Center"
+                                   FontWeight="Bold"
+                                   Foreground="Red"
+                                   Text="!" />
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type DataGridRow}">
+                        <Border x:Name="DGR_Border"
+                                Background="#FF4B4B4B"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                SnapsToDevicePixels="True">
+                            <SelectiveScrollingGrid>
+                                <SelectiveScrollingGrid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                </SelectiveScrollingGrid.ColumnDefinitions>
+                                <SelectiveScrollingGrid.RowDefinitions>
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="Auto" />
+                                </SelectiveScrollingGrid.RowDefinitions>
+                                <DataGridCellsPresenter Grid.Column="1"
+                                                        ItemsPanel="{TemplateBinding ItemsPanel}"
+                                                        SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                                <DataGridDetailsPresenter Grid.Row="1"
+                                                          Grid.Column="1"
+                                                          SelectiveScrollingGrid.SelectiveScrollingOrientation="{Binding AreRowDetailsFrozen,
+                                                                                                                         ConverterParameter={x:Static SelectiveScrollingOrientation.Vertical},
+                                                                                                                         Converter={x:Static DataGrid.RowDetailsScrollingConverter},
+                                                                                                                         RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"
+                                                          Visibility="{TemplateBinding DetailsVisibility}" />
+                                <DataGridRowHeader Grid.RowSpan="2"
+                                                   Background="#FF4B4B4B"
+                                                   SelectiveScrollingGrid.SelectiveScrollingOrientation="Vertical"
+                                                   Visibility="{Binding HeadersVisibility,
+                                                                        ConverterParameter={x:Static DataGridHeadersVisibility.Row},
+                                                                        Converter={x:Static DataGrid.HeadersVisibilityConverter},
+                                                                        RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" />
+                            </SelectiveScrollingGrid>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="ContentPresenterStyle1" TargetType="{x:Type ContentPresenter}" />
+
+
+        <Style x:Key="TimePickerStyle_common" TargetType="{x:Type xctk:TimePicker}">
+            <Setter Property="WatermarkTemplate">
+                <Setter.Value>
+                    <DataTemplate>
+                        <ContentControl Margin="0,0,3,0"
+                                        Content="{Binding}"
+                                        Focusable="False"
+                                        Foreground="Gray" />
+                    </DataTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="IsTabStop" Value="False" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type xctk:TimePicker}">
+                        <Border>
+                            <Grid>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <xctk:DateTimeUpDown x:Name="PART_TimeUpDown"
+                                                         AllowSpin="{TemplateBinding AllowSpin}"
+                                                         Background="{TemplateBinding Background}"
+                                                         BorderBrush="{x:Null}"
+                                                         BorderThickness="1,1,0,1"
+                                                         ClipValueToMinMax="{Binding ClipValueToMinMax,
+                                                                                     RelativeSource={RelativeSource TemplatedParent}}"
+                                                         ContextMenu="{TemplateBinding ContextMenu}"
+                                                         Foreground="Gainsboro"
+                                                         FormatString="{TemplateBinding FormatString}"
+                                                         Maximum="{Binding Maximum,
+                                                                           RelativeSource={RelativeSource TemplatedParent}}"
+                                                         Minimum="{Binding Minimum,
+                                                                           RelativeSource={RelativeSource TemplatedParent}}"
+                                                         Padding="{TemplateBinding Padding}"
+                                                         ShowButtonSpinner="{TemplateBinding ShowButtonSpinner}"
+                                                         Style="{DynamicResource DateTimeUpDownStyle_auto}"
+                                                         TabIndex="{TemplateBinding TabIndex}"
+                                                         Text=""
+                                                         TextAlignment="{TemplateBinding TextAlignment}"
+                                                         Watermark="{TemplateBinding Watermark}"
+                                                         WatermarkTemplate="{TemplateBinding WatermarkTemplate}"
+                                                         Value="{Binding Value,
+                                                                         RelativeSource={RelativeSource TemplatedParent}}">
+                                        <xctk:DateTimeUpDown.Format>
+                                            <TemplateBinding Property="Format">
+                                                <TemplateBinding.Converter>
+                                                    <xctk:TimeFormatToDateTimeFormatConverter />
+                                                </TemplateBinding.Converter>
+                                            </TemplateBinding>
+                                        </xctk:DateTimeUpDown.Format>
+                                    </xctk:DateTimeUpDown>
+                                    <ToggleButton x:Name="_timePickerToggleButton"
+                                                  Grid.Column="1"
+                                                  Background="{x:Null}"
+                                                  Focusable="False"
+                                                  IsChecked="{Binding IsOpen,
+                                                                      RelativeSource={RelativeSource TemplatedParent}}">
+                                        <ToggleButton.IsHitTestVisible>
+                                            <Binding Path="IsOpen" RelativeSource="{RelativeSource TemplatedParent}">
+                                                <Binding.Converter>
+                                                    <xctk:InverseBoolConverter />
+                                                </Binding.Converter>
+                                            </Binding>
+                                        </ToggleButton.IsHitTestVisible>
+                                        <ToggleButton.Style>
+                                            <Style TargetType="{x:Type ToggleButton}">
+                                                <Setter Property="Template">
+                                                    <Setter.Value>
+                                                        <ControlTemplate TargetType="{x:Type ToggleButton}">
+                                                            <Grid SnapsToDevicePixels="True">
+                                                                <xctk:ButtonChrome x:Name="ToggleButtonChrome"
+                                                                                   Background="#FF4B4B4B"
+                                                                                   BorderBrush="#FF576695"
+                                                                                   BorderThickness="0.5,0.6,0.6,0.5"
+                                                                                   CornerRadius="0,2.75,2.75,0"
+                                                                                   InnerCornerRadius="0,1.75,1.75,0"
+                                                                                   RenderChecked="{Binding IsOpen,
+                                                                                                           RelativeSource={RelativeSource FindAncestor,
+                                                                                                                                          AncestorLevel=1,
+                                                                                                                                          AncestorType={x:Type xctk:TimePicker}}}"
+                                                                                   RenderEnabled="{Binding IsEnabled,
+                                                                                                           RelativeSource={RelativeSource FindAncestor,
+                                                                                                                                          AncestorLevel=1,
+                                                                                                                                          AncestorType={x:Type xctk:TimePicker}}}"
+                                                                                   RenderMouseOver="{TemplateBinding IsMouseOver}"
+                                                                                   RenderPressed="{TemplateBinding IsPressed}">
+                                                                    <Grid>
+                                                                        <Grid.ColumnDefinitions>
+                                                                            <ColumnDefinition Width="*" />
+                                                                            <ColumnDefinition Width="Auto" />
+                                                                        </Grid.ColumnDefinitions>
+                                                                        <ContentPresenter HorizontalAlignment="Stretch"
+                                                                                          VerticalAlignment="Stretch"
+                                                                                          Content="{TemplateBinding Content}"
+                                                                                          ContentStringFormat="{TemplateBinding ContentStringFormat}"
+                                                                                          ContentTemplate="{TemplateBinding ContentTemplate}"
+                                                                                          SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                                                                        <Grid x:Name="arrowGlyph"
+                                                                              Grid.Column="1"
+                                                                              Margin="5"
+                                                                              IsHitTestVisible="False">
+                                                                            <Path x:Name="Arrow"
+                                                                                  Width="7"
+                                                                                  Height="4"
+                                                                                  Data="M0,1C0,1 0,0 0,0 0,0 3,0 3,0 3,0 3,1 3,1 3,1 4,1 4,1 4,1 4,0 4,0 4,0 7,0 7,0 7,0 7,1 7,1 7,1 6,1 6,1 6,1 6,2 6,2 6,2 5,2 5,2 5,2 5,3 5,3 5,3 4,3 4,3 4,3 4,4 4,4 4,4 3,4 3,4 3,4 3,3 3,3 3,3 2,3 2,3 2,3 2,2 2,2 2,2 1,2 1,2 1,2 1,1 1,1 1,1 0,1 0,1z"
+                                                                                  Fill="Black" />
+                                                                        </Grid>
+                                                                    </Grid>
+                                                                </xctk:ButtonChrome>
+                                                            </Grid>
+                                                            <ControlTemplate.Triggers>
+                                                                <Trigger Property="IsEnabled" Value="False">
+                                                                    <Setter TargetName="Arrow" Property="Fill" Value="#FFAFAFAF" />
+                                                                </Trigger>
+                                                            </ControlTemplate.Triggers>
+                                                        </ControlTemplate>
+                                                    </Setter.Value>
+                                                </Setter>
+                                            </Style>
+                                        </ToggleButton.Style>
+                                    </ToggleButton>
+                                </Grid>
+                                <Popup x:Name="PART_Popup"
+                                       IsOpen="{Binding IsChecked,
+                                                        ElementName=_timePickerToggleButton}"
+                                       StaysOpen="False">
+                                    <Border Background="#FF4A4A4A" BorderThickness="1">
+                                        <Border.BorderBrush>
+                                            <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+                                                <GradientStop Offset="0" Color="#FFA3AEB9" />
+                                                <GradientStop Offset="0.375" Color="#FF8399A9" />
+                                                <GradientStop Offset="0.375" Color="#FF718597" />
+                                                <GradientStop Offset="1" Color="#FF617584" />
+                                            </LinearGradientBrush>
+                                        </Border.BorderBrush>
+                                        <Grid Background="#FF4A4A4A">
+                                            <ListBox x:Name="PART_TimeListItems"
+                                                     Width="{TemplateBinding Width}"
+                                                     Height="130"
+                                                     Background="#FF4A4A4A"
+                                                     BorderThickness="0"
+                                                     DisplayMemberPath="Display"
+                                                     Foreground="Gainsboro"
+                                                     ItemContainerStyle="{DynamicResource ListBoxItemStyle_TimePeriod}"
+                                                     ScrollViewer.VerticalScrollBarVisibility="Visible" />
+                                        </Grid>
+                                    </Border>
+                                </Popup>
+                            </Grid>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger SourceName="PART_TimeUpDown" Property="IsEnabled" Value="False">
+                                <Setter TargetName="PART_TimeUpDown" Property="Foreground" Value="#FF767673" />
+                            </Trigger>
+                            <Trigger Property="IsFocused" Value="True">
+                                <Setter TargetName="PART_TimeUpDown" Property="FocusManager.FocusedElement" Value="{Binding ElementName=PART_TimeUpDown}" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="DateTimeUpDownStyle_auto" TargetType="{x:Type xctk:DateTimeUpDown}">
+            <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.WindowBrushKey}}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource {ComponentResourceKey ResourceId=ControlNormalBorderKey, TypeInTargetAssembly={x:Type Xceed_Wpf_Toolkit_Themes:ResourceKeys}}}" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}" />
+            <Setter Property="HorizontalContentAlignment" Value="Right" />
+            <Setter Property="TextAlignment" Value="Right" />
+            <Setter Property="WatermarkTemplate">
+                <Setter.Value>
+                    <DataTemplate>
+                        <ContentControl Margin="0,0,3,0"
+                                        Content="{Binding}"
+                                        Focusable="False"
+                                        Foreground="Gray" />
+                    </DataTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="IsTabStop" Value="False" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type xctk:DateTimeUpDown}">
+                        <xctk:ButtonSpinner x:Name="PART_Spinner"
+                                            AllowSpin="{TemplateBinding AllowSpin}"
+                                            Background="{TemplateBinding Background}"
+                                            BorderBrush="{TemplateBinding BorderBrush}"
+                                            BorderThickness="{TemplateBinding BorderThickness}"
+                                            IsTabStop="False"
+                                            ShowButtonSpinner="{TemplateBinding ShowButtonSpinner}">
+                            <xctk:WatermarkTextBox x:Name="PART_TextBox"
+                                                   MinWidth="20"
+                                                   HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                                   AcceptsReturn="False"
+                                                   Background="Transparent"
+                                                   BorderThickness="0"
+                                                   ContextMenu="{TemplateBinding ContextMenu}"
+                                                   FontFamily="{TemplateBinding FontFamily}"
+                                                   FontSize="{TemplateBinding FontSize}"
+                                                   FontStretch="{TemplateBinding FontStretch}"
+                                                   FontStyle="{TemplateBinding FontStyle}"
+                                                   FontWeight="{TemplateBinding FontWeight}"
+                                                   Foreground="{TemplateBinding Foreground}"
+                                                   IsReadOnly="{Binding IsReadOnly,
+                                                                        RelativeSource={RelativeSource TemplatedParent}}"
+                                                   Padding="{TemplateBinding Padding}"
+                                                   Style="{DynamicResource WatermarkTextBoxStyle_auto}"
+                                                   TabIndex="{TemplateBinding TabIndex}"
+                                                   Text="{Binding Text,
+                                                                  RelativeSource={RelativeSource TemplatedParent}}"
+                                                   TextAlignment="{TemplateBinding TextAlignment}"
+                                                   TextWrapping="NoWrap"
+                                                   Watermark="{TemplateBinding Watermark}"
+                                                   WatermarkTemplate="{TemplateBinding WatermarkTemplate}" />
+                        </xctk:ButtonSpinner>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsFocused" Value="True">
+                                <Setter TargetName="PART_TextBox" Property="FocusManager.FocusedElement" Value="{Binding ElementName=PART_TextBox}" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="WatermarkTextBoxStyle_auto" TargetType="{x:Type xctk:WatermarkTextBox}">
+            <Setter Property="Foreground" Value="Red" />
+            <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.WindowBrushKey}}" />
+            <Setter Property="BorderBrush">
+                <Setter.Value>
+                    <LinearGradientBrush MappingMode="Absolute" StartPoint="0,0" EndPoint="0,20">
+                        <GradientStop Offset="0.05" Color="#FFABADB3" />
+                        <GradientStop Offset="0.07" Color="#FFE2E3EA" />
+                        <GradientStop Offset="1" Color="#FFE3E9EF" />
+                    </LinearGradientBrush>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="Padding" Value="3" />
+            <Setter Property="AllowDrop" Value="True" />
+            <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+            <Setter Property="ScrollViewer.PanningMode" Value="VerticalFirst" />
+            <Setter Property="Stylus.IsFlicksEnabled" Value="False" />
+            <Setter Property="WatermarkTemplate">
+                <Setter.Value>
+                    <DataTemplate>
+                        <ContentControl Content="{Binding}"
+                                        Focusable="False"
+                                        Foreground="Gray" />
+                    </DataTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type xctk:WatermarkTextBox}">
+                        <Grid>
+                            <Border x:Name="Border"
+                                    Background="{TemplateBinding Background}"
+                                    BorderBrush="{TemplateBinding BorderBrush}"
+                                    BorderThickness="{TemplateBinding BorderThickness}"
+                                    CornerRadius="1" />
+                            <Border x:Name="MouseOverVisual"
+                                    BorderThickness="{TemplateBinding BorderThickness}"
+                                    CornerRadius="1"
+                                    Opacity="0">
+                                <Border.BorderBrush>
+                                    <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                                        <GradientStop Offset="0.05" Color="#FF5794BF" />
+                                        <GradientStop Offset="0.07" Color="#FFB7D5EA" />
+                                        <GradientStop Offset="1" Color="#FFC7E2F1" />
+                                    </LinearGradientBrush>
+                                </Border.BorderBrush>
+                            </Border>
+                            <Border x:Name="FocusVisual"
+                                    BorderThickness="{TemplateBinding BorderThickness}"
+                                    CornerRadius="1"
+                                    Opacity="0">
+                                <Border.BorderBrush>
+                                    <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                                        <GradientStop Offset="0.05" Color="#FF3D7BAD" />
+                                        <GradientStop Offset="0.07" Color="#FFA4C9E3" />
+                                        <GradientStop Offset="1" Color="#FFB7D9ED" />
+                                    </LinearGradientBrush>
+                                </Border.BorderBrush>
+                            </Border>
+                            <ScrollViewer x:Name="PART_ContentHost" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                            <ContentPresenter x:Name="PART_WatermarkHost"
+                                              Margin="{TemplateBinding Padding}"
+                                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                              Content="{TemplateBinding Watermark}"
+                                              ContentTemplate="{TemplateBinding WatermarkTemplate}"
+                                              IsHitTestVisible="False"
+                                              Visibility="Collapsed" />
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <MultiTrigger>
+                                <MultiTrigger.Conditions>
+                                    <Condition Property="IsFocused" Value="False" />
+                                    <Condition Property="Text" Value="" />
+                                </MultiTrigger.Conditions>
+                                <Setter TargetName="PART_WatermarkHost" Property="Visibility" Value="Visible" />
+                            </MultiTrigger>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="MouseOverVisual" Property="Opacity" Value="1" />
+                            </Trigger>
+                            <Trigger Property="IsFocused" Value="True">
+                                <Setter TargetName="FocusVisual" Property="Opacity" Value="1" />
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter TargetName="Border" Property="BorderBrush" Value="#FFADB2B5" />
+                                <Setter TargetName="Border" Property="Background" Value="#FF4B4B4B" />
+                                <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="TabItemFocusVisual">
+            <Setter Property="Control.Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <Rectangle Margin="3,3,3,1"
+                                   SnapsToDevicePixels="true"
+                                   Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"
+                                   StrokeDashArray="1 2"
+                                   StrokeThickness="1" />
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <SolidColorBrush x:Key="TabControlNormalBorderBrush" Color="#8C8E94" />
+        <LinearGradientBrush x:Key="TabItemHotBackground" StartPoint="0,0" EndPoint="0,1">
+            <GradientStop Offset="0.15" Color="#EAF6FD" />
+            <GradientStop Offset=".5" Color="#D9F0FC" />
+            <GradientStop Offset=".5" Color="#BEE6FD" />
+            <GradientStop Offset="1" Color="#A7D9F5" />
+        </LinearGradientBrush>
+        <SolidColorBrush x:Key="TabItemSelectedBackground" Color="#F9F9F9" />
+        <SolidColorBrush x:Key="TabItemHotBorderBrush" Color="#3C7FB1" />
+        <SolidColorBrush x:Key="TabItemDisabledBackground" Color="#F4F4F4" />
+        <SolidColorBrush x:Key="TabItemDisabledBorderBrush" Color="#FFC9C7BA" />
+        <Style x:Key="TabItemStyle_ManualAdjustBright" TargetType="{x:Type TabItem}">
+            <Setter Property="FocusVisualStyle" Value="{StaticResource TabItemFocusVisual}" />
+            <Setter Property="Foreground" Value="Black" />
+            <Setter Property="Padding" Value="6,1,6,1" />
+            <Setter Property="BorderBrush" Value="{StaticResource TabControlNormalBorderBrush}" />
+            <Setter Property="Background" Value="{StaticResource ButtonNormalBackground}" />
+            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+            <Setter Property="VerticalContentAlignment" Value="Stretch" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type TabItem}">
+                        <Grid SnapsToDevicePixels="true">
+                            <Border Margin="0,-2,8,0"
+                                    BorderBrush="Gainsboro"
+                                    BorderThickness="1,1,1,0">
+                                <Grid x:Name="Bd"
+                                      Margin="0"
+                                      Background="#FF4B4B4B">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition x:Name="columnDefinition" Width="Auto" />
+                                        <ColumnDefinition x:Name="columnDefinition1" Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <Image x:Name="Image_Checked"
+                                           Width="18"
+                                           Height="18"
+                                           HorizontalAlignment="Left"
+                                           VerticalAlignment="Top"
+                                           Source="/Nova.SmartLCT.Skin;component/Image/BlueMode/Normal/New.png" />
+                                    <ContentPresenter x:Name="Content"
+                                                      Grid.Column="1"
+                                                      Width="Auto"
+                                                      HorizontalAlignment="Left"
+                                                      VerticalAlignment="Top"
+                                                      ContentSource="Header"
+                                                      RecognizesAccessKey="True"
+                                                      SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                                </Grid>
+                            </Border>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="true" />
+                            <Trigger Property="IsSelected" Value="true">
+                                <Setter Property="Panel.ZIndex" Value="1" />
+                                <Setter TargetName="Bd" Property="Background" Value="#FF057AD7" />
+                                <Setter TargetName="Image_Checked" Property="Visibility" Value="Visible" />
+                            </Trigger>
+                            <Trigger Property="IsSelected" Value="false">
+                                <Setter TargetName="Image_Checked" Property="Visibility" Value="Collapsed" />
+                            </Trigger>
+                            <MultiTrigger>
+                                <MultiTrigger.Conditions>
+                                    <Condition Property="IsSelected" Value="false" />
+                                    <Condition Property="IsMouseOver" Value="true" />
+                                </MultiTrigger.Conditions>
+                                <Setter TargetName="Bd" Property="Background" Value="Gray" />
+                                <Setter TargetName="Image_Checked" Property="Visibility" Value="Collapsed" />
+                            </MultiTrigger>
+                            <Trigger Property="TabStripPlacement" Value="Bottom" />
+                            <Trigger Property="TabStripPlacement" Value="Left" />
+                            <Trigger Property="TabStripPlacement" Value="Right" />
+                            <MultiTrigger>
+                                <MultiTrigger.Conditions>
+                                    <Condition Property="IsSelected" Value="true" />
+                                    <Condition Property="TabStripPlacement" Value="Top" />
+                                </MultiTrigger.Conditions>
+                                <Setter Property="Margin" Value="-2,-2,-2,-1" />
+                                <Setter TargetName="Content" Property="Margin" Value="0,0,0,1" />
+                            </MultiTrigger>
+                            <MultiTrigger>
+                                <MultiTrigger.Conditions>
+                                    <Condition Property="IsSelected" Value="true" />
+                                    <Condition Property="TabStripPlacement" Value="Bottom" />
+                                </MultiTrigger.Conditions>
+                                <Setter Property="Margin" Value="-2,-1,-2,-2" />
+                                <Setter TargetName="Content" Property="Margin" Value="0,1,0,0" />
+                            </MultiTrigger>
+                            <MultiTrigger>
+                                <MultiTrigger.Conditions>
+                                    <Condition Property="IsSelected" Value="true" />
+                                    <Condition Property="TabStripPlacement" Value="Left" />
+                                </MultiTrigger.Conditions>
+                                <Setter Property="Margin" Value="-2,-2,-1,-2" />
+                                <Setter TargetName="Content" Property="Margin" Value="0,0,1,0" />
+                            </MultiTrigger>
+                            <MultiTrigger>
+                                <MultiTrigger.Conditions>
+                                    <Condition Property="IsSelected" Value="true" />
+                                    <Condition Property="TabStripPlacement" Value="Right" />
+                                </MultiTrigger.Conditions>
+                                <Setter Property="Margin" Value="-1,-2,-2,-2" />
+                                <Setter TargetName="Content" Property="Margin" Value="1,0,0,0" />
+                            </MultiTrigger>
+
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <BooleanToVisibilityConverter x:Key="bool2VisibilityConverter" />
+        <Style x:Key="RowHeaderGripperStyle" TargetType="{x:Type Thumb}">
+            <Setter Property="Height" Value="8" />
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="Cursor" Value="SizeNS" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Thumb}">
+                        <Border Background="{TemplateBinding Background}" Padding="{TemplateBinding Padding}" />
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="DataGridRowHeaderStyle_Auto" TargetType="{x:Type DataGridRowHeader}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type DataGridRowHeader}">
+                        <Grid>
+                            <Microsoft_Windows_Themes:DataGridHeaderBorder Background="{TemplateBinding Background}"
+                                                                           BorderBrush="{TemplateBinding BorderBrush}"
+                                                                           BorderThickness="1"
+                                                                           IsHovered="{TemplateBinding IsMouseOver}"
+                                                                           IsPressed="{TemplateBinding IsPressed}"
+                                                                           IsSelected="{TemplateBinding IsRowSelected}"
+                                                                           Orientation="Horizontal"
+                                                                           Padding="{TemplateBinding Padding}"
+                                                                           SeparatorBrush="{TemplateBinding SeparatorBrush}"
+                                                                           SeparatorVisibility="{TemplateBinding SeparatorVisibility}">
+                                <StackPanel Orientation="Horizontal">
+                                    <ContentPresenter VerticalAlignment="Center" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                                    <Control SnapsToDevicePixels="false"
+                                             Template="{Binding ValidationErrorTemplate,
+                                                                RelativeSource={RelativeSource AncestorType={x:Type DataGridRow}}}"
+                                             Visibility="{Binding (Validation.HasError),
+                                                                  Converter={StaticResource bool2VisibilityConverter},
+                                                                  RelativeSource={RelativeSource AncestorType={x:Type DataGridRow}}}" />
+                                </StackPanel>
+                            </Microsoft_Windows_Themes:DataGridHeaderBorder>
+                            <Thumb x:Name="PART_TopHeaderGripper"
+                                   VerticalAlignment="Top"
+                                   Style="{StaticResource RowHeaderGripperStyle}" />
+                            <Thumb x:Name="PART_BottomHeaderGripper"
+                                   VerticalAlignment="Bottom"
+                                   Style="{StaticResource RowHeaderGripperStyle}" />
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="TextBoxStyle_Auto" TargetType="{x:Type TextBox}">
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="Padding" Value="0" />
+            <Setter Property="Foreground" Value="Gainsboro" />
+            <Setter Property="Background" Value="#FFF90000" />
+        </Style>
+
+
+
+
+    </MetroUI:MetroWindow.Resources>
+    <Window.DataContext>
+        <Binding Source="{StaticResource Window_AddTimingAdjustData_VMDataSource}" />
+    </Window.DataContext>
+
+    <Grid x:Name="LayoutRoot" DataContext="{Binding Source={StaticResource Window_AddTimingAdjustData_VMDataSource}}">
+        <Grid Margin="5,5">
+            <TabControl Background="#FF303435"
+                        ItemContainerStyle="{DynamicResource TabItemStyle_ManualAdjustBright}"
+                        SelectedIndex="{Binding SelectedAdjustBrightMode,
+                                                Converter={StaticResource AdjustBrightModeConvertIsSelected},
+                                                Mode=TwoWay}">
+                <TabItem Margin="0"
+                         Foreground="Gainsboro"
+                         Header="{DynamicResource Lang_Bright_TimingAdjust}"
+                         IsSelected="{Binding SelectedSmartBrightMode,
+                                              ConverterParameter=FixBright,
+                                              Converter={StaticResource EnumBoolConverter}}">
+                    <Grid Height="Auto"
+                          Margin="0"
+                          VerticalAlignment="Stretch"
+                          Background="#FF303435">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="1*" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="8*" />
+                        </Grid.RowDefinitions>
+                        <Grid Height="42"
+                              Margin="0"
+                              VerticalAlignment="Bottom">
+                            <Label Margin="0,6,300,0"
+                                   HorizontalAlignment="Right"
+                                   VerticalAlignment="Top"
+                                   Content="{DynamicResource Lang_Bright_TimePeriod}"
+                                   Foreground="Gainsboro" />
+                            <ComboBox x:Name="Combox_TimePeriod"
+                                      Width="130"
+                                      Margin="111,7,0,0"
+                                      HorizontalAlignment="Left"
+                                      VerticalAlignment="Top"
+                                      Background="#FF4B4B4B"
+                                      DisplayMemberPath="Name"
+                                      ItemContainerStyle="{DynamicResource ComboBoxItemStyle_GuideTwo_ReceiveSize}"
+                                      ItemsPanel="{DynamicResource ItemsPanelTemplate_GuideTwo_ReceiveSize}"
+                                      ItemsSource="{Binding RepetitionStateDataSource}"
+                                      SelectedValue="{Binding SelectedRepetitionState}"
+                                      SelectedValuePath="Data"
+                                      Style="{DynamicResource ComboBoxStyle_GuideTwo}"
+                                      TabIndex="0" />
+                        </Grid>
+                        <Grid Grid.Row="1"
+                              Height="50"
+                              Margin="0,0,0,0"
+                              HorizontalAlignment="Stretch"
+                              VerticalAlignment="Stretch"
+                              Visibility="{Binding SelectedRepetitionState,
+                                                   Converter={StaticResource RepetitionStateVisibilityConverter}}"
+                              d:LayoutOverrides="HorizontalAlignment, GridBox">
+                            <CheckBox Margin="112,0,161,0"
+                                      HorizontalAlignment="Left"
+                                      VerticalAlignment="Top"
+                                      Content="{DynamicResource Lang_Bright_Monday}"
+                                      Foreground="Gainsboro"
+                                      IsChecked="{Binding CustomSelectedWeekCollection[1].IsSelected,
+                                                          Mode=TwoWay,
+                                                          UpdateSourceTrigger=PropertyChanged}" />
+                            <CheckBox Margin="185,0,0,0"
+                                      HorizontalAlignment="Left"
+                                      VerticalAlignment="Top"
+                                      Content="{DynamicResource Lang_Bright_Tuesday}"
+                                      Foreground="Gainsboro"
+                                      IsChecked="{Binding CustomSelectedWeekCollection[2].IsSelected,
+                                                          Mode=TwoWay,
+                                                          UpdateSourceTrigger=PropertyChanged}" />
+                            <CheckBox Width="52"
+                                      Margin="0,0,88,0"
+                                      HorizontalAlignment="Right"
+                                      VerticalAlignment="Top"
+                                      Content="{DynamicResource Lang_Bright_Wednesday}"
+                                      Foreground="Gainsboro"
+                                      IsChecked="{Binding CustomSelectedWeekCollection[3].IsSelected,
+                                                          Mode=TwoWay,
+                                                          UpdateSourceTrigger=PropertyChanged}" />
+                            <CheckBox Width="49"
+                                      Margin="0,0,22,0"
+                                      HorizontalAlignment="Right"
+                                      VerticalAlignment="Top"
+                                      Content="{DynamicResource Lang_Bright_Thursday}"
+                                      Foreground="Gainsboro"
+                                      IsChecked="{Binding CustomSelectedWeekCollection[4].IsSelected,
+                                                          Mode=TwoWay,
+                                                          UpdateSourceTrigger=PropertyChanged}" />
+                            <CheckBox Width="49"
+                                      Margin="112,0,0,8.625"
+                                      HorizontalAlignment="Left"
+                                      VerticalAlignment="Bottom"
+                                      Content="{DynamicResource Lang_Bright_Friday}"
+                                      Foreground="Gainsboro"
+                                      IsChecked="{Binding CustomSelectedWeekCollection[5].IsSelected,
+                                                          Mode=TwoWay,
+                                                          UpdateSourceTrigger=PropertyChanged}" />
+                            <CheckBox Margin="185,0,0,8.625"
+                                      HorizontalAlignment="Left"
+                                      VerticalAlignment="Bottom"
+                                      Content="{DynamicResource Lang_Bright_Saturday}"
+                                      Foreground="Gainsboro"
+                                      IsChecked="{Binding CustomSelectedWeekCollection[6].IsSelected,
+                                                          Mode=TwoWay,
+                                                          UpdateSourceTrigger=PropertyChanged}" />
+                            <CheckBox Width="56"
+                                      Margin="0,0,85,8.625"
+                                      HorizontalAlignment="Right"
+                                      VerticalAlignment="Bottom"
+                                      Content="{DynamicResource Lang_Bright_Sunday}"
+                                      Foreground="Gainsboro"
+                                      IsChecked="{Binding CustomSelectedWeekCollection[0].IsSelected,
+                                                          Mode=TwoWay,
+                                                          UpdateSourceTrigger=PropertyChanged}" />
+                        </Grid>
+                        <Grid Grid.Row="2"
+                              Height="126"
+                              Margin="0"
+                              VerticalAlignment="Top">
+                            <xctk:TimePicker Width="130"
+                                             Height="26"
+                                             Margin="111,0,0,0"
+                                             HorizontalAlignment="Left"
+                                             VerticalAlignment="Top"
+                                             Background="#FF4B4B4B"
+                                             Foreground="Gainsboro"
+                                             IsTabStop="True"
+                                             Style="{DynamicResource TimePickerStyle_common}"
+                                             TabIndex="1"
+                                             Value="{Binding AdjustTime,
+                                                             Mode=TwoWay}"
+                                             d:LayoutOverrides="VerticalAlignment" />
+                            <myNumericUD:NumericUpDown Width="128"
+                                                       Height="28"
+                                                       Margin="111,35,0,0"
+                                                       HorizontalAlignment="Left"
+                                                       VerticalAlignment="Top"
+                                                       Background="#FF4B4B4B"
+                                                       Foreground="Gainsboro"
+                                                       IsSelectedAll="True"
+                                                       IsTabStop="True"
+                                                       TabIndex="2"
+                                                       Value="{Binding BrightValue,
+                                                                       Mode=TwoWay}" />
+                            <Button Width="68"
+                                    Height="26"
+                                    Margin="208,88,0,0"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Top"
+                                    Command="{Binding CmdOK,
+                                                      Mode=OneWay}"
+                                    Content="{DynamicResource Lang_Global_OK}"
+                                    TabIndex="3" />
+                            <Button Width="68"
+                                    Height="26"
+                                    Margin="0,88,18,0"
+                                    HorizontalAlignment="Right"
+                                    VerticalAlignment="Top"
+                                    Command="{Binding CmdCancel,
+                                                      Mode=OneWay}"
+                                    Content="{DynamicResource Lang_Global_Cancel}"
+                                    RenderTransformOrigin="0.574,0.577"
+                                    TabIndex="4" />
+                            <Label Margin="0,0,300,0"
+                                   HorizontalAlignment="Right"
+                                   VerticalAlignment="Top"
+                                   Content="{DynamicResource Lang_Bright_Time}"
+                                   Foreground="Gainsboro"
+                                   d:LayoutOverrides="VerticalAlignment" />
+                            <Label Margin="0,38,300,0"
+                                   HorizontalAlignment="Right"
+                                   VerticalAlignment="Top"
+                                   Content="{DynamicResource Lang_Bright_Bright}"
+                                   Foreground="Gainsboro" />
+                        </Grid>
+                    </Grid>
+                </TabItem>
+                <TabItem Foreground="Gainsboro"
+                         Header="{DynamicResource Lang_Bright_AutoAdjust}"
+                         IsSelected="{Binding SelectedSmartBrightMode,
+                                              ConverterParameter=AutoBright,
+                                              Converter={StaticResource EnumBoolConverter}}">
+                    <Grid Margin="0" Background="#FF303435">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="1*" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="8*" />
+                        </Grid.RowDefinitions>
+                        <Grid Height="42"
+                              Margin="0"
+                              VerticalAlignment="Bottom">
+                            <Label Margin="0,6,300,0"
+                                   HorizontalAlignment="Right"
+                                   VerticalAlignment="Top"
+                                   Content="{DynamicResource Lang_Bright_TimePeriod}"
+                                   Foreground="Gainsboro" />
+                            <ComboBox x:Name="Combox_TimePeriod1"
+                                      Width="130"
+                                      Margin="111,7,0,0"
+                                      HorizontalAlignment="Left"
+                                      VerticalAlignment="Top"
+                                      Background="#FF4B4B4B"
+                                      DisplayMemberPath="Name"
+                                      ItemContainerStyle="{DynamicResource ComboBoxItemStyle_GuideTwo_ReceiveSize}"
+                                      ItemsPanel="{DynamicResource ItemsPanelTemplate_GuideTwo_ReceiveSize}"
+                                      ItemsSource="{Binding RepetitionStateDataSource}"
+                                      SelectedValue="{Binding SelectedRepetitionState}"
+                                      SelectedValuePath="Data"
+                                      Style="{DynamicResource ComboBoxStyle_GuideTwo}"
+                                      TabIndex="0" />
+                        </Grid>
+                        <Grid Grid.Row="1"
+                              Height="50"
+                              Margin="0,0,0,0"
+                              HorizontalAlignment="Stretch"
+                              VerticalAlignment="Stretch"
+                              Visibility="{Binding SelectedRepetitionState,
+                                                   Converter={StaticResource RepetitionStateVisibilityConverter}}"
+                              d:LayoutOverrides="HorizontalAlignment, GridBox">
+                            <CheckBox Margin="112,0,161,0"
+                                      HorizontalAlignment="Left"
+                                      VerticalAlignment="Top"
+                                      Content="{DynamicResource Lang_Bright_Monday}"
+                                      Foreground="Gainsboro"
+                                      IsChecked="{Binding CustomSelectedWeekCollection[1].IsSelected,
+                                                          Mode=TwoWay,
+                                                          UpdateSourceTrigger=PropertyChanged}" />
+                            <CheckBox Width="49"
+                                      Margin="185,0,0,0"
+                                      HorizontalAlignment="Left"
+                                      VerticalAlignment="Top"
+                                      Content="{DynamicResource Lang_Bright_Tuesday}"
+                                      Foreground="Gainsboro"
+                                      IsChecked="{Binding CustomSelectedWeekCollection[2].IsSelected,
+                                                          Mode=TwoWay,
+                                                          UpdateSourceTrigger=PropertyChanged}" />
+                            <CheckBox Width="52"
+                                      Margin="0,0,88,0"
+                                      HorizontalAlignment="Right"
+                                      VerticalAlignment="Top"
+                                      Content="{DynamicResource Lang_Bright_Wednesday}"
+                                      Foreground="Gainsboro"
+                                      IsChecked="{Binding CustomSelectedWeekCollection[3].IsSelected,
+                                                          Mode=TwoWay,
+                                                          UpdateSourceTrigger=PropertyChanged}" />
+                            <CheckBox Width="49"
+                                      Margin="0,0,22,0"
+                                      HorizontalAlignment="Right"
+                                      VerticalAlignment="Top"
+                                      Content="{DynamicResource Lang_Bright_Thursday}"
+                                      Foreground="Gainsboro"
+                                      IsChecked="{Binding CustomSelectedWeekCollection[4].IsSelected,
+                                                          Mode=TwoWay,
+                                                          UpdateSourceTrigger=PropertyChanged}" />
+                            <CheckBox Width="49"
+                                      Margin="112,0,0,8.625"
+                                      HorizontalAlignment="Left"
+                                      VerticalAlignment="Bottom"
+                                      Content="{DynamicResource Lang_Bright_Friday}"
+                                      Foreground="Gainsboro"
+                                      IsChecked="{Binding CustomSelectedWeekCollection[5].IsSelected,
+                                                          Mode=TwoWay,
+                                                          UpdateSourceTrigger=PropertyChanged}" />
+                            <CheckBox Width="53"
+                                      Margin="185,0,0,8.625"
+                                      HorizontalAlignment="Left"
+                                      VerticalAlignment="Bottom"
+                                      Content="{DynamicResource Lang_Bright_Saturday}"
+                                      Foreground="Gainsboro"
+                                      IsChecked="{Binding CustomSelectedWeekCollection[6].IsSelected,
+                                                          Mode=TwoWay,
+                                                          UpdateSourceTrigger=PropertyChanged}" />
+                            <CheckBox Width="56"
+                                      Margin="0,0,84,8.625"
+                                      HorizontalAlignment="Right"
+                                      VerticalAlignment="Bottom"
+                                      Content="{DynamicResource Lang_Bright_Sunday}"
+                                      Foreground="Gainsboro"
+                                      IsChecked="{Binding CustomSelectedWeekCollection[0].IsSelected,
+                                                          Mode=TwoWay,
+                                                          UpdateSourceTrigger=PropertyChanged}" />
+                        </Grid>
+                        <Grid Grid.Row="2"
+                              Height="93.333"
+                              VerticalAlignment="Top">
+                            <xctk:TimePicker Width="130"
+                                             Height="26"
+                                             Margin="111,0,0,0"
+                                             HorizontalAlignment="Left"
+                                             VerticalAlignment="Top"
+                                             Background="#FF4B4B4B"
+                                             Foreground="Gainsboro"
+                                             IsEnabled="{Binding IsSelectedAllHours,
+                                                                 Converter={StaticResource IsTrueConvertIsFalse1},
+                                                                 Mode=TwoWay}"
+                                             IsTabStop="True"
+                                             Style="{DynamicResource TimePickerStyle_common}"
+                                             TabIndex="1"
+                                             Value="{Binding AdjustTime,
+                                                             Mode=TwoWay}"
+                                             d:LayoutOverrides="VerticalAlignment" />
+                            <Button Width="68"
+                                    Height="26"
+                                    Margin="238,0,0,5"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Bottom"
+                                    Command="{Binding CmdOK,
+                                                      Mode=OneWay}"
+                                    Content="{DynamicResource Lang_Global_OK}"
+                                    TabIndex="4"
+                                    d:LayoutOverrides="VerticalAlignment" />
+                            <Button Width="68"
+                                    Height="26"
+                                    Margin="0,0,10,5"
+                                    HorizontalAlignment="Right"
+                                    VerticalAlignment="Bottom"
+                                    Command="{Binding CmdCancel,
+                                                      Mode=OneWay}"
+                                    Content="{DynamicResource Lang_Global_Cancel}"
+                                    RenderTransformOrigin="0.574,0.577"
+                                    TabIndex="5"
+                                    d:LayoutOverrides="VerticalAlignment" />
+                            <Label Margin="0,0,300,0"
+                                   HorizontalAlignment="Right"
+                                   VerticalAlignment="Top"
+                                   Content="{DynamicResource Lang_Bright_Time}"
+                                   Foreground="Gainsboro"
+                                   d:LayoutOverrides="VerticalAlignment" />
+                            <CheckBox x:Name="MyAllHours"
+                                      Margin="250,8,0,0"
+                                      HorizontalAlignment="Left"
+                                      VerticalAlignment="Top"
+                                      Content="{DynamicResource Lang_Bright_AllHours}"
+                                      Foreground="Gainsboro"
+                                      IsChecked="{Binding IsSelectedAllHours,
+                                                          Mode=TwoWay}"
+                                      TabIndex="2"
+                                      Visibility="Collapsed" />
+                        </Grid>
+                    </Grid>
+                </TabItem>
+            </TabControl>
+        </Grid>
+    </Grid>
+</MetroUI:MetroWindow>
+
+<!--  {Binding SelectedTimePeriod, Converter={StaticResource TimePeriodConvertVisibile6}, Mode=TwoWay}  -->
